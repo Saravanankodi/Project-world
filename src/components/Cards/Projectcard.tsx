@@ -11,9 +11,9 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
     const [isBookmarked, setIsBookmarked] = useState(bookmarked);
 
     return (
-        <div className="w-full  max-h-sm overflow-hidden rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D]">
+        <div className="w-full h-full flex flex-col xl:max-w-82 xl:max-h-75 2xl:max-w-83 2xl:max-h-86 overflow-hidden xl:rounded-2xl 2xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D]">
             {/* Image */}
-            <div className="relative aspect-[2/1] w-full">
+            <div className="relative aspect-2/1 xl:max-h-35 2xl:max-h-40 w-full">
                 <Image
                     src={props.image}
                     alt={props.title}
@@ -34,9 +34,9 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
             </div>
 
             {/* Content */}
-            <div className="p-4">
-                <div className="mb-2 flex items-center justify-between">
-                    <span className={`${inter.className} h-5 rounded-sm bg-[#DCE5D9] px-4 py-2 text-[11px] lg:text-xs font-semibold uppercase text-[#3D4A3D] flex items-center justify-center`}>
+            <div className="p-2 flex-1 flex flex-col">
+                <div className="mb-1 flex items-center justify-between">
+                    <span className={`${inter.className} h-5 rounded-sm bg-[#DCE5D9] px-2 py-1  text-[8px] 2xl:text-xs font-semibold uppercase text-[#3D4A3D] flex items-center justify-center`}>
                         {props.category}
                     </span>
 
@@ -46,28 +46,27 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                     </div>
                 </div>
 
-                <h2 className={`${geist.className} text-sm font-semibold text-[#161D16]`}>
+                <h2 className={`${geist.className} text-sm lg:text-base font-semibold text-[#161D16]`}>
                     {props.title}
                 </h2>
 
-                <p className={`${inter.className} mt-2 text-[10px] leading-relaxed text-[#565E74]`}>
+                <p className={`${inter.className} mt-1 text-[11px] leading-relaxed text-[#565E74]`}>
                     {props.description}
                 </p>
 
-                <div className="my-2 h-px bg-gray-200" />
-
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
+                <div className="my-1 h-px bg-gray-200" />
+                <div className="h-fit flex-1 flex items-center justify-between">
+                    <div className="h-min flex items-center gap-2">
                         {props.authorAvatar ? (
                             <Image
                                 src={props.authorAvatar}
-                                alt={props.author}
-                                width={40}
-                                height={40}
+                                alt={''}
+                                width={24}
+                                height={24}
                                 className="rounded-full object-cover"
                             />
                         ) : (
-                            <div className="h-12 w-12 rounded-full bg-indigo-200" />
+                            <div className="2xl:h-12 2xl:w-12 rounded-full bg-indigo-200" />
                         )}
 
                         <span className={`${inter.className} text-xs font-medium text-[#161D16CC]`}>
