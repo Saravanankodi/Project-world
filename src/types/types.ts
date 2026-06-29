@@ -10,3 +10,14 @@ export interface ProjectCardProps {
     bookmarked?: boolean;
    
 }
+
+
+import { ButtonHTMLAttributes, ReactNode } from "react";
+
+export interface ButtonProps
+    extends ButtonHTMLAttributes<HTMLButtonElement> {
+    children: ReactNode;
+    leftIcon?: ReactNode;
+    rightIcon?: ReactNode;
+    className?: string;
+}
