@@ -77,7 +77,7 @@ export default function AuthInput({
                 <input
                     id={id}
                     {...props}
-                    className={`w-full h-11 rounded-md border bg-[#F9FFF8] placeholder-[#6B7280] text-[#161D16]
+                    className={`w-full h-11  rounded-md border bg-[#F9FFF8] placeholder-[#6B7280] text-[#161D16]
           ${leftIcon ? "pl-10" : "pl-4"}
           ${rightIcon ? "pr-10" : "pr-4"}
           text-sm ${inter.className} outline-none transition
@@ -88,7 +88,7 @@ export default function AuthInput({
                 />
 
                 {rightIcon && (
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+                    <div className="absolute  right-3 top-1/2  -translate-y-1/2  cursor-pointer">
                         {rightIcon}
                     </div>
                 )}

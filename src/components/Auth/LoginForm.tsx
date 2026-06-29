@@ -316,7 +316,7 @@ export default function LoginForm() {
                 </div>
 
             </div>
-            <div className="flex items-end justify-end xl:absolute xl:bottom-2 xl:right-8">
+            <div className="flex items-end justify-end absolute bottom-2 right-8">
                 <p className="text-center text-xs text-gray-400 ">
                     Powered by <span className="font-semibold">Deslyfer</span>
                 </p>

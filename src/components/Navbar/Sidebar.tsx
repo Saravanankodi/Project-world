@@ -81,7 +81,7 @@ export default function Sidebar() {
     const pathname = usePathname();
 
     return (
-        <aside className="w-64  h-full bg-white border-r border-[#BCCBB94D]  shrink-0">
+        <aside className="max-w-64  max-h-screen bg-white border-r border-[#BCCBB94D]  shrink-0">
             <div className="h-full px-3 py-2">
                 {menu.map((section) => (
                     <div key={section.title} className="mb-4">
@@ -107,7 +107,7 @@ export default function Sidebar() {
                                         <Icon />
 
                                         <span
-                                            className={`${geist.className}  text-[16px] px-3 py-1 ${active ? "font-bold" : "font-medium"
+                                            className={`${geist.className}  text-sm  p-1 ${active ? "font-bold" : "font-medium"
                                                 }`}
                                         >
                                             {item.name}

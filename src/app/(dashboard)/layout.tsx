@@ -12,8 +12,8 @@ export default function Layout({
     children,
 }: DashboardLayoutProps) {
     return (
-        <div className="flex min-h-screen">
-            <div className="flex flex-1 flex-col">
+        <div className="flex min-h-screen bg-white">
+            <div className="flex min-w-0 flex-1 flex-col">
                 <Topbar />
 
                 <div className="flex flex-1 overflow-hidden">
@@ -21,7 +21,7 @@ export default function Layout({
                         <Sidebar />
                     </div>
 
-                    <main className="flex-1">
+                    <main className="min-w-0 flex-1 overflow-x-hidden px-4 md:px-10 py-5">
                         {children}
                     </main>
                 </div>
