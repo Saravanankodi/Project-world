@@ -1,5 +1,6 @@
 import React from 'react'
 import Projectcard from '@/components/Cards/Projectcard'
+import HeroCard from '@/components/Cards/HeroCard';
 const DashboardPage = () => {
 
   const cards = [
@@ -111,6 +112,9 @@ const DashboardPage = () => {
 
   return (
     <div>     
+      <div>
+        <HeroCard/>
+      </div>
       <div className="overflow-x-auto md:overflow-visible scrollbar-hide">
         <div className="flex w-max gap-3 md:gap-6 md:grid md:w-full md:grid-cols-3 xl:grid-cols-4">
           {cards.map((card) => (

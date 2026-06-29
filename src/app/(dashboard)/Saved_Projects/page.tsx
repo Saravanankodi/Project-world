@@ -114,9 +114,9 @@ const Saved_ProjectsPage = () => {
         <div>
 
             <div className="mb-2">
-                <div className={`${geist.className} text-3xl lg:text-[32px] font-bold text-[#006E2F]`}>Saved Projects</div>
-                <div className="md:flex items-center justify-between ">
-                    <div className={`${inter.className} text-sm xl:text-base font-normal text-[#3D4A3D]`}>Your collection of projects that inspire, interest, or help your journey.</div>
+                <div className={`${geist.className} mb-1 text-3xl lg:text-[32px] font-bold text-[#006E2F]`}>Saved Projects</div>
+                <div className="md:flex items-center justify-between mb-2">
+                    <div className={`${inter.className} mb-2 text-sm xl:text-base font-normal text-[#3D4A3D]`}>Your collection of projects that inspire, interest, or help your journey.</div>
                     <div><Button
                         leftIcon={<Filter />}
                         className={`md:px-6 md:py-3 px-3 py-2  bg-[#DCE5D9] text-sm text-[#161D16] ${geist.className} `}
