@@ -110,17 +110,17 @@ const ExplorePage = () => {
 
     return (
         <div>
-            <div className="w-full md:w-8/12 lg:w-6/12 xl:w-full flex flex-col gap-2 ">
+            <div className=" flex flex-col gap-2 ">
                 <div>
-                    <div className={`${inter.className} text-[32px] font-semibold text-[#006E2F]`}>Explore Projects</div>
-                    <div className={`${inter.className} text-base font-normal text-[#565E74]`}>Discover verified projects created by students and professionals.</div>
+                    <div className={`${inter.className} mb-2 text-3xl lg:text-[32px] font-semibold text-[#006E2F]`}>Explore Projects</div>
+                    <div className={`${inter.className} text-sm xl:text-base font-normal text-[#565E74]`}>Discover verified projects created by students and professionals.</div>
                 </div>
                 <div className={`${inter.className} text-sm font-normal text-[#3D4A3D]`}>Showing 1,240 projects</div>
             </div>
-            <div className="overflow-x-auto md:overflow-visible">
-                <div className="flex w-max gap-6 md:grid md:w-full md:grid-cols-3 xl:grid-cols-4">
+            <div className="overflow-x-auto md:overflow-visible scrollbar-hide">
+                <div className="flex  gap-3 md:gap-6 md:grid md:w-full md:grid-cols-3 xl:grid-cols-4">
                     {cards.map((card) => (
-                        <div key={card.id} className="w-85 shrink-0 md:w-auto">
+                        <div key={card.id} className="w-60 shrink-0 md:w-auto">
                             <Projectcard {...card} />
                         </div>
                     ))}

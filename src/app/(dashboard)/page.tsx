@@ -111,8 +111,8 @@ const DashboardPage = () => {
 
   return (
     <div>     
-      <div className="overflow-x-auto md:overflow-visible">
-        <div className="flex w-max gap-3 md:grid md:w-full xl:grid-cols-4">
+      <div className="overflow-x-auto md:overflow-visible scrollbar-hide">
+        <div className="flex w-max gap-3 md:gap-6 md:grid md:w-full md:grid-cols-3 xl:grid-cols-4">
           {cards.map((card) => (
             <div key={card.id} className="w-fit shrink-0 md:w-auto">
               <Projectcard {...card} />
