@@ -6,14 +6,16 @@ import { BookMark,  Star } from "@/components/icons/cards";
 import { useState } from "react";
 import {inter, geist} from "@/lib/fonts"
 import { ProjectCardProps } from "@/types/types";
+import Button from "../Button/Button";
+import { Download, GraduationCap } from "lucide-react";
 
-const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
+const PurchasedCard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
     const [isBookmarked, setIsBookmarked] = useState(bookmarked);
 
     return (
-        <div className="w-full h-full flex flex-col xl:max-w-82 xl:max-h-75 2xl:max-w-83 2xl:max-h-86 overflow-hidden xl:rounded-2xl 2xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D] m-auto">
+        <section className="w-full h-full flex flex-col xl:max-w-82 2xl:max-w-83 overflow-hidden xl:rounded-2xl 2xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D] m-auto">
             {/* Image */}
-            <div className="relative aspect-2/1 w-full">
+            <header className="relative aspect-2/1 w-full">
                 <Image
                     src={props.image}
                     alt={props.title}
@@ -31,11 +33,11 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                         <BookMark className="h-5 w-5 text-green-500" />
                     )}
                 </button>
-            </div>
+            </header>
 
             {/* Content */}
-            <div className="p-4">
-                <div className="mb-2 flex items-center justify-between">
+            <main className="p-4">
+                <aside className="mb-2 flex items-center justify-between">
                     <span className={`${inter.className} h-5 rounded-sm bg-[#DCE5D9] px-4 py-2 text-[11px] lg:text-xs font-semibold uppercase text-[#3D4A3D] flex items-center justify-center`}>
                         {props.category}
                     </span>
@@ -44,7 +46,7 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                         <Star className="h-4 w-4 fill-current" />
                         <span className="font-semibold">{props.rating}</span>
                     </div>
-                </div>
+                </aside>
 
                 <h2 className={`${geist.className} text-sm font-semibold text-[#161D16] line-clamp-1`}>
                     {props.title}
@@ -57,31 +59,44 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                 <div className="my-2 h-px bg-gray-200" />
 
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        {props.authorAvatar ? (
-                            <Image
-                                src={props.authorAvatar}
-                                alt={props.author}
-                                width={40}
-                                height={40}
-                                className="rounded-full object-cover"
-                            />
-                        ) : (
-                            <div className="h-12 w-12 rounded-full bg-indigo-200" />
-                        )}
-
+                    <div className="w-fit">
+                        <p className="text-[11px] ">
+                            Creator
+                        </p>
                         <span className={`${inter.className} text-xs font-medium text-[#161D16CC]`}>
                             {props.author}
                         </span>
                     </div>
-
-                    <span className={` ${inter.className} text-lg font-semibold text-[#006E2F]`}>
-                        ${props.price}
-                    </span>
+                    <aside className="w-fit">
+                        <p className="text-[11px] ">
+                            Purchased
+                        </p>
+                        <p className={` ${inter.className} text-lg font-semibold text-[#006E2F]`}>
+                            ${props.price}
+                        </p>
+                    </aside>
                 </div>
-            </div>
-        </div>
+                <div className="w-full flex items-center justify-center gap-3 mt-3">
+                    <Button className="w-1/2 bg-[#006E2F] text-sm text-white">
+                        Open Project
+                    </Button>
+                    <Button className="w-1/2 bg-[#161D16] text-white text-sm">
+                        Contact
+                    </Button>
+                </div>
+                <div className="w-full flex items-center justify-evenly">
+                    <Button className="w-fit  text-black text-[10px]">
+                        <Download className="w-6 h-6 m-auto"/>
+                        RESOURCES
+                    </Button>
+                    <Button className="w-fit text-black text-[10px]">
+                        <GraduationCap className="w-6 h-6 m-auto"/>
+                        BOOK MENTOR
+                    </Button>
+                </div>
+            </main>
+        </section>
     );
 };
 
-export default Projectcard;
+export default PurchasedCard;

@@ -15,7 +15,7 @@ const Button = ({
             {...props} 
         >
             {leftIcon}
-            <span>{children}</span>
+            <span className=" text-center">{children}</span>
             {rightIcon}
         </button>
     );
