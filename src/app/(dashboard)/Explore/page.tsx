@@ -110,7 +110,7 @@ const ExplorePage = () => {
 
     return (
         <div>
-            <div className=" flex flex-col gap-2 ">
+            <div className=" flex flex-col gap-2 mb-4">
                 <div>
                     <div className={`${inter.className} mb-2 text-3xl lg:text-[32px] font-semibold text-[#006E2F]`}>Explore Projects</div>
                     <div className={`${inter.className} text-sm xl:text-base font-normal text-[#565E74]`}>Discover verified projects created by students and professionals.</div>
