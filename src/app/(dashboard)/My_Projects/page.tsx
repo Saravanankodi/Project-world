@@ -1,8 +1,13 @@
+import ProjectsInfo from "@/components/ui/projects/ProjectsInfo"
+
 const My_ProjectsPage = () => {
     return (
-
-        <h1 className="text-4xl ">My_Projects Page</h1>
-
+    <>
+    <section className="w-full h-full p-3">
+        <h2 className="">
+            hello</h2>        
+    </section>    
+    </>
     )
 }
 

@@ -27,3 +27,14 @@ export type CategoriesCardProps = {
     tittle:string;
     projectCount:number;    
 }
+
+export type ProjectInfoProps = {
+    tittle:string;
+    categories:string;
+    avgRatings:number;
+    reviewCount:number;
+    purchasesCount:number;
+    tagList:string[];
+    price:number;
+    discount:number;
+}
