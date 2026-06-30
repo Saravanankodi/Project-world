@@ -18,7 +18,7 @@ export default function Layout({
             </header>
 
             <div className="flex flex-1 overflow-hidden">
-                <aside>
+                <aside className="hidden lg:block">
                 <Sidebar />
                 </aside>
 
@@ -29,6 +29,7 @@ export default function Layout({
 
             <footer className="fixed bottom-0 left-0 w-full">
                 <Footer />
+                <MobileBottomNav/>
             </footer>
         </section>
     );

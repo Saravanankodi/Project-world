@@ -11,7 +11,7 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
     const [isBookmarked, setIsBookmarked] = useState(bookmarked);
 
     return (
-        <div className="w-full h-full flex flex-col xl:max-w-82 xl:max-h-75 2xl:max-w-83 2xl:max-h-86 overflow-hidden xl:rounded-2xl 2xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D] m-auto">
+        <div className="w-full h-full flex flex-col rounded-xl  xl:max-w-82 xl:max-h-75 2xl:max-w-83 2xl:max-h-86 overflow-hidden xl:rounded-2xl 2xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D] m-auto">
             {/* Image */}
             <div className="relative aspect-[2/1] w-full">
                 <Image
