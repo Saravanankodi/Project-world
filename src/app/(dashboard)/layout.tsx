@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import Topbar from "@/components/Navbar/Topbar";
 import Sidebar from "@/components/Navbar/Sidebar";
 import Footer from "@/components/Footer/Footer";
-
+import MobileBottomNav from "@/components/Navbar/MobileBottomNav";
 type DashboardLayoutProps = {
     children: ReactNode;
 };
