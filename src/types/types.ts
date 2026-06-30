@@ -21,3 +21,9 @@ export interface ButtonProps
     rightIcon?: ReactNode;
     className?: string;
 }
+
+export type CategoriesCardProps = {
+    icon:React.ReactNode;
+    tittle:string;
+    projectCount:number;    
+}

@@ -4,14 +4,14 @@ const ExplorePage = () => {
     const cards = [
         {
             id: 1,
-            image: "/Auth/login.png",
+            image: "/img/Image.png",
             category: "Civil Engineering",
             title: "Eco-Smart Bridge Infrastructure",
             description:
                 "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
             rating: 4.9,
             author: "Alex Rivera",
-            authorAvatar: "/Topbar/ProfileImage.png",
+            authorAvatar: "/Topbar/ProfileImage.jpg",
             price: 120,
             bookmarked: true,
         },
@@ -24,33 +24,33 @@ const ExplorePage = () => {
                 "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
             rating: 4.9,
             author: "Alex Rivera",
-            authorAvatar: "/Topbar/ProfileImage.png",
+            authorAvatar: "/Topbar/ProfileImage.jpg",
             price: 120,
             bookmarked: true,
         },
         {
             id: 3,
-            image: "/Auth/login.png",
+            image: "/img/Image-2.png",
             category: "Civil Engineering",
             title: "Eco-Smart Bridge Infrastructure",
             description:
                 "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
             rating: 4.9,
             author: "Alex Rivera",
-            authorAvatar: "/Topbar/ProfileImage.png",
+            authorAvatar: "/Topbar/ProfileImage.jpg",
             price: 120,
             bookmarked: true,
         },
         {
             id: 4,
-            image: "/Auth/login.png",
+            image: "/img/Image.png",
             category: "Civil Engineering",
             title: "Eco-Smart Bridge Infrastructure",
             description:
                 "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
             rating: 4.9,
             author: "Alex Rivera",
-            authorAvatar: "/Topbar/ProfileImage.png",
+            authorAvatar: "/Topbar/ProfileImage.jpg",
             price: 120,
             bookmarked: true,
         },
@@ -63,7 +63,7 @@ const ExplorePage = () => {
                 "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
             rating: 4.9,
             author: "Alex Rivera",
-            authorAvatar: "/Topbar/ProfileImage.png",
+            authorAvatar: "/Topbar/ProfileImage.jpg",
             price: 120,
             bookmarked: true,
         },
@@ -76,20 +76,20 @@ const ExplorePage = () => {
                 "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
             rating: 4.9,
             author: "Alex Rivera",
-            authorAvatar: "/Topbar/ProfileImage.png",
+            authorAvatar: "/Topbar/ProfileImage.jpg",
             price: 120,
             bookmarked: true,
         },
         {
             id: 7,
-            image: "/Auth/login.png",
+            image: "/img/Image-2.png",
             category: "Civil Engineering",
             title: "Eco-Smart Bridge Infrastructure",
             description:
                 "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
             rating: 4.9,
             author: "Alex Rivera",
-            authorAvatar: "/Topbar/ProfileImage.png",
+            authorAvatar: "/Topbar/ProfileImage.jpg",
             price: 120,
             bookmarked: true,
         },
@@ -102,7 +102,7 @@ const ExplorePage = () => {
                 "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
             rating: 4.9,
             author: "Alex Rivera",
-            authorAvatar: "/Topbar/ProfileImage.png",
+            authorAvatar: "/Topbar/ProfileImage.jpg",
             price: 120,
             bookmarked: true,
         },
@@ -110,17 +110,17 @@ const ExplorePage = () => {
 
     return (
         <div>
-            <div className=" flex flex-col gap-2 ">
+            <div className=" flex items-end justify-between mb-5 ">
                 <div>
                     <div className={`${inter.className} mb-2 text-3xl lg:text-[32px] font-semibold text-[#006E2F]`}>Explore Projects</div>
                     <div className={`${inter.className} text-sm xl:text-base font-normal text-[#565E74]`}>Discover verified projects created by students and professionals.</div>
                 </div>
-                <div className={`${inter.className} text-sm font-normal text-[#3D4A3D]`}>Showing 1,240 projects</div>
+                <p className={`${inter.className} text-sm font-normal text-[#3D4A3D]`}>Showing 1,240 projects</p>
             </div>
             <div className="overflow-x-auto md:overflow-visible scrollbar-hide">
-                <div className="flex  gap-3 md:gap-6 md:grid md:w-full md:grid-cols-3 xl:grid-cols-4">
+                <div className="flex gap-3 md:gap-x-3 md:gap-y-6 md:grid md:w-full md:grid-cols-3 xl:grid-cols-4">
                     {cards.map((card) => (
-                        <div key={card.id} className="w-60 shrink-0 md:w-auto">
+                        <div key={card.id} className="w-fit shrink-0 md:w-auto">
                             <Projectcard {...card} />
                         </div>
                     ))}

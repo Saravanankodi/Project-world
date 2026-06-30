@@ -12,22 +12,24 @@ export default function Layout({
     children,
 }: DashboardLayoutProps) {
     return (
-        <div className="flex min-h-screen bg-white">
-            <div className="flex min-w-0 flex-1 flex-col">
+        <section className="h-screen flex flex-col overflow-hidden bg-white">
+            <header className="sticky top-0 z-10">
                 <Topbar />
+            </header>
 
-                <div className="flex flex-1 overflow-hidden">
-                    <div className="hidden lg:block">
-                        <Sidebar />
-                    </div>
+            <div className="flex flex-1 overflow-hidden">
+                <aside>
+                <Sidebar />
+                </aside>
 
-                    <main className="min-w-0 flex-1 overflow-x-hidden px-4 md:px-10 py-5">
-                        {children}
-                    </main>
-                </div>
-
-                <Footer />
+                <main className="flex-1 overflow-y-auto px-4 py-5 pb-20 md:px-10">
+                {children}
+                </main>
             </div>
-        </div>
+
+            <footer className="fixed bottom-0 left-0 w-full">
+                <Footer />
+            </footer>
+        </section>
     );
 }

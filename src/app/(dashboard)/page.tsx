@@ -1,5 +1,6 @@
 import React from 'react'
 import Projectcard from '@/components/Cards/Projectcard'
+import CategoriesCard from '@/components/Cards/CategoriesCard';
 const DashboardPage = () => {
 
   const cards = [
@@ -12,7 +13,7 @@ const DashboardPage = () => {
         "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
       rating: 4.9,
       author: "Alex Rivera",
-      authorAvatar: "/Topbar/ProfileImage.png",
+      authorAvatar: "/Topbar/ProfileImage.jpg",
       price: 120,
       bookmarked: true,
     },
@@ -25,7 +26,7 @@ const DashboardPage = () => {
         "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
       rating: 4.9,
       author: "Alex Rivera",
-      authorAvatar: "/Topbar/ProfileImage.png",
+      authorAvatar: "/Topbar/ProfileImage.jpg",
       price: 120,
       bookmarked: true,
     },
@@ -38,7 +39,7 @@ const DashboardPage = () => {
         "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
       rating: 4.9,
       author: "Alex Rivera",
-      authorAvatar: "/Topbar/ProfileImage.png",
+      authorAvatar: "/Topbar/ProfileImage.jpg",
       price: 120,
       bookmarked: true,
     },
@@ -51,7 +52,7 @@ const DashboardPage = () => {
         "design with integrated IoT sensors for monitoring.",
       rating: 4.9,
       author: "Alex Rivera",
-      authorAvatar: "/Topbar/ProfileImage.png",
+      authorAvatar: "/Topbar/ProfileImage.jpg",
       price: 120,
       bookmarked: true,
     },
@@ -64,7 +65,7 @@ const DashboardPage = () => {
         "Next-gen structural design with integrated IoT sensors for real-time design with integrated IoT sensors for real-time monitoring.",
       rating: 4.9,
       author: "Alex Rivera",
-      authorAvatar: "/Topbar/ProfileImage.png",
+      authorAvatar: "/Topbar/ProfileImage.jpg",
       price: 120,
       bookmarked: true,
     },
@@ -77,7 +78,7 @@ const DashboardPage = () => {
         "Next-gen structural design with integrated IoT sensors for real-time Next-gen structural design with integrated IoT sensors for real-time monitoring.",
       rating: 4.9,
       author: "Alex Rivera",
-      authorAvatar: "/Topbar/ProfileImage.png",
+      authorAvatar: "/Topbar/ProfileImage.jpg",
       price: 120,
       bookmarked: true,
     },
@@ -90,7 +91,7 @@ const DashboardPage = () => {
         "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
       rating: 4.9,
       author: "Alex Rivera",
-      authorAvatar: "/Topbar/ProfileImage.png",
+      authorAvatar: "/Topbar/ProfileImage.jpg",
       price: 120,
       bookmarked: true,
     },
@@ -103,7 +104,7 @@ const DashboardPage = () => {
         "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
       rating: 4.9,
       author: "Alex Rivera",
-      authorAvatar: "/Topbar/ProfileImage.png",
+      authorAvatar: "/Topbar/ProfileImage.jpg",
       price: 120,
       bookmarked: true,
     },
@@ -112,13 +113,18 @@ const DashboardPage = () => {
   return (
     <div>     
       <div className="overflow-x-auto md:overflow-visible scrollbar-hide">
-        <div className="flex w-max gap-3 md:gap-6 md:grid md:w-full md:grid-cols-3 xl:grid-cols-4">
+        <div className="flex flex-col w-max md:gap-y-6 md:gap-x-3 md:grid md:w-full md:grid-cols-3 xl:grid-cols-4">
           {cards.map((card) => (
-            <div key={card.id} className="w-fit shrink-0 md:w-auto">
+            <div key={card.id} className="w-fit md:w-auto">
               <Projectcard {...card} />
             </div>
           ))}
         </div>
+        <aside className="w-full p-4 space-y-5">
+          <h2 className="text-[20px] text-black font-semibold">
+            Explore Categories
+          </h2>
+        </aside>
       </div>
     </div>
   )

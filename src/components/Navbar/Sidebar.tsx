@@ -81,7 +81,7 @@ export default function Sidebar() {
     const pathname = usePathname();
 
     return (
-        <aside className="max-w-64  max-h-screen bg-white border-r border-[#BCCBB94D]  shrink-0">
+        <aside className=" sticky top-0 left-0 max-w-64  max-h-screen bg-white border-r border-[#BCCBB94D]  shrink-0">
             <div className="h-full px-3 py-2">
                 {menu.map((section) => (
                     <div key={section.title} className="mb-4">

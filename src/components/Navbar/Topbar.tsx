@@ -27,7 +27,7 @@ function Topbar() {
                         <span className={`text-xs text-[#3D4A3D] font-normal ${inter.className}`}>Senior Architect</span>
                     </div>
                     <div>
-                        <div className='w-10 h-10 border-2 border-[#22C55E] rounded-full'><Image src="/Topbar/ProfileImage.png" alt="Alex Rivera" width={40} height={40} /></div>
+                        <div className='w-10 h-10 border-2 border-[#22C55E] rounded-full'><Image src="/Topbar/ProfileImage.jpg" alt="Alex Rivera" width={40} height={40} className=' rounded-full' /></div>
                     </div>
                 </div>
             </div>
