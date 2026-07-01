@@ -38,3 +38,37 @@ export type ProjectInfoProps = {
     price:number;
     discount:number;
 }
+export type ProjectStatus =
+    | "marketplace"
+    | "review"
+    | "draft";
+
+export interface Project {
+    id: number;
+    image: string;
+    title: string;
+    website: string;
+    technologies: string[];
+    uploadDate: string;
+    status: ProjectStatus;
+    metrics: {
+        sales?: number;
+        revenue?: string;
+        views?: string;
+        likes?: number;
+        progress?: number;
+    };
+   
+}
+
+export interface ProjectTableProps {
+    projects: Project[];
+    page: number;
+    totalPages: number;
+    totalItems: number;
+    rowsPerPage: number;
+
+    onPageChange: (page: number) => void;
+}
+
+

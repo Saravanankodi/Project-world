@@ -81,7 +81,7 @@ export default function Sidebar() {
     const pathname = usePathname();
 
     return (
-        <aside className=" sticky top-0 left-0 max-w-64  max-h-screen bg-white border-r border-[#BCCBB94D]  shrink-0">
+        <aside className=" sticky top-0 left-0 max-w-64  max-h-screen bg-white  shrink-0">
             <div className="h-full px-3 py-2">
                 {menu.map((section) => (
                     <div key={section.title} className="mb-4">
@@ -98,14 +98,13 @@ export default function Sidebar() {
                                     <Link
                                         key={item.name}
                                         href={item.href}
-                                        className={`flex items-center  gap-3 rounded-xl px-3 py-2 transition-all
+                                        className={`flex items-center   gap-3 rounded-xl px-3 py-2 transition-all
                                            ${active
                                             ? "bg-[#22C55E1A] text-[#006E2F]"
                                             : "text-[#565E74] hover:bg-gray-100"
                                             }`}
                                     >
-                                        <Icon />
-
+                                        <Icon viewBox="0 0 17 17" width={17} height={17} />                                      
                                         <span
                                             className={`${geist.className}  text-sm  p-1 ${active ? "font-bold" : "font-medium"
                                                 }`}

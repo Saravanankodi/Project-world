@@ -18,7 +18,7 @@ export default function Layout({
             </header>
 
             <div className="flex flex-1 overflow-hidden">
-                <aside className="hidden lg:block">
+                <aside className="hidden lg:block border-r border-[#BCCBB94D] ">
                 <Sidebar />
                 </aside>
 

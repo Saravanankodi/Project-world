@@ -1,10 +1,11 @@
 import * as React from "react";
 import type { SVGProps } from "react";
-const SvgExploreIcon = (props: SVGProps<SVGSVGElement>) => (
+const ExploreIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={17}
-    height={17}
+    // viewBox="0 0 17 17"
+    // width={15}
+    // height={15}
     fill="none"
     {...props}
   >
@@ -14,4 +15,4 @@ const SvgExploreIcon = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export default SvgExploreIcon;
+export default ExploreIcon;
