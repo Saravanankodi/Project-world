@@ -30,7 +30,7 @@ export default function ProjectTable({
 
             case "marketplace":
                 return (
-                    <div className="flex gap-12">
+                    <div className="flex md:flex-col xl:flex-row md:gap-4 xl:gap-12 ">
                         <div>
                             <p className={`${inter.className} text-[10px] uppercase tracking-wider text-[#3D4A3D]`}>
                                 SALES
@@ -55,7 +55,7 @@ export default function ProjectTable({
 
             case "review":
                 return (
-                    <div className="flex gap-12">
+                    <div className="flex md:flex-col xl:flex-row md:gap-4 xl:gap-12 ">
                         <div>
                             <p className={`${inter.className} text-[10px] uppercase tracking-wider text-[#3D4A3D]`}>
                                 VIEWS
@@ -95,34 +95,34 @@ export default function ProjectTable({
     const renderActions = (project: Project) => {
         if (project.status === "draft") {
             return (
-                <div className="flex items-center justify-end gap-3">
-                    <button className="rounded-xl bg-[#E2EBDE] border border-[#BCCBB94D] px-4 py-2 text-sm font-medium text-[#161D16] hover:bg-[#006E2F]">
+                <div className="flex items-center justify-end xl:gap-3">
+                    <button className="rounded-xl bg-[#E2EBDE] border border-[#BCCBB94D] px-4 py-2 md:text-[10px] xl:text-sm font-medium text-[#161D16] hover:bg-[#006E2F]">
                         Finish Draft
                     </button>
 
                     <button className="rounded-lg p-2 hover:bg-red-50">
-                        <Trash2 className="h-5 w-5 text-red-500" />
+                        <Trash2 className="h-5 w-5 text-[#565E74]" />
                     </button>
                 </div>
             );
         }
 
         return (
-            <div className="flex items-center justify-end gap-2">
+            <div className="flex items-center justify-end xl:gap-2">
                 <button className="rounded-lg p-2 hover:bg-gray-100">
                     <Edit3 className="h-5 w-5 text-[#565E74]" />
                 </button>
 
-                <button className="rounded-lg p-2 hover:bg-gray-100">
+                <button className="rounded-lg p-2 hover:bg-gray-100 hidden lg:block">
                     <ChartColumn className="h-5 w-5 text-[#565E74]" />
                 </button>
 
-                <button className="rounded-lg p-2 hover:bg-gray-100">
+                <button className="rounded-lg p-2 hover:bg-gray-100 hidden lg:block">
                     <Eye className="h-5 w-5 text-[#565E74]" />
                 </button>
 
                 <button className="rounded-lg p-2 hover:bg-red-50">
-                    <Trash2 className="h-5 w-5 text-red-500" />
+                    <Trash2 className="h-5 w-5 text-[#565E74]" />
                 </button>
             </div>
         );
@@ -177,7 +177,7 @@ export default function ProjectTable({
                     />
                 </div >
                 {/* Header */}
-                <div className="grid grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr]  border-b border-[#BCCBB9] px-8 py-5">
+                <div className="grid xl:grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_2fr_1fr_1fr]   border-b border-[#BCCBB9] px-8 py-5">
 
                     <h3 className={`text-xs font-semibold uppercase tracking-wider  text-[#3D4A3D] ${geist.className}`}>
                         Project
@@ -203,7 +203,7 @@ export default function ProjectTable({
                 {projects.map((project) => (
                     <div
                         key={project.id}
-                        className="grid grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] items-center border-b px-8 py-2 transition hover:bg-[#FAFAFA]"
+                        className="grid xl:grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_2fr_1fr_1fr] items-center border-b md:px-4 xl:px-8 py-2 transition hover:bg-[#FAFAFA]"
                     >
                         {/* Project */}
                         <div className="flex items-center gap-4">
@@ -218,13 +218,13 @@ export default function ProjectTable({
 
                             <div>
                                 <h3
-                                    className={`${inter.className} text-base font-semibold text-[#161D16]`}
+                                    className={`${inter.className} md:text-sm xl:text-base font-semibold text-[#161D16]`}
                                 >
                                     {project.title}
                                 </h3>
 
                                 <p
-                                    className={`${inter.className} mt-1 text-xs text-[#3D4A3D]`}
+                                    className={`${inter.className} mt-1 md:text-[10px] xl:text-xs text-[#3D4A3D]`}
                                 >
                                     {project.website}
                                 </p>
@@ -233,7 +233,7 @@ export default function ProjectTable({
                                     {project.technologies.map((tech) => (
                                         <span
                                             key={tech}
-                                            className={` ${inter.className} rounded-full bg-[#F2F4F7] px-3 py-1 text-[10px] font-medium text-[#3D4A3D]`}
+                                            className={` ${inter.className} rounded-full bg-[#F2F4F7] px-3 py-1 xl:text-[10px] md:text-[8px] font-medium text-[#3D4A3D]`}
                                         >
                                             {tech}
                                         </span>
@@ -245,7 +245,7 @@ export default function ProjectTable({
 
                         {/* Upload Date */}
                         <div>
-                            <p className={` ${inter.className} text-base font-medium text-[#161D16]`}>
+                            <p className={` ${inter.className} md:text-sm xl:text-base font-medium text-[#161D16]`}>
                                 {project.uploadDate}
                             </p>
                         </div>

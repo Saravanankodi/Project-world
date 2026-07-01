@@ -37,7 +37,7 @@ export default function StatusBadge({
 
     return (
         <span
-            className={`${inter.className} inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${current.className}`}
+            className={`${inter.className} inline-flex items-center rounded-full px-3 py-1 md:text-[10px] xl:text-xs font-semibold ${current.className}`}
         >
             {current.text}
         </span>
