@@ -38,3 +38,21 @@ export type ProjectInfoProps = {
     price:number;
     discount:number;
 }
+export type technicalStack ={
+    label:string;
+    value:number;
+}
+export type OverviewProps ={
+    overview:string;
+    techStacklist: technicalStack[];
+    requirements:string[];
+}
+export type FeaturesProps = {
+    feature:string;
+    overview:string;
+}
+export type TechnicalDetailsProps = {
+    techStacklist: technicalStack[];
+    requirements: string[];
+    architecture: string[];
+}
