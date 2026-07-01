@@ -44,7 +44,7 @@ export default function MobileBottomNav() {
 
     return (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#E5E7EB] bg-white lg:hidden">
-            <div className="flex items-center justify-around px-2 py-1">
+            <div className="flex items-center justify-around  px-2 py-1">
                 {navItems.map((item) => {
                     const Icon = item.icon;
                     const active = pathname === item.href;
@@ -53,15 +53,15 @@ export default function MobileBottomNav() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className="flex flex-col items-center gap-1"
+                            className="flex flex-col items-center justify-center"
                         >
                             <div
-                                className={`w-12 h-12 py-2 grid grid-col-5 gap-2 place-items-center rounded-xl  transition-all ${active
+                                className={` w-14 h-auto flex flex-col gap-1 items-center justify-center rounded-xl  transition-all px-6 py-1 ${active
                                     ? "bg-[#22C55E] text-white"
                                     : "text-[#667085]"
                                     }`}
                             >
-                                <Icon />
+                                <Icon viewBox="0 0 17 17" width={20} height={20} /> 
                                 <span
                                     className={`${geist.className} text-xs font-medium `}
                                 >
