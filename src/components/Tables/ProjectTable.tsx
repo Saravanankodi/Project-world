@@ -131,7 +131,7 @@ export default function ProjectTable({
     return (
         <>
             {/* Mobile */}
-            <div className="md:hidden flex min-h-[420px] items-center justify-center rounded-3xl border border-[#E5E7EB] bg-white">
+            <div className="md:hidden flex min-h-105 items-center justify-center rounded-3xl border border-[#E5E7EB] bg-white">
                 <div className="text-center">
                     <h2
                         className={`${geist.className} text-2xl font-bold text-[#161D16]`}

@@ -1,8 +1,13 @@
 "use client";
+import Button from "@/components/Button/Button";
 import StatsCard from "@/components/Cards/StatsCard";
 import ProjectTable from "@/components/Tables/ProjectTable";
+import { geist, inter } from "@/lib/fonts";
 import { Project } from "@/types/types"
 import { useState } from "react";
+import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import ProjectBanner from "@/components/Cards/ProjectBanner";
 
 
 const projects: Project[] = [
@@ -134,8 +139,24 @@ const My_ProjectsPage = () => {
         (page - 1) * rowsPerPage,
         page * rowsPerPage
     );
+const router = useRouter();
+
     return (
         <div className="space-y-8">
+
+            <div className="mb-2">
+                <div className={`${geist.className} mb-1 text-3xl lg:text-[32px] font-bold text-[#006E2F]`}>My Projects</div>
+                <div className="md:flex items-center justify-between mb-2">
+                    <div className={`${inter.className} mb-2 text-sm xl:text-base font-normal text-[#3D4A3D]`}>Manage, update, and track your uploaded projects.</div>
+                    <div><Button
+                    onClick={() => router.push("/My_Projects/Upload_Projects")}
+                        leftIcon={<Plus />}
+                        className={`md:px-6 md:py-3 px-3 py-2  bg-[#22C55E] text-sm text-[#004B1E] font-bold ${geist.className} `}
+                    >
+                        Upload New Project
+                    </Button></div>
+                </div>
+            </div>
 
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 <StatsCard
@@ -171,6 +192,10 @@ const My_ProjectsPage = () => {
                     rowsPerPage={rowsPerPage}
                     onPageChange={setPage}
                 />
+            </div>
+
+            <div>
+                <ProjectBanner/>
             </div>
            
         </div>
