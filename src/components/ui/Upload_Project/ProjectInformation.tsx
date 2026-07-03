@@ -9,7 +9,15 @@ import TagInput from "./TagInput";
 import BottomActions from "./BottomActions";
 import CustomSelect from "./CustomSelect";
 
-export default function ProjectInformation() {
+
+interface ProjectInformationProps {
+    onContinue: () => void;
+}
+
+export default function ProjectInformation({
+    onContinue,
+}: ProjectInformationProps) {
+    
     return (
         <section className="rounded-3xl bg-[#F7FBF6] border border-[#E3EFE1] p-6 lg:p-8">
 
@@ -95,7 +103,9 @@ export default function ProjectInformation() {
 
             </div>
 
-            <BottomActions />
+            <BottomActions
+                onContinue={onContinue}
+            />
 
         </section>
     );
