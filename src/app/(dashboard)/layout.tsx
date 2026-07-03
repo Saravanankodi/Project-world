@@ -12,14 +12,14 @@ export default function Layout({
     children,
 }: DashboardLayoutProps) {
     return (
-        <section className="h-screen flex flex-col overflow-hidden bg-white">
+        <section className="h-screen flex flex-col overflow-hidden text-black  bg-white">
             <header className="sticky top-0 z-10">
                 <Topbar />
             </header>
 
             <div className="flex flex-1 overflow-hidden">
                 <aside className="hidden lg:block border-r border-[#BCCBB94D] ">
-                <Sidebar />
+                    <Sidebar />
                 </aside>
 
                 <main className="flex-1 overflow-y-auto px-4 py-5 pb-20 md:px-10">
