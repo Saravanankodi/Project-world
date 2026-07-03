@@ -19,7 +19,7 @@ export default function Layout({
 
             <div className="flex flex-1 overflow-hidden">
                 <aside className="hidden lg:block border-r border-[#BCCBB94D] ">
-                <Sidebar />
+                    <Sidebar />
                 </aside>
 
                 <main className="flex-1 overflow-y-auto px-4 py-5 pb-20 md:px-10">

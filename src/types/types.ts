@@ -89,4 +89,8 @@ export interface ProjectTableProps {
     onPageChange: (page: number) => void;
 }
 
-
+export type RatingPercentageBarProps = {
+  star: number;
+  percentage: number;
+  color?: string;
+};
