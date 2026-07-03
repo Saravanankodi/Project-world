@@ -12,7 +12,7 @@ export default function Layout({
     children,
 }: DashboardLayoutProps) {
     return (
-        <section className="h-screen flex flex-col overflow-hidden bg-white">
+        <section className="h-screen flex flex-col overflow-hidden text-black  bg-white">
             <header className="sticky top-0 z-10">
                 <Topbar />
             </header>
