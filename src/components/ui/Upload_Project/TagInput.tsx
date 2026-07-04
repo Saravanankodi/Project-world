@@ -2,78 +2,75 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
-import { inter } from "@/lib/fonts";
+import { geist, inter } from "@/lib/fonts";
 
 interface Props {
     label: string;
     placeholder: string;
+    value: string[];
+    onChange: (tags: string[]) => void;
 }
 
 export default function TagInput({
     label,
     placeholder,
+    value: tags,
+    onChange,
 }: Props) {
-
-    const [tags, setTags] = useState<string[]>([]);
-    const [value, setValue] = useState("");
+    const [inputValue, setInputValue] = useState("");
 
     const addTag = () => {
-        if (!value.trim()) return;
+        const tag = inputValue.trim();
 
-        setTags([...tags, value]);
+        if (!tag || tags.includes(tag)) return;
 
-        setValue("");
+        onChange([...tags, tag]);
+        setInputValue("");
+    };
+
+    const removeTag = (tag: string) => {
+        onChange(tags.filter((t) => t !== tag));
     };
 
     return (
         <div className="flex flex-col gap-2">
-
             <label
-                className={`${inter.className} text-sm font-semibold text-[#161D16]`}
+                className={`${geist.className} text-sm font-semibold text-[#161D16]`}
             >
                 {label}
             </label>
 
-            <div className="rounded-xl border border-[#D8E3D8] bg-white p-3">
+            <div className="flex flex-wrap gap-2 rounded-xl border border-[#D8E3D8] bg-white p-3">
 
-                <div className="mb-2 flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                    <div
+                        key={tag}
+                        className={`${inter.className} flex items-center gap-2 rounded-full bg-[#E8F5E9] px-3 py-1 text-base font-bold text-[#009741]`}
+                    >
+                        {tag}
 
-                    {tags.map((tag) => (
-
-                        <div
-                            key={tag}
-                            className="flex items-center gap-2 rounded-full bg-[#E8F5E9] px-3 py-1 text-sm"
+                        <button
+                            type="button"
+                            onClick={() => removeTag(tag)}
                         >
-                            {tag}
-
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    setTags(tags.filter((t) => t !== tag))
-                                }
-                            >
-                                <X size={14} />
-                            </button>
-
-                        </div>
-
-                    ))}
-
-                </div>
+                            <X size={14} />
+                        </button>
+                    </div>
+                ))}
 
                 <input
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    onKeyDown={(e) =>
-                        e.key === "Enter" &&
-                        (e.preventDefault(), addTag())
-                    }
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            e.preventDefault();
+                            addTag();
+                        }
+                    }}
                     placeholder={placeholder}
-                    className="w-full outline-none text-sm"
+                    className={`${inter.className} min-w-[120px] flex-1 bg-transparent text-sm outline-none`}
                 />
-
             </div>
-
         </div>
     );
 }

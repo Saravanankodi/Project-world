@@ -94,3 +94,11 @@ export type RatingPercentageBarProps = {
   percentage: number;
   color?: string;
 };
+
+
+interface Props {
+    label: string;
+    placeholder: string;
+    value?: string[];
+    onChange?: (tags: string[]) => void;
+}

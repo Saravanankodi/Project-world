@@ -27,15 +27,37 @@ import { useState } from "react";
 
 import Stepper from "@/components/ui/Upload_Project/Stepper";
 import UploadHeader from "@/components/ui/Upload_Project/UploadHeader";
-
+import { useRouter } from "next/navigation";
 import ProjectInformation from "@/components/ui/Upload_Project/ProjectInformation";
-import TechnicalDetails from "@/components/ui/Upload_Project/TechnicalDetails";
+import TechnicalDetails from "@/components/ui/Technical_Details/TechnicalDetails";
+import Pricing from "@/components/ui/Upload_Project/Pricing";
 
 
 
 export default function UploadProjectPage() {
-
     const [step, setStep] = useState(1);
+
+    const handleContinue = () => {
+        setStep((prev) => Math.min(prev + 1, 3));
+    };
+
+    const handleBack = () => {
+        setStep((prev) => Math.max(prev - 1, 1));
+    };
+
+    const handleSaveDraft = () => {
+        console.log("Draft Saved");
+        alert("Draft saved successfully!");
+    };
+    const router = useRouter();
+
+    const handleSubmit = () => {
+        console.log("Project Submitted");
+        // API Call
+        alert("Project submitted successfully!");
+        // later:
+        router.push("/My_Projects");
+    };
 
     return (
 
@@ -43,29 +65,30 @@ export default function UploadProjectPage() {
 
             <Stepper currentStep={step} />
 
-            <UploadHeader
-                title="Upload Your Project"
-                description="Share your innovation with students and creators worldwide."
-            />
+           
 
             {step === 1 && (
                 <ProjectInformation
-                    onContinue={() => setStep(2)}
+                    onContinue={handleContinue}
+                    onSaveDraft={handleSaveDraft}
                 />
             )}
 
             {step === 2 && (
                 <TechnicalDetails
-                    onContinue={() => setStep(3)}
-                    onBack={() => setStep(1)}
+                    onBack={handleBack}
+                    onContinue={handleContinue}
+                    onSaveDraft={handleSaveDraft}
                 />
             )}
 
-            {/* {step === 3 && (
-                <PricingSettings
-                    onBack={() => setStep(2)}
+            {step === 3 && (
+                <Pricing
+                    onBack={handleBack}
+                    onSaveDraft={handleSaveDraft}
+                    onSubmit={handleSubmit}
                 />
-            )} */}
+            )}
 
         </div>
 

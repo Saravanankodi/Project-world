@@ -8,19 +8,27 @@ import FormTextarea from "./FormTextarea";
 import TagInput from "./TagInput";
 import BottomActions from "./BottomActions";
 import CustomSelect from "./CustomSelect";
-
+import { useState } from "react";
+import UploadHeader from "./UploadHeader";
 
 interface ProjectInformationProps {
     onContinue: () => void;
+    onSaveDraft?: () => void;
 }
 
 export default function ProjectInformation({
     onContinue,
+    onSaveDraft,
 }: ProjectInformationProps) {
+    const [tags, setTags] = useState<string[]>([]);
     
     return (
-        <section className="rounded-3xl bg-[#F7FBF6] border border-[#E3EFE1] p-6 lg:p-8">
-
+        <section className="">
+            <UploadHeader
+                title="Upload Your Project"
+                description="Share your innovation with students and creators worldwide."
+            />
+            <div className=" bg-[#24EA2412] rounded-3xl shadow-[#0F172A0D] p-6 lg:p-8">
             {/* Header */}
             <div className="flex items-start gap-3 mb-8">
 
@@ -41,71 +49,81 @@ export default function ProjectInformation({
                         Project Information
                     </h2>
 
-                    <p
-                        className={`${inter.className}
-                        mt-1
-                        text-sm
-                        text-[#565E74]`}
-                    >
-                        Tell us about your project and help others discover it.
-                    </p>
                 </div>
 
             </div>
 
             {/* Form */}
-            <div className="grid gap-6">
+            <div className="flex flex-col gap-6">
 
                 <FormInput
                     label="Project Title"
                     placeholder="Enter your project title"
                 />
-<div className="flex">
-                <CustomSelect
-                    label="Project Domain"
-                    placeholder="Select Domain"
-                    options={[
-                        "Web Development",
-                        "Artificial Intelligence",
-                        "Machine Learning",
-                        "Cyber Security",
-                        "IoT",
-                    ]}
-                />
+                <div className="w-full flex gap-5">
+                    <CustomSelect
+                        label="Domain / Category"
+                        placeholder="Select Domain"
+                        options={[
+                            "Web Development",
+                            "Artificial Intelligence",
+                            "Machine Learning",
+                            "Cyber Security",
+                            "IoT",
+                        ]}
+                    />
 
-                <CustomSelect
-                    label="Technology Stack"
-                    placeholder="Select Technology"
-                    options={[
-                        "React",
-                        "Next.js",
-                        "Node.js",
-                        "MongoDB",
-                        "Express",
-                    ]}
-                />
-</div>
+                    <CustomSelect
+                        label="Technology "
+                        placeholder="Select Technology"
+                        options={[
+                            "React",
+                            "Next.js",
+                            "Node.js",
+                            "MongoDB",
+                            "Express",
+                        ]}
+                    />
+                </div>
                 <ProjectType />
 
                 <div className="lg:col-span-2">
                     <FormTextarea
-                        label="Project Description"
+                        label="Short Description"
                         placeholder="Describe your project, its purpose, features, and target audience..."
                     />
                 </div>
 
                 <div className="lg:col-span-2">
                     <TagInput
-                        label="Tags"
+                        label="Keywords / Tags"
                         placeholder="Add tags..."
+                        value={tags}
+                        onChange={setTags}
                     />
                 </div>
 
             </div>
-
-            <BottomActions
-                onContinue={onContinue}
-            />
+            <div className="w-full flex flex-col md:flex-row mt-5">
+                <div className="w-full md:w-4/6 flex items-start gap-1 md:gap-3 rounded-2xl  md:p-4 py-2 ">
+                    <Info
+                        size={20}
+                        className="mt-0.5 text-[#16A34A]"
+                    />
+                    <p
+                        className={`${inter.className} text-xs  text-[#565E74]`}
+                    >
+                        Project draft will be saved automatically.
+                    </p>
+                </div>
+                <div className="w-full md:w-2/6 flex flex-row items-center justify-center md:justify-end ">
+                    <BottomActions
+                        onContinue={onContinue}
+                        onSaveDraft={onSaveDraft}
+                    />
+                </div>
+            </div>
+            </div>
 
         </section>
     );

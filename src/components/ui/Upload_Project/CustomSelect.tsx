@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, Check } from "lucide-react";
-import { inter } from "@/lib/fonts";
+import { geist, inter } from "@/lib/fonts";
 
 interface CustomSelectProps {
     label: string;
@@ -29,9 +29,9 @@ export default function CustomSelect({
     };
 
     return (
-        <div className="relative flex flex-col gap-2">
+        <div className="w-full relative flex flex-col gap-2">
             <label
-                className={`${inter.className} text-sm font-semibold text-[#161D16]`}
+                className={`${geist.className} text-sm font-medium text-[#161D16]`}
             >
                 {label}
             </label>
@@ -39,7 +39,7 @@ export default function CustomSelect({
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="flex h-12 w-full items-center justify-between rounded-xl border border-[#D8E3D8] bg-white px-4 text-sm text-left shadow-sm transition hover:border-[#22C55E]">
+                className={`${inter.className} flex h-12 w-full items-center justify-between rounded-xl border border-[#D8E3D8] bg-white px-4 text-sm text-left shadow-sm transition hover:border-[#22C55E]`}>
                 <span
                     className={
                         selected
@@ -59,13 +59,13 @@ export default function CustomSelect({
 
             {open && (
                 <div
-                    className="absolute top-full z-50 mt-2 w-full overflow-hidden rounded-xl border border-[#E4E7EC] bg-white shadow-xl">
+                    className={`${inter.className} absolute top-full z-50 mt-2 w-full overflow-hidden rounded-xl border border-[#E4E7EC] bg-white shadow-xl`}>
                     {options.map((item) => (
                         <button
                             key={item}
                             type="button"
                             onClick={() => selectOption(item)}
-                            className="flex w-full items-center justify-between px-4 py-3 text-left text-sm hover:bg-[#F3F9F3]">
+                            className={`${inter.className} flex w-full items-center justify-between px-4 py-3 text-left text-sm hover:bg-[#F3F9F3]`}>
 
                             {item}
 

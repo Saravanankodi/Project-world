@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { inter } from "@/lib/fonts";
+import { geist, inter } from "@/lib/fonts";
 
 const types = [
     "Web App",
@@ -16,7 +16,7 @@ export default function ProjectType() {
     return (
         <div className="flex flex-col gap-3">
 
-            <label className={`${inter.className} text-sm font-semibold text-[#161D16]`}>
+            <label className={`${geist.className} text-sm font-semibold text-[#161D16]`}>
                 Project Type
             </label>
 
@@ -32,11 +32,10 @@ export default function ProjectType() {
                             type="radio"
                             checked={selected === type}
                             onChange={() => setSelected(type)}
-                            className="accent-[#22C55E]"
+                            className="w-4 h-4 accent-[#22C55E]"
                         />
-
                         <span
-                            className={`${inter.className} text-sm text-[#344054]`}
+                            className={`${inter.className} text-base text-[#344054]`}
                         >
                             {type}
                         </span>
