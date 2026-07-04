@@ -131,19 +131,14 @@ export default function ProjectTable({
     return (
         <>
             {/* Mobile */}
-            <div className="md:hidden flex min-h-105 items-center justify-center rounded-3xl border border-[#E5E7EB] bg-white">
+            <div className="md:hidden flex min-h-38.25 items-center justify-center rounded-3xl border border-[#E5E7EB] bg-white p-4 shadow">
                 <div className="text-center">
                     <h2
-                        className={`${geist.className} text-2xl font-bold text-[#161D16]`}
+                        className={`${geist.className} text-xs font-normal text-[#3D4A3D]`}
                     >
-                        Desktop View Required
+                        Only in Desktop view 
                     </h2>
 
-                    <p
-                        className={`${inter.className} mt-3 max-w-sm text-[#565E74]`}
-                    >
-                        Project management is available only on larger screens.
-                    </p>
                 </div>
             </div>
 

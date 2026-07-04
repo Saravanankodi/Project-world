@@ -1,5 +1,6 @@
 "use client";
 
+import { inter } from "@/lib/fonts";
 import { Monitor, Laptop, Server } from "lucide-react";
 
 const operatingSystems = [
@@ -31,7 +32,7 @@ export default function OSSelector({
 }: OSSelectorProps) {
     return (
         <div>
-            <label className="mb-4 block text-sm font-medium text-[#344054]">
+            <label className={`${inter.className} mb-4 block text-sm font-semibold text-[#161D16]`}>
                 Operating Systems
             </label>
 
@@ -44,9 +45,9 @@ export default function OSSelector({
                             key={os.id}
                             type="button"
                             onClick={() => onToggle(os.id)}
-                            className={`flex flex-col items-center justify-center rounded-xl border p-5 transition
+                            className={`flex flex-col items-center justify-center rounded-lg border p-5 transition
                                 ${active
-                                    ? "border-[#039855] bg-[#ECFDF3]"
+                                ? "border-[#006E2F] bg-[#22C55E1A]"
                                     : "border-[#EAECF0] hover:border-[#039855]"
                                 }`}
                         >
@@ -54,14 +55,14 @@ export default function OSSelector({
                                 size={28}
                                 className={
                                     active
-                                        ? "text-[#039855]"
+                                        ? "text-[#006E2F]"
                                         : "text-[#98A2B3]"
                                 }
                             />
 
                             <span
-                                className={`mt-3 text-sm font-medium ${active
-                                        ? "text-[#027A48]"
+                                className={`${inter.className} mt-3 text-xs font-medium ${active
+                                    ? "text-[#006E2F]"
                                         : "text-[#344054]"
                                     }`}
                             >

@@ -23,7 +23,7 @@ export default function ProjectInformation({
     const [tags, setTags] = useState<string[]>([]);
     
     return (
-        <section className="">
+        <section className="mb-10 sm:my-8">
             <UploadHeader
                 title="Upload Your Project"
                 description="Share your innovation with students and creators worldwide."

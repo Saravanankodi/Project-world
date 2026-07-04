@@ -18,7 +18,7 @@ export default function BottomActions({
     return (
         <div className=" flex flex-col gap-6">
             {/* Buttons */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-row gap-3 sm:flex-row  justify-evenly items-center sm:justify-between">
 
                 {/* Left */}
                 {onBack && (

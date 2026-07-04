@@ -484,16 +484,16 @@ const My_ProjectsPage = () => {
 const router = useRouter();
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 px-4">
 
             <div className="mb-2">
-                <div className={`${geist.className} mb-1 text-3xl lg:text-[32px] font-bold text-[#006E2F]`}>My Projects</div>
+                <div className={`${geist.className} mb-1 text-2xl lg:text-[32px] font-bold text-[#006E2F]`}>My Projects</div>
                 <div className="md:flex items-center justify-between mb-2">
                     <div className={`${inter.className} mb-2 text-sm xl:text-base font-normal text-[#3D4A3D]`}>Manage, update, and track your uploaded projects.</div>
                     <div><Button
                     onClick={() => router.push("/My_Projects/Upload_Projects")}
-                        leftIcon={<Plus />}
-                        className={`md:px-6 md:py-3 px-3 py-2  bg-[#22C55E] text-sm text-[#004B1E] font-bold ${geist.className} `}
+                        leftIcon={<Plus className="h-5 w-5" />}
+                        className={`md:px-6 md:py-3 px-3 py-2  bg-[#22C55E] text-xs sm:text-sm text-[#004B1E] font-bold ${geist.className} my-4`}
                     >
                         Upload New Project
                     </Button></div>

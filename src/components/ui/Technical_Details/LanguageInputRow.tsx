@@ -31,7 +31,7 @@ export default function LanguageInputRow({
     showRemove,
 }: LanguageInputRowProps) {
     return (
-        <div className="grid grid-cols-[1fr_150px_auto] gap-4 items-end">
+        <div className="grid sm:grid-cols-[1fr_150px_auto] gap-4 items-end">
             <FormInput
                 label="Programming Language"
                 placeholder="React"

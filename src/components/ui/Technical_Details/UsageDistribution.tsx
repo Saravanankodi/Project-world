@@ -39,10 +39,6 @@ export default function UsageDistribution({
                         Usage Distribution
                     </h3>
 
-                    <p className="mt-1 text-sm text-[#667085]">
-                        Visual overview of language usage.
-                    </p>
-
                 </div>
 
                 <span className={`${inter.className} text-sm font-semibold text-[#006E2F]`}>
@@ -97,7 +93,7 @@ export default function UsageDistribution({
 
                     <div className="h-50 flex items-center justify-center rounded-xl border border-dashed border-[#D0D5DD]  text-center">
 
-                        <p className="text-sm text-[#98A2B3]">
+                        <p className="text-sm text-[#98A2B3] p-2">
                             Add programming languages above to see usage distribution.
                         </p>
 

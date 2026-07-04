@@ -30,21 +30,17 @@ export default function ProjectResources({
     onFileChange,
 }: ProjectResourcesProps) {
     return (
-        <div className="mt-6 rounded-2xl border border-[#EAECF0] p-6">
+        <div className="mt-6 rounded-2xl border border-[#EAECF0]  p-3 sm:p-6">
 
             {/* Header */}
             <h3
-                className={`${geist.className} text-xl font-semibold text-[#101828]`}
+                className={`${geist.className} text-lg font-medium text-[#161D16]`}
             >
                 Project Resources
             </h3>
 
-            <p className="mt-1 text-sm text-[#667085]">
-                Upload all required files for reviewers and buyers.
-            </p>
-
             {/* Upload Cards */}
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <div className="mt-8 grid gap-1 md:gap-6 grid-cols-2">
 
                 <ResourceUploadCard
                     title="Source Code"

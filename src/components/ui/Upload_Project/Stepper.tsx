@@ -18,13 +18,13 @@ export default function Stepper({ currentStep }: StepperProps) {
             <div className="relative flex justify-between">
 
                 {/* Progress Line */}
-                <div className="absolute left-0 top-5 h-[2px] w-full bg-[#D8EAD8]" />
+                <div className="absolute left-0 top-5 h-0.5 w-full bg-[#D8EAD8]" />
 
                 {/* Active Progress */}
                 <div
-                    className="absolute left-0 top-5 h-[2px] bg-[#22C55E] transition-all duration-300"
+                    className="absolute left-0 top-5 h-0.5 bg-[#22C55E] transition-all duration-300"
                     style={{
-                        width:
+                        width: 
                             currentStep === 1
                                 ? "0%"
                                 : currentStep === 2
@@ -68,7 +68,7 @@ export default function Stepper({ currentStep }: StepperProps) {
 
                             <span
                                 className={`
-                  mt-3 text-sm font-medium text-center
+                  mt-3 text-xs sm:text-sm font-medium text-center
 
                   ${active || completed
                                         ? "text-[#006E2F]"

@@ -16,7 +16,7 @@ export default function UploadHeader({
             <h1
                 className={`
                     ${geist.className}
-                    text-[32px]
+                    text-2xl sm:text-[32px]
                     leading-none
                     font-bold
                     text-[#006E2F]
@@ -29,7 +29,7 @@ export default function UploadHeader({
                 className={`
                     ${inter.className}
                     mt-3
-                    text-base
+                    text-sm sm:text-base
                     font-normal
                     text-[#565E74]
                 `}

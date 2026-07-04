@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation'
 function ProjectBanner() {
     const router = useRouter();
     return (
-        <div className="flex bg-[#006E2F] text-white p-6 items-center justify-center rounded-xl gap-6">
-            <div className="w-3/4 flex flex-col justify-center  text-white">
+        <div className="flex bg-[#006E2F] text-white 
+        p-6 items-center justify-center rounded-xl gap-6">
+            <div className="sm:w-3/4 flex flex-col justify-center  text-white">
                 <div className={` ${geist.className} text-xl md:text-2xl  font-semibold text-white`}>
                     Boost Your Project Visibility
                 </div>
@@ -23,7 +24,7 @@ function ProjectBanner() {
                     </Button>
                 </div>
             </div>
-            <div className='w-1/4 flex items-center justify-center '>
+            <div className='sm:w-1/4 md:flex items-center justify-center hidden'>
                 <img className='border-4 border-[#FFFFFF33] rounded-2xl' src="/img/Rocket.png" alt="rocket" />
             </div>
         </div>
