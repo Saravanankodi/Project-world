@@ -11,7 +11,6 @@ export interface ProjectCardProps {
    
 }
 
-
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
 export interface ButtonProps
@@ -101,4 +100,41 @@ interface Props {
     placeholder: string;
     value?: string[];
     onChange?: (tags: string[]) => void;
+}
+export type MessageType = "text" | "image" | "file";
+
+export type MessageStatus = "sent" | "delivered" | "read";
+
+export type message = {
+    msg: string;
+    type: MessageType;
+    senderId:string;
+    createdAt: Date;
+    status?: MessageStatus;
+} 
+
+export type ChatcardProps = {
+    name:string;
+    profile?: string;
+    message: string; 
+    time: string;
+}
+export interface Message {
+  msg: string;
+  type: "text";
+  senderId: string;
+  createdAt: string;
+  status: "sent" | "read" | "delivered";
+}
+
+export interface Chat {
+  projectId: string;
+  lastMessage: string;
+  updatedAt: string;
+  messages: Record<string, Message>;
+}
+
+export interface ChatData {
+  currentUser: string;
+  chats: Record<string, Chat>;
 }

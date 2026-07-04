@@ -17,19 +17,18 @@ export default function Layout({
                 <Topbar />
             </header>
 
-            <div className="flex flex-1 overflow-hidden">
+            <div className="h-full w-full flex flex-1 overflow-hidden">
                 <aside className="hidden lg:block border-r border-[#BCCBB94D] ">
                     <Sidebar />
                 </aside>
 
-                <main className="flex-1 overflow-y-auto px-4 py-5 pb-20 md:px-10">
-                {children}
+                <main className="flex-1 overflow-y-auto px-4 py-5 md:pb-10">
+                    {children}
                 </main>
             </div>
-
-            <footer className="fixed bottom-0 left-0 w-full">
+            <MobileBottomNav/>
+            <footer className=" md:fixed bottom-0 left-0 w-full">
                 <Footer />
-                <MobileBottomNav/>
             </footer>
         </section>
     );

@@ -43,7 +43,7 @@ export default function MobileBottomNav() {
     const pathname = usePathname();
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#E5E7EB] bg-white lg:hidden">
+        <div className=" border-t border-[#E5E7EB] bg-white md:hidden">
             <div className="flex items-center justify-around  px-2 py-1">
                 {navItems.map((item) => {
                     const Icon = item.icon;
