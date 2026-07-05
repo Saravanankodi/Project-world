@@ -108,7 +108,7 @@ export default function TechnicalDetails({
 
 
     return (
-        <section className="my-10 p-2 md:p-8">
+        <section className="my-10 ">
 
             {/* Header */}
 

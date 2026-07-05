@@ -37,7 +37,7 @@ export default function UploadProjectPage() {
 
     return (
 
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl px-4 py-5">
 
             <Stepper currentStep={step} />
 

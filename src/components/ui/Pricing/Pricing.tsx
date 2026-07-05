@@ -4,6 +4,7 @@ import { geist, inter } from "@/lib/fonts";
 import { Eye, Lock } from "lucide-react";
 import UploadHeader from "../Upload_Project/UploadHeader";
 import FinalSubmissionCard from "./FinalSubmissionCard";
+import {useRouter} from "next/navigation"
 
 interface PricingProps {
     onBack: () => void;
@@ -22,9 +23,10 @@ export default function Pricing({
     const [discountEnabled, setDiscountEnabled] = useState(true);
     const [discount, setDiscount] = useState(20);
     const [chatEnabled, setChatEnabled] = useState(true);
+    const router = useRouter();
 
     return (
-        <section className="mt-8 p-3 sm:p-8">
+        <section className="mt-8 ">
 
             {/* Header */}
             <UploadHeader
@@ -384,7 +386,11 @@ export default function Pricing({
                     </div>
                     {/* Final Submission */}
                     <FinalSubmissionCard
-                        onSubmit={onSubmit}
+                        onSubmit={() =>
+                            router.push(
+                                "/My_Projects/Upload_Projects/UploadProject_Analytics"
+                            )
+                        }
                         onSaveDraft={onSaveDraft}
                         onBack={onBack}
                     />

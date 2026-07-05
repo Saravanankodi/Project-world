@@ -111,7 +111,7 @@ const DashboardPage = () => {
   ];
 
   return (
-    <div>     
+    <div className='px-4 py-5'>     
       <div>
         <HeroCard/>
       </div>

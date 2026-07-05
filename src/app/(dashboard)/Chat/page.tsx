@@ -3,7 +3,7 @@ import { MessageSquare, MessageSquareReply } from "lucide-react";
 
 export default function ChatPage() {
     return (
-        <section className="w-full h-full">
+        <section className="w-full h-full px-4 py-5 ">
             <aside className="w-auto md:hidden">
                 <ChatList />
             </aside>

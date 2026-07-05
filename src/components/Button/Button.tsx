@@ -11,7 +11,7 @@ const Button = ({
 }: ButtonProps) => {
     return (
         <button
-            className={`inline-flex items-center justify-center cursor-pointer gap-2 ${className} px-3 py-1 md:px-6 md:py-3 rounded-xl`}
+            className={`inline-flex items-center justify-center cursor-pointer gap-1 sm:gap-2 ${className} px-3 py-1 md:px-6 md:py-3 rounded-xl`}
             {...props} 
         >
             {leftIcon}

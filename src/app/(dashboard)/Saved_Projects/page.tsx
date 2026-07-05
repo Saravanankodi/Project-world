@@ -111,7 +111,7 @@ const Saved_ProjectsPage = () => {
     ];
 
     return (
-        <div>
+        <div className="px-4 py-5">
 
             <div className="mb-2">
                 <div className={`${geist.className} mb-1 text-3xl lg:text-[32px] font-bold text-[#006E2F]`}>Saved Projects</div>

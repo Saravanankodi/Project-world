@@ -33,6 +33,7 @@ export default function FinalSubmission({
     onBack,
     onSaveDraft,
 }: FinalSubmissionProps) {
+
     return (
         <div className="overflow-hidden rounded-3xl border border-[#e9e9e9] shadow-lg p-4">
 
@@ -102,7 +103,7 @@ export default function FinalSubmission({
 
                 <Button
                     onClick={onSubmit}
-                    className={`${inter.className} h-10 sm:h-14 w-full rounded-2xl bg-[#22C55E] text-sm sm:text-lg font-semibold text-[#004B1E] text-white hover:bg-[#4fc47a]`}
+                    className={`${inter.className} h-10 sm:h-14 w-full rounded-2xl bg-[#22C55E] text-sm sm:text-lg font-semibold  text-white hover:bg-[#4fc47a]`}
                     rightIcon={<Rocket size={18} />}
                 >
                     Submit For Review

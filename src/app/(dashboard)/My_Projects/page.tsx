@@ -484,7 +484,7 @@ const My_ProjectsPage = () => {
 const router = useRouter();
 
     return (
-        <div className="space-y-8 px-4">
+        <div className="space-y-8 px-8 py-5">
 
             <div className="mb-2">
                 <div className={`${geist.className} mb-1 text-2xl lg:text-[32px] font-bold text-[#006E2F]`}>My Projects</div>
@@ -504,7 +504,7 @@ const router = useRouter();
                 <StatsCard
                     title="Total Revenue"
                     value="$12,480.00"
-                    badge="+12%"
+                    trend="+12%"
                     valueColor="text-[#006E2F] "
                 />
 
