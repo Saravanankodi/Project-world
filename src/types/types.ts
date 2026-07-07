@@ -133,3 +133,13 @@ export interface ChatData {
   currentUser: string;
   chats: Record<string, Chat>;
 }
+export type Option ={
+    label:string;
+    value:string;
+}
+export type DropdownProps ={
+    name:string;
+    option: Option[];
+    value?:string | number;
+    onChange:(value:string)=> void;
+}
