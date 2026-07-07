@@ -131,19 +131,14 @@ export default function ProjectTable({
     return (
         <>
             {/* Mobile */}
-            <div className="md:hidden flex min-h-[420px] items-center justify-center rounded-3xl border border-[#E5E7EB] bg-white">
+            <div className="md:hidden flex min-h-38.25 items-center justify-center rounded-3xl border border-[#E5E7EB] bg-white p-4 shadow">
                 <div className="text-center">
                     <h2
-                        className={`${geist.className} text-2xl font-bold text-[#161D16]`}
+                        className={`${geist.className} text-xs font-normal text-[#3D4A3D]`}
                     >
-                        Desktop View Required
+                        Only in Desktop view 
                     </h2>
 
-                    <p
-                        className={`${inter.className} mt-3 max-w-sm text-[#565E74]`}
-                    >
-                        Project management is available only on larger screens.
-                    </p>
                 </div>
             </div>
 
@@ -203,7 +198,7 @@ export default function ProjectTable({
                 {projects.map((project) => (
                     <div
                         key={project.id}
-                        className="grid xl:grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_2fr_1fr_1fr] items-center border-b md:px-4 xl:px-8 py-2 transition hover:bg-[#FAFAFA]"
+                        className="grid xl:grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_2fr_1fr_1fr] items-center border-b border-[#BCCBB9] md:px-4 xl:px-8 py-2 transition hover:bg-[#FAFAFA]"
                     >
                         {/* Project */}
                         <div className="flex items-center gap-4">

@@ -11,8 +11,6 @@ export interface ProjectCardProps {
    
 }
 
-
-import { Timestamp } from "next/dist/server/lib/cache-handlers/types";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
 export interface ButtonProps
@@ -96,6 +94,13 @@ export type RatingPercentageBarProps = {
   color?: string;
 };
 
+
+interface Props {
+    label: string;
+    placeholder: string;
+    value?: string[];
+    onChange?: (tags: string[]) => void;
+}
 export type MessageType = "text" | "image" | "file";
 
 export type MessageStatus = "sent" | "delivered" | "read";

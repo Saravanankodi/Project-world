@@ -22,7 +22,7 @@ export default function Layout({
                     <Sidebar />
                 </aside>
 
-                <main className="flex-1 overflow-y-auto px-4 py-5 md:pb-10">
+                <main className="flex-1 overflow-y-auto  md:pb-10">
                     {children}
                 </main>
             </div>

@@ -109,7 +109,7 @@ const ExplorePage = () => {
     ];
 
     return (
-        <div>
+        <div className="px-4 py-5">
             <div className=" flex flex-col gap-2 md:gap-0 md:flex-row md:items-end md:justify-between mb-5 ">
                 <div>
                     <div className={`${inter.className} mb-2 text-3xl lg:text-[32px] font-semibold text-[#006E2F]`}>Explore Projects</div>
