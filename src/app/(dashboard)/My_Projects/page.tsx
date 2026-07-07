@@ -5,7 +5,7 @@ import ProjectTable from "@/components/Tables/ProjectTable";
 import { geist, inter } from "@/lib/fonts";
 import { Project } from "@/types/types"
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import { Plus,Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ProjectBanner from "@/components/Cards/ProjectBanner";
 
@@ -500,7 +500,7 @@ const router = useRouter();
                 </div>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {/* <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 <StatsCard
                     title="Total Revenue"
                     value="$12,480.00"
@@ -523,7 +523,33 @@ const router = useRouter();
                     value="#14"
                     valueColor="text-[#9E4036]"
                 />
-            </div>
+            </div> */}
+
+             <div className="grid gap-5 grid-cols-2 xl:grid-cols-4">
+            
+                      <StatsCard
+                        title="Total Revenue"
+                       className="border-[#E5E7EB] bg-white" value="$12,480.00"
+                        badge="+28%"
+                      />
+            
+                      <StatsCard
+                        title="Active Projects"
+                       className="border-[#E5E7EB] bg-white" value="24"
+                      />
+            
+                      <StatsCard
+                        title="Total Likes"
+                       className="border-[#E5E7EB] bg-white" value="1,842"
+                      />
+            
+                      <StatsCard
+                        title="Marketplace Rank"
+                       className="border-[#E5E7EB] bg-white" value="#14"
+                        valueColor="text-[#D92D20]"
+                      />
+            
+                    </div>
             
             <div className="">
                 <ProjectTable

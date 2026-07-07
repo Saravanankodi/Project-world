@@ -36,7 +36,7 @@ export default function UploadProject_Analytics() {
       />
 
       {/* Statistics */}
-      <div className="grid gap-5 grid-cols-2 sm:grid-cols-4 ">
+      {/* <div className="grid gap-5 grid-cols-2 sm:grid-cols-4 ">
 
         <StatsCard
           title="TOTAL VIEWS"
@@ -66,7 +66,47 @@ export default function UploadProject_Analytics() {
           trendUp
         />
 
-      </div>
+      </div> */}
+
+       
+
+        <div className="grid gap-5 grid-cols-2 xl:grid-cols-4">
+
+          <StatsCard
+            title="Total Views"
+            value="12,450"
+            className="border-[#E5E7EB] bg-white"
+            trend="+12%"
+          />
+
+          <StatsCard
+            title="Total Purchases"
+            value="320"
+            className="border-[#E5E7EB] bg-white"
+            trend="+5%"
+          />
+
+          <StatsCard
+            title="Total Revenue"
+            value="₹95,000"
+            className="border-[#E5E7EB] bg-white"
+            trend="+18%"
+          />
+
+          <StatsCard
+            title="Avg Rating"
+            value="4.8 / 5"
+            className="border-[#E5E7EB] bg-white"
+            rightIcon={
+              <Star
+                size={18}
+                fill="#FDB022"
+                className="text-[#FDB022]"
+              />
+            }
+          />
+
+        </div>
 
       {/* Charts */}
       <div className="grid gap-6 xl:grid-cols-2">
