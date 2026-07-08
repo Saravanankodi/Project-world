@@ -6,7 +6,7 @@ import { geist, inter } from "@/lib/fonts";
 
 const projects = [
     {
-        image: "/Topbar/Profileimage.jpg",
+        image: "/Bot.svg",
         name: "Autonomous Drone Kit",
         category: "AI / ML",
         sales: 54,
@@ -15,7 +15,7 @@ const projects = [
         status: "TRENDING",
     },
     {
-        image: "/Topbar/Profileimage.jpg",
+        image: "/db.svg",
         name: "Micro-SaaS Boilerplate",
         category: "Web Dev",
         sales: 42,
@@ -79,7 +79,7 @@ export default function TopProjectsTable() {
                                                 src={item.image}
                                                 alt={item.name}
                                                 fill
-                                                className="object-cover"
+                                                className="object-cover p-2 bg-[#22C55E1A]"
                                             />
 
                                         </div>
