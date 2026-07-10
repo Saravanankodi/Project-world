@@ -1,4 +1,8 @@
 import BasicInfo from "@/components/form/BasicInfo"
+import PaymentDetails from "@/components/form/PaymentDetails"
+import PortfolioLinks from "@/components/form/PortfolioLinks"
+import ProfilePhoto from "@/components/form/ProfilePhoto"
+import ContactVerification from "@/components/ui/profile/ContactVerification"
 import ProfileBanner from "@/components/ui/profile/ProfileBanner"
 import ProfileInfo from "@/components/ui/profile/ProfileInfo"
 
@@ -28,7 +32,8 @@ const ProfilePage = () => {
             </div>
 
         </main> */}
-        <BasicInfo/>
+        <PaymentDetails/>
+        <PortfolioLinks/>
     </section>
     </>
     )

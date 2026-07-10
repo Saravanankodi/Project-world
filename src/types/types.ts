@@ -11,6 +11,7 @@ export interface ProjectCardProps {
    
 }
 
+import { Timestamp } from "firebase/firestore";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
 export interface ButtonProps
@@ -148,3 +149,33 @@ export type DropdownProps ={
     value?:string | number;
     onChange:(value:string)=> void;
 }
+
+export interface VerificationCardProps {
+  icon: ReactNode;
+  value: string;
+  verified?: boolean;
+}
+
+// For firestore and state management
+export type Portfolio = {
+    siteName: string;
+    url:string;
+}
+
+export type UserProfile = {
+    uid:string;
+    name:string;
+    email:string;
+    phone:number;
+    age:number;
+    userType: 'student' | 'professional';
+    portfolioLinks:Portfolio[];
+    experience:number;
+    location:string;
+    gender:'none' | 'male' | 'female';
+    intro:string;
+    createdAt:Timestamp;
+    updatedAt:Timestamp;
+    profileImg:string;    
+}
+

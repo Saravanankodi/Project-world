@@ -27,13 +27,17 @@ const GENDER = [
     },
     {
         label:"Female",
-        value:"Female"
+        value:"female"
     },
 ]
 
 const BasicInfo = () => {
     const [userType,setUserType] = useState('');
     const [gender,setGender] = useState('');
+    const [name,setName] = useState('');
+    const [age,setAge] = useState(18);
+    const [location,setLocation] = useState('');
+
   return (
     <>
     <section className="w-full h-auto bg-white rounded-xl p-6 space-y-6">
@@ -41,7 +45,13 @@ const BasicInfo = () => {
             Basic Information
         </h2>
         <form action="" className="w-full grid grid-cols-2 gap-5">
-            <AuthInput label='FULL NAME' type='text' placeholder='Alex Rivera' />
+            <AuthInput 
+                label='FULL NAME' 
+                type='text' 
+                placeholder='Alex Rivera'
+                value={name}
+                onChange={(e)=>(setName(e.target.value))} />
+
             <Dropdown 
                 name='USER TYPE'
                 option={USER_TYPE}
@@ -54,9 +64,19 @@ const BasicInfo = () => {
                 value={gender}
                 onChange={setGender}
                 />
-            <AuthInput label='AGE' type='number' placeholder='Years'/>
+            <AuthInput 
+                label='AGE' 
+                type='number' 
+                placeholder='Years'
+                value={age}
+                onChange={(e)=>(setAge(Number(e.target.value)))} />
             <div className="col-span-2">
-                <AuthInput label='LOCATION' type='text' placeholder='City, Country'/>
+                <AuthInput 
+                    label='LOCATION' 
+                    type='text' 
+                    placeholder='City, Country'
+                    value={location}
+                    onChange={(e)=>(setLocation(e.target.value))} />
             </div>
         </form>
     </section>

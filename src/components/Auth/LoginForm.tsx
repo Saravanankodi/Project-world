@@ -206,10 +206,45 @@ import Image from "next/image";
 import Link from "next/link";
 import AuthInput from "./AuthInput";
 import { inter, geist } from "@/lib/fonts"
+import { useRouter } from "next/navigation";
+import { login, loginWithGoogle } from "@/services/auth";
 
 export default function LoginForm() {
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const [loading,setLoading] = useState(false);
+    const [error,setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    const router = useRouter();
+
+    const handleLogin = async ()=>{
+        setLoading(true);
+        setError('');
+        try {
+            await login(email,password);
+            router.replace('/');
+        } catch (err: any){
+            setError(err.message);
+        } finally{
+            setLoading(false);
+        }
+    }
+
+    const handleGoogleLogin = async () => {
+        setLoading(true);
+        setError("");
+
+        try {
+            await loginWithGoogle();
+
+            router.replace("/");
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className="min-h-screen w-full flex flex-col justify-center px-5 md:px-8 ">
             
@@ -238,6 +273,8 @@ export default function LoginForm() {
                                 label="Email Address" 
                                 type="email"
                                 placeholder="name@company.com"
+                                onChange={(e)=>(setEmail(e.target.value))}
+                                value={email}
                                 leftIcon="/Auth/mail.png"
                             />
 
@@ -245,6 +282,8 @@ export default function LoginForm() {
                                 label="Password"
                                 type={showPassword ? "text" : "password"}
                                 placeholder="••••••••"
+                                onChange={(e)=>(setPassword(e.target.value))}
+                                value={password}
                                 leftIcon="/Auth/lock.png"
                                 rightIcon={
                                     <Image
@@ -276,8 +315,12 @@ export default function LoginForm() {
                                     Forgot password?
                                 </Link>
                             </div>
-
-                            <button className="w-full h-11 rounded-md text-sm bg-[#22C55E] text-[#161D16] font-semibold hover:bg-[#16a34a]">
+                            {error && (
+                                <p className="text-red-500 text-sm">
+                                    {error}
+                                </p>
+                            )}
+                            <button onClick={handleLogin} className="w-full h-11 rounded-md text-sm bg-[#22C55E] text-[#161D16] font-semibold hover:bg-[#16a34a]">
                                 Login
                             </button>
 
@@ -287,7 +330,7 @@ export default function LoginForm() {
                                 <div className="flex-1 h-px bg-gray-200"></div>
                             </div>
 
-                            <button className="w-full h-11 rounded-md bg-[#1D1D1D] text-white flex justify-center items-center gap-3">
+                            <button onClick={handleGoogleLogin} className="w-full h-11 rounded-md bg-[#1D1D1D] text-white flex justify-center items-center gap-3">
                                 <Image
                                     src="/Auth/G_white.png"
                                     alt=""

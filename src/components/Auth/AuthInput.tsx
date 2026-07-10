@@ -40,9 +40,9 @@ import React from "react";
 
 interface AuthInputProps
     extends React.InputHTMLAttributes<HTMLInputElement> {
-    label: string;
+    label?: string;
     error?: string;
-    leftIcon?: string;
+    leftIcon?: string | React.ReactNode;
     rightIcon?: React.ReactNode;
 }
 
@@ -64,15 +64,20 @@ export default function AuthInput({
             </label>
 
             <div className="relative">
-                {leftIcon && (
+                {leftIcon && typeof(leftIcon) == 'string' && (
                     <Image
-                        src={leftIcon}
+                        src={leftIcon.toString()}
                         alt=""
                         width={18}
                         height={18}
                         className="absolute left-3 top-1/2 -translate-y-1/2"
                     />
                 )}
+                {
+                    leftIcon && (
+                        leftIcon
+                    )
+                }
 
                 <input
                     id={id}

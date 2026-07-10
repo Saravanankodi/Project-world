@@ -64,9 +64,54 @@ import Link from "next/link";
 import { useState } from "react";
 import AuthInput from "./AuthInput";
 import { geist, inter } from "@/lib/fonts";
+import { useRouter } from "next/navigation";
+import { loginWithGoogle, register } from "@/services/auth";
 
 export default function SignupForm() {
+    const [name, setName] = useState("");
+    // const [phone,setPhone] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const [Error,setError] = useState('');
+    const [loading,setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+
+    const router = useRouter();
+
+    const handleRegister = async () => {
+            setLoading(true);
+            setError("");
+
+            try {
+                const user = await register(
+                    name,
+                    email,
+                    password
+                );
+
+                console.log(user);
+
+                router.push("/");
+            } catch (error: any) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+    };
+
+    const handleGoogle = async () => {
+        setLoading(true);
+
+        try {
+            await loginWithGoogle();
+
+            router.push("/");
+        } catch (error: any) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen flex flex-col md:justify-center gap-3 w-full  items-center p-4">
@@ -90,19 +135,29 @@ export default function SignupForm() {
                         </div>
 
                         <div className=" md:mt-8 space-y-3 lg:space-y-5">
+                            <AuthInput
+                                label="Full Name"
+                                type="text"
+                                placeholder="John Doe"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
 
                             <AuthInput
                                 label="Email address"
                                 type="email"
                                 placeholder="name@company.com"
-
+                                onChange={((e)=>(setEmail(e.target.value)))}
+                                value={email}
                             />
 
-                            <AuthInput
+                            {/* <AuthInput
                                 label="Phone number"
+                                type="tel"
                                 placeholder="+1 (555) 000-0000"
-
-                            />
+                                onChange={((e)=>(setPhone(e.target.value)))}
+                                value={phone}
+                            /> */}
 
                             {/* <div className="grid grid-cols-2 gap-4"> */}
 
@@ -110,6 +165,8 @@ export default function SignupForm() {
                                 label="Password"
                                 type={showPassword ? "text" : "password"}
                                 placeholder="••••••••"
+                                onChange={((e)=>(setPassword(e.target.value)))}
+                                value={password}
                                 rightIcon={
                                     <Image
                                         src={
@@ -126,18 +183,16 @@ export default function SignupForm() {
                                     />
                                 }
                             />
-
-                            {/* <AuthInput
-                            label="Confirm password"
-                            type={showPassword ? "text" : "password"}
-                            placeholder="••••••••"
-                           
-                        /> */}
-
-                            {/* </div> */}
-
-                            <button className="w-full h-11 rounded-md bg-[#22C55E] text-white font-semibold">
-                                Create Account
+                            {Error && (
+                                <p className="text-sm text-red-500">
+                                    {Error}
+                                </p>
+                            )}
+                            <button
+                             onClick={handleRegister}
+                             disabled={loading}
+                             className="w-full h-11 rounded-md bg-[#22C55E] text-white font-semibold">
+                                {loading ? "Creating..." : "Create Account"}
                             </button>
 
                             <div className="flex items-center gap-3">
@@ -146,7 +201,7 @@ export default function SignupForm() {
                                 <div className="flex-1 h-px bg-gray-200"></div>
                             </div>
 
-                            <button className={`w-full h-11 border rounded-md flex justify-center items-center  font-semibold text-sm text-[#161D16] gap-3 ${inter.className}`}>
+                            <button onClick={handleGoogle} className={`w-full h-11 border rounded-md flex justify-center items-center  font-semibold text-sm text-[#161D16] gap-3 ${inter.className}`}>
                                 <Image
                                     src="/Auth/G_color.png"
                                     alt=""
