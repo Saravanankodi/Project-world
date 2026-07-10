@@ -500,30 +500,6 @@ const router = useRouter();
                 </div>
             </div>
 
-            {/* <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-                <StatsCard
-                    title="Total Revenue"
-                    value="$12,480.00"
-                    trend="+12%"
-                    valueColor="text-[#006E2F] "
-                />
-
-                <StatsCard
-                    title="Active Projects"
-                    value="24"
-                />
-
-                <StatsCard
-                    title="Total Likes"
-                    value="1,842"
-                />
-
-                <StatsCard
-                    title="Marketplace Rank"
-                    value="#14"
-                    valueColor="text-[#9E4036]"
-                />
-            </div> */}
 
              <div className="grid gap-5 grid-cols-2 xl:grid-cols-4">
             

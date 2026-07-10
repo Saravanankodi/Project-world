@@ -1,80 +1,3 @@
-// "use client";
-
-// import React from "react";
-// import { geist, inter } from "@/lib/fonts";
-// import { TrendingUp } from "lucide-react";
-
-// interface StatsCardProps {
-//     title: string;
-//     value: string;
-//     icon?: React.ReactNode;
-//     trend?: string;
-//     trendUp?: boolean;
-//     valueColor?: string;
-// }
-
-// export default function StatsCard({
-//     title,
-//     value,
-//     icon,
-//     trend,
-//     trendUp = true,
-//     valueColor = "text-[#161D16]",
-// }: StatsCardProps) {
-//     return (
-//         <div className="rounded-2xl border border-[#D8E3D3] flex flex-col items-start justify-center bg-white  px-5  py-2 shadow-sm transition hover:shadow-md">
-
-//             {/* Header */}
-//             <div className="flex items-center ">
-
-//                 <p
-//                     className={`${geist.className} text-xs font-medium uppercase tracking-wide text-[#3D4A3D]`}
-//                 >
-//                     {title}
-//                 </p>
-
-               
-//             </div>
-
-//             {/* Value */}
-//             <div className="w-full mt-2 flex items-center justify-between gap-3">
-
-//                 <h2
-//                     className={`${geist.className} text-xs sm:text-base font-bold ${valueColor}`}
-//                 >
-//                     {value}
-//                 </h2>
-
-//                 {trend && (
-//                     <span
-//                         className={`rounded-md  px-2 py-1 text-[10px] sm:text-xs font-semibold ${inter.className} flex gap-2
-//                         ${trendUp
-//                                 ? "text-[#006E2F]"
-//                                 : "text-[#D92D20]"
-//                             }`}
-//                     >                     
-//                         <TrendingUp size={20} className="text-[#006E2F] text-xs" />
-//                         {trend}
-//                     </span>
-//                 )}
-//                 {icon && (
-//                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-[#FBBF24]">
-//                         {icon}
-//                     </div>
-//                 )}
-
-
-//             </div>
-
-//         </div>
-//     );
-// }
-
-
-
-
-
-
 "use client";
 
 import React from "react";
@@ -82,8 +5,12 @@ import { geist, inter } from "@/lib/fonts";
 import { TrendingUp, TrendingDown } from "lucide-react";
 
 interface StatsCardProps {
-    title: string;
-    value: string | number;
+    title?: string;
+    value?: string | number;
+
+    subtitle?: string;
+    center?: boolean;
+    largeValue?: boolean;
 
     icon?: React.ReactNode;
     iconBg?: string;
@@ -105,6 +32,10 @@ export default function StatsCard({
     title,
     value,
 
+    subtitle,
+    center,
+    largeValue,
+
     icon,
     iconBg = "bg-[#ECFDF3]",
 
@@ -122,73 +53,106 @@ export default function StatsCard({
 }: StatsCardProps) {
     return (
         <div
-            className={`rounded-2xl border  p-5 shadow-sm transition hover:shadow-md ${className}`}
+            className={`rounded-2xl   shadow-sm transition hover:shadow-md ${largeValue ? "bg-[#EDF6EA] p-5" : "bg-white p-1" } ${className}`}
         >
-            {/* Top */}
-
-            <div className="flex items-start justify-between">
-
-                <div className="flex items-center gap-3">
+            {center ? (
+                // =========================
+                // Center Layout
+                // =========================
+                <div className={`flex h-full flex-col items-center justify-center text-center  `}>
 
                     {icon && (
                         <div
-                            className={`flex h-10 w-10 items-center justify-center rounded-xl ${iconBg}`}
+                            className={`mb-1 flex h-10 w-10 items-center justify-center rounded-2xl ${iconBg} text-[#006E2F66]`}
                         >
                             {icon}
                         </div>
                     )}
 
-                    <div>
+                    <h2
+                        className={`${geist.className} ${largeValue ? "text-2xl text-[#006E2F] font-semibold" : "text-sm font-bold text-[#161D16]"
+                            } font-bold ${valueColor}`}
+                    >
+                        {value}
+                    </h2>
 
+                    {subtitle && (
                         <p
-                            className={`${geist.className} text-xs uppercase tracking-wide text-[#667085]`}
+                            className={`${geist.className} mt-2 text-[10px] uppercase tracking-wide ${largeValue ? "text-[#161D16]" : "text-[#3D4A3D]"}`}
                         >
-                            {title}
+                            {subtitle}
                         </p>
-
-                    </div>
-
+                    )}
                 </div>
+            ) : (
+                // =========================
+                // Analytics Layout
+                // =========================
+                <>
+                    {/* Top */}
+                    <div className="flex items-start justify-between">
 
-                {badge && (
-                    <span
-                        className={`${inter.className} rounded-full px-2.5 py-1 text-xs font-semibold ${badgeColor}`}
-                    >
-                        {badge}
-                    </span>
-                )}
+                        <div className="flex items-center gap-3">
 
-            </div>
+                            {icon && (
+                                <div
+                                    className={`flex h-10 w-10 items-center justify-center rounded-xl ${iconBg}`}
+                                >
+                                    {icon}
+                                </div>
+                            )}
 
-            {/* Bottom */}
+                            {title && (
+                                <p
+                                    className={`${geist.className} text-xs uppercase tracking-wide text-[#667085]`}
+                                >
+                                    {title}
+                                </p>
+                            )}
 
-            <div className="mt-4 flex items-end justify-between">
+                        </div>
 
-                <h2
-                    className={`${geist.className} text-xs sm:text-base font-bold ${valueColor}`}
-                >
-                    {value}
-                </h2>
-
-                {trend && (
-                    <div
-                        className={`flex items-center gap-1 text-[10px] sm:text-xs font-semibold ${inter.className} ${trendUp
-                                ? "text-[#027A48]"
-                                : "text-[#D92D20]"
-                            }`}
-                    >
-                        {trendUp ? (
-                            <TrendingUp size={16} />
-                        ) : (
-                            <TrendingDown size={16} />
+                        {badge && (
+                            <span
+                                className={`${inter.className} rounded-full px-2.5 py-1 text-xs font-semibold ${badgeColor}`}
+                            >
+                                {badge}
+                            </span>
                         )}
 
-                        {trend}
                     </div>
-                )}
 
-                {rightIcon}
-            </div>
+                    {/* Bottom */}
+                    <div className="mt-4 flex items-end justify-between">
+
+                        <h2
+                            className={`${geist.className} text-xl sm:text-2xl font-bold ${valueColor}`}
+                        >
+                            {value}
+                        </h2>
+
+                        {trend && (
+                            <div
+                                className={`flex items-center gap-1 text-[10px] sm:text-xs font-semibold ${trendUp
+                                        ? "text-[#027A48]"
+                                        : "text-[#D92D20]"
+                                    }`}
+                            >
+                                {trendUp ? (
+                                    <TrendingUp size={16} />
+                                ) : (
+                                    <TrendingDown size={16} />
+                                )}
+
+                                {trend}
+                            </div>
+                        )}
+
+                        {rightIcon}
+
+                    </div>
+                </>
+            )}
         </div>
     );
 }
