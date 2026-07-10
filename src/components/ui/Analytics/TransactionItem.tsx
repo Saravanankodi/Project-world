@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { inter } from "@/lib/fonts";
+import { geist, inter } from "@/lib/fonts";
 
 interface TransactionItemProps {
     image: string;
@@ -37,16 +37,22 @@ export default function TransactionItem({
                 <div>
 
                     <h4
-                        className={`${inter.className} text-sm font-semibold text-[#161D16]`}
+                        className={`${geist.className} text-sm font-bold text-[#161D16]`}
                     >
                         {name}
                     </h4>
-
+<div className="flex gap-1">
                     <p
-                        className={`${inter.className} text-xs text-[#667085]`}
+                            className={`${inter.className} text-xs text-[#3D4A3D]`}
                     >
-                        {project}
+                            {time} • 
                     </p>
+                    <p
+                            className={`${inter.className} text-xs text-[#3D4A3D]`}
+                    >
+                         {project}
+                    </p>
+</div>
 
                 </div>
 
@@ -55,17 +61,12 @@ export default function TransactionItem({
             <div className="text-right">
 
                 <p
-                    className={`${inter.className} text-sm font-semibold text-[#006E2F]`}
+                    className={`${inter.className} text-base font-bold text-[#006E2F]`}
                 >
                     {amount}
                 </p>
 
-                <p
-                    className={`${inter.className} text-xs text-[#98A2B3]`}
-                >
-                    {time}
-                </p>
-
+              
             </div>
 
         </div>

@@ -29,7 +29,7 @@ const Dropdown = ({name,option,value,onChange}:DropdownProps) => {
                   text-sm ${inter.className} outline-none transition`}
       >
          {selectedOption ? selectedOption.label : "Select"}
-        {/* <span className="ml-2">▾</span> */}
+      
       </button>
 
       {open && (
