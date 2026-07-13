@@ -179,3 +179,12 @@ export type UserProfile = {
     profileImg:string;    
 }
 
+export interface Payment {
+    id: number;
+    date: string;
+    project: string;
+    category: string;
+    amount: string;
+    method: "UPI" | "CARD" | "BANK";
+    status: "PAID" | "PENDING" | "FAILED";
+}

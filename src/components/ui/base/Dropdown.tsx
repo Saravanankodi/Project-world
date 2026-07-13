@@ -8,10 +8,10 @@ import React, { useState } from 'react'
 
 const Dropdown = ({name,option,value,onChange}:DropdownProps) => {
     const [open,setOpen] = useState(false);
-    const [select,setSelect] = useState<Option | null>(null)
+    // const [select,setSelect] = useState<Option | null>(null)
 
     const handleSelect =(option:Option)=>{
-        setSelect(option)
+        // setSelect(option)
         onChange(option.value)
         setOpen(false)
     }

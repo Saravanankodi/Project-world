@@ -13,6 +13,7 @@ import ChatIcon from "@/components/icons/Sidebar/ChatIcon";
 import AnalyticsIcon from "@/components/icons/Sidebar/AnalyticsIcon";
 import ProfileIcon from "@/components/icons/Sidebar/ProfileIcon";
 import SettingsIcon from "@/components/icons/Sidebar/SettingsIcon";
+import { Wallet } from "lucide-react";
 
 const menu = [
     {
@@ -48,6 +49,11 @@ const menu = [
                 href: "/Chat",
                 icon: ChatIcon,
             },
+            {
+                name: "Issues",
+                href: "/Chat",
+                icon: ChatIcon,
+            },
         ],
     },
     {
@@ -57,6 +63,11 @@ const menu = [
                 name: "Analytics",
                 href: "/Analytics",
                 icon: AnalyticsIcon,
+            },
+            {
+                name: "Payment Details",
+                href: "/Payment_Details",
+                icon: Wallet,
             },
         ],
     },
@@ -104,7 +115,7 @@ export default function Sidebar() {
                                             : "text-[#565E74] hover:bg-gray-100"
                                             }`}
                                     >
-                                        <Icon viewBox="0 0 17 17" width={17} height={17} />                                      
+                                        <Icon  width={17} height={17} />                                      
                                         <span
                                             className={`${geist.className}  text-sm  p-1 ${active ? "font-bold" : "font-medium"
                                                 }`}

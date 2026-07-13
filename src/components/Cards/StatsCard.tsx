@@ -26,6 +26,8 @@ interface StatsCardProps {
     rightIcon?: React.ReactNode;
 
     className?: string;
+
+    onClick?: () => void;
 }
 
 export default function StatsCard({
@@ -50,10 +52,15 @@ export default function StatsCard({
     rightIcon,
 
     className = "",
+
+    onClick,
 }: StatsCardProps) {
     return (
         <div
-            className={`rounded-2xl   shadow-sm transition hover:shadow-md ${largeValue ? "bg-[#EDF6EA] p-5" : "bg-white p-1" } ${className}`}
+            onClick={onClick}
+            className={`rounded-2xl   shadow-sm transition hover:shadow-md
+                 ${onClick ? "cursor-pointer hover:scale-[1.02] hover:bg-[#c1f4c4a9]" : ""}
+                  ${largeValue ? "bg-[#EDF6EA] p-5" : "bg-white p-1" } ${className}`}
         >
             {center ? (
                 // =========================
