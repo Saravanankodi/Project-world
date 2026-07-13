@@ -156,6 +156,18 @@ export interface VerificationCardProps {
   verified?: boolean;
 }
 
+export type IssusesCardProps = {
+    icon:ReactNode;
+    tittle:string;
+    value:string;
+}
+export interface IssueDetailsProps {
+  projectName: string;
+  paymentAmount: number;
+  technicalSummary: string;
+  description: string;
+}
+
 // For firestore and state management
 export type Portfolio = {
     siteName: string;
