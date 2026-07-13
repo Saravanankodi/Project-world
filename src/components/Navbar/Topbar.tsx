@@ -11,7 +11,7 @@ function Topbar() {
         <div className='min-w-0 w-full md:p-2 px-4 py-2 flex flex-row items-center md:justify-between md:px-8 bg-white border-b border-[#BCCBB94D]'>
             <div className='w-3/5 hidden md:flex flex-row gap-12 items-center justify-start'>
                 <div className={` text-2xl text-[#161D16] ms-5 font-bold ${geist.className}`}>ProjectVerse</div>
-                <div className='w-3/6'><Search placeholder="Search for projects, users, and more ..." /></div>
+                <div className='w-3/6'><Search className="bg-[#EDF6EA]" placeholder="Search for projects, users, and more ..." /></div>
             </div>
             <div className='min-w-0 w-full md:hidden flex items-center justify-between'>
                 <div className={` text-2xl text-[#161D16]  font-bold ${geist.className}`}>ProjectVerse</div>

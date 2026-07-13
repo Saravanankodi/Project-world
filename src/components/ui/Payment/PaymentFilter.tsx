@@ -1,6 +1,7 @@
 "use client";
 
 import Search from "@/components/Navbar/Search";
+import { geist } from "@/lib/fonts";
 import { Filter } from "lucide-react";
 
 interface PaymentFilterProps {
@@ -36,7 +37,7 @@ export default function PaymentFilter({
                 {/* Search */}
 
                 <div className="flex-1">
-                    <Search />
+                    <Search className="bg-white border border-[#BCCBB9] text-[#6B7280]"/>
                 </div>
 
                 {/* Filters */}
@@ -48,8 +49,7 @@ export default function PaymentFilter({
                     {/* <select
                         value={day}
                         onChange={(e) => onDayChange(e.target.value)}
-                        className="h-10 w-[95px] rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none"
-                    >
+                        className={` ${geist.className} h-10 w-[95px] rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none`}                    >
                         <option>Day</option>
                         <option>Today</option>
                         <option>Yesterday</option>
@@ -60,8 +60,7 @@ export default function PaymentFilter({
                     <select
                         value={month}
                         onChange={(e) => onMonthChange(e.target.value)}
-                        className="h-10 w-[95px] rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none"
-                    >
+                        className={` ${geist.className} h-10 w-[95px] rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none`}                    >
                         <option>October</option>
                         <option>September</option>
                         <option>August</option>
@@ -73,8 +72,7 @@ export default function PaymentFilter({
                     <select
                         value={year}
                         onChange={(e) => onYearChange(e.target.value)}
-                        className="h-10 w-[80px] rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none"
-                    >
+                        className={` ${geist.className} h-10 w-[80px] rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none`}                    >
                         <option>2024</option>
                         <option>2023</option>
                         <option>2022</option>
@@ -85,7 +83,7 @@ export default function PaymentFilter({
                     <select
                         value={status}
                         onChange={(e) => onStatusChange(e.target.value)}
-                        className="h-10 w-[120px] rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none"
+                        className={` ${geist.className} h-10 w-30 rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none`}
                     >
                         <option>Status: All</option>
                         <option>Paid</option>

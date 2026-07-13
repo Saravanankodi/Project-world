@@ -16,7 +16,7 @@ export default function UploadProject_Analytics() {
 
       {/* Search */}
       <div className="sm:hidden m-4">
-        <SearchBar placeholder="Search Projects..." />
+        <SearchBar className="bg-[#EDF6EA]" placeholder="Search Projects..." />
       </div>
       <div className=" space-y-5 sm:space-y-3  bg-[#F3FCEF] p-4 px-4 py-2">
       {/* Project Header */}

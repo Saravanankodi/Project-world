@@ -253,13 +253,13 @@ export default function TransactionSummary({
                     <div className="flex items-center justify-between">
 
                         <span
-                            className={`${inter.className} text-[#667085]`}
+                            className={`${inter.className} text-base text-[#3D4A3D] font-medium`}
                         >
                             Available Balance
                         </span>
 
                         <span
-                            className={`${geist.className} font-semibold text-[#161D16]`}
+                            className={`${geist.className} font-semibold text-base text-[#161D16]`}
                         >
                             ₹{balance.toLocaleString()}
                         </span>
@@ -269,13 +269,13 @@ export default function TransactionSummary({
                     <div className="flex items-center justify-between">
 
                         <span
-                            className={`${inter.className} text-[#667085]`}
+                            className={`${inter.className} text-base text-[#3D4A3D] font-medium`}
                         >
                             Withdrawal Amount
                         </span>
 
                         <span
-                            className={`${geist.className} font-semibold text-[#161D16]`}
+                            className={`${geist.className} font-semibold text-base text-[#161D16]`}
                         >
                             ₹{amount.toLocaleString()}
                         </span>
@@ -285,7 +285,7 @@ export default function TransactionSummary({
                     <div className="flex items-center justify-between">
 
                         <span
-                            className={`${inter.className} text-[#667085]`}
+                            className={`${inter.className} text-base text-[#3D4A3D] font-medium`}
                         >
                             Processing Fee
                         </span>
@@ -300,7 +300,7 @@ export default function TransactionSummary({
 
                     </div>
 
-                    <div className="border-t border-[#EEF2EE]" />
+                    <div className="border-t border-[#BCCBB94D]" />
 
                     <div className="flex items-center justify-between">
 
@@ -320,13 +320,13 @@ export default function TransactionSummary({
 
                     {/* Estimated */}
 
-                    <div className="rounded-xl bg-[#F5FAF3] p-4">
+                    <div className="rounded-xl bg-[#EDF6EA] p-4">
 
                         <div className="flex items-center gap-3">
 
                             <Clock3
                                 size={18}
-                                className="text-[#98A2B3]"
+                                className="text-[#BEC6E0]"
                             />
 
                             <div>
@@ -338,7 +338,7 @@ export default function TransactionSummary({
                                 </p>
 
                                 <p
-                                    className={`${inter.className} text-sm text-[#667085]`}
+                                    className={`${inter.className} text-sm text-[#3D4A3D]`}
                                 >
                                     1–3 Business Days
                                 </p>
@@ -353,23 +353,24 @@ export default function TransactionSummary({
 
                     <Button
                         onClick={onWithdraw}
-                        className={`w-full bg-[#22C55E] text-[#004B1E] font-bold py-3 ${geist.className}`}
+                        className={`w-full bg-[#22C55E] text-[#FFFFFF] font-bold py-3 ${geist.className}`}
                     >
                         Withdraw Earnings
                     </Button>
 
                     <button
                         onClick={onCancel}
-                        className={`${inter.className} w-full text-sm font-medium text-[#161D16] hover:text-[#027A48] transition`}
+                        className={`${inter.className} w-full
+                         text-sm font-medium text-[#161D16] hover:text-[#027A48] transition`}
                     >
                         Cancel
                     </button>
 
                     <p
-                        className={`${inter.className} text-center text-xs leading-6 text-[#667085]`}
+                        className={`${inter.className} text-center text-sm leading-6 text-[#3D4A3D]`}
                     >
                         By clicking Withdraw, you agree to our{" "}
-                        <span className="font-semibold underline cursor-pointer">
+                        <span className="font-medium underline cursor-pointer text-[#027A48]">
                             Terms of Payout
                         </span>
                         .
@@ -381,19 +382,19 @@ export default function TransactionSummary({
 
             {/* Security */}
 
-            <div className="rounded-2xl border border-[#F7D4CC] bg-[#FFF1EF] p-5">
+            <div className="rounded-2xl border border-[#F7D4CC] bg-[#FFDAD5] p-5">
 
                 <div className="flex gap-3">
 
                     <AlertTriangle
                         size={20}
-                        className="mt-1 text-[#B42318]"
+                        className="mt-1 text-[#7F2A21]"
                     />
 
                     <div>
 
                         <h3
-                            className={`${geist.className} text-sm font-semibold text-[#B42318]`}
+                            className={`${geist.className} text-sm font-semibold text-[#7F2A21]`}
                         >
                             Secure Transfer
                         </h3>

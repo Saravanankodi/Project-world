@@ -104,13 +104,13 @@ export default function WithdrawPage() {
             <div>
 
                 <h1
-                    className={`${geist.className} text-[30px] font-bold text-[#006E2F]`}
+                    className={`${geist.className} text-3xl font-bold text-[#006E2F]`}
                 >
                     Withdraw Earnings
                 </h1>
 
                 <p
-                    className={`${inter.className} mt-2 text-[#667085]`}
+                    className={`${inter.className} mt-2 text-lg text-[#3D4A3D]`}
                 >
                     Withdraw your available earnings securely to your preferred payment method.
                 </p>

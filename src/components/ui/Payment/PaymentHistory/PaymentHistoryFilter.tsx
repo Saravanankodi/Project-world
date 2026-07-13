@@ -33,7 +33,7 @@ export default function PaymentHistoryFilter({
 
                     <Search
                         size={18}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-[#6B7280]"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-[#6B7280] bg-[#EDF6EA]"
                     />
 
                     <input

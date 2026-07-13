@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, MoreVertical } from "lucide-react";
 import { geist, inter } from "@/lib/fonts";
 import Pagination from "@/components/Tables/Pagination";
 import { Payment } from "@/types/types";
@@ -23,18 +23,7 @@ export default function PaymentTable({
     rowsPerPage,
     onPageChange,
 }: PaymentTableProps) {
-    const statusStyle = {
-        PAID: "bg-[#ECFDF3] text-[#027A48]",
-        PENDING: "bg-[#FFF7E6] text-[#B54708]",
-        FAILED: "bg-[#FEF3F2] text-[#B42318]",
-    };
-
-    const methodStyle = {
-        UPI: "bg-[#EEF4FF] text-[#175CD3]",
-        CARD: "bg-[#F4F3FF] text-[#6938EF]",
-        BANK: "bg-[#F2F4F7] text-[#344054]",
-    };
-
+  
     return (
         <>
             {/* Mobile */}
@@ -43,7 +32,7 @@ export default function PaymentTable({
                 {payments.map((item) => (
                     <div
                         key={item.id}
-                        className="rounded-2xl border border-[#E5E7EB] bg-white p-5 shadow-sm"
+                        className="rounded-2xl border border-[#BCCBB9] bg-white p-5 shadow-sm shadow-[#0000000D]"
                     >
                         <div className="flex items-start justify-between">
 
@@ -64,7 +53,7 @@ export default function PaymentTable({
                             </div>
 
                             <button>
-                                <MoreHorizontal size={20} />
+                                <MoreVertical size={20} />
                             </button>
 
                         </div>
@@ -97,7 +86,7 @@ export default function PaymentTable({
                                 </p>
 
                                 <span
-                                    className={`mt-2 inline-flex rounded-full px-3 py-1 text-xs font-semibold ${methodStyle[item.method]}`}
+                                    className={`mt-2 inline-flex rounded-full px-3 py-1 text-xs font-semibold `}
                                 >
                                     {item.method}
                                 </span>
@@ -109,7 +98,7 @@ export default function PaymentTable({
                                 </p>
 
                                 <span
-                                    className={`mt-2 inline-flex rounded-full px-3 py-1 text-xs font-semibold ${statusStyle[item.status]}`}
+                                    className={`mt-2 inline-flex rounded-full px-3 py-1 text-xs font-semibold`}
                                 >
                                     {item.status}
                                 </span>
@@ -122,11 +111,11 @@ export default function PaymentTable({
 
             {/* Desktop */}
 
-            <div className="hidden overflow-hidden rounded-3xl border border-[#E5E7EB] bg-white md:block">
+            <div className="hidden overflow-hidden rounded-3xl border border-[#BCCBB9]  md:block">
 
                 {/* Header */}
 
-                <div className="grid grid-cols-[1.2fr_2.4fr_1fr_1fr_1fr_80px] border-b border-[#D8E3D3] px-8 py-5">
+                <div className="grid grid-cols-[1.2fr_2.4fr_1fr_1fr_1fr_80px] border-b border-[#D8E3D3] bg-[#EDF6EA] px-8 py-5">
 
                     <h3 className={`${geist.className} text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
                         Date
@@ -162,7 +151,7 @@ export default function PaymentTable({
                         className="grid grid-cols-[1.2fr_2.4fr_1fr_1fr_1fr_80px] items-center border-b border-[#E5E7EB] px-8 py-5 transition hover:bg-[#FAFAFA]"
                     >
                         <div>
-                            <p className={`${inter.className} text-sm font-medium`}>
+                            <p className={`${inter.className} text-sm text-[#161D16] font-medium`}>
                                 {item.date}
                             </p>
                         </div>
@@ -170,13 +159,13 @@ export default function PaymentTable({
                         <div>
 
                             <h3
-                                className={`${geist.className} text-base font-semibold text-[#161D16]`}
+                                className={`${geist.className} text-sm font-semibold text-[#161D16]`}
                             >
                                 {item.project}
                             </h3>
 
                             <p
-                                className={`${inter.className} mt-1 text-sm text-[#667085]`}
+                                className={`${inter.className} mt-1 text-sm font-medium text-[#3D4A3D]`}
                             >
                                 {item.category}
                             </p>
@@ -185,7 +174,7 @@ export default function PaymentTable({
 
                         <div>
                             <h3
-                                className={`${geist.className} text-base font-bold text-[#006E2F]`}
+                                className={`${geist.className} text-sm font-bold text-[#161D16]`}
                             >
                                 {item.amount}
                             </h3>
@@ -194,7 +183,7 @@ export default function PaymentTable({
                         <div>
 
                             <span
-                                className={`rounded-full px-3 py-1 text-xs font-semibold ${methodStyle[item.method]}`}
+                                className={`${geist.className} uppercase rounded-full px-3 py-1 text-[10px] font-medium  bg-[#E8F0E4]`}
                             >
                                 {item.method}
                             </span>
@@ -204,7 +193,7 @@ export default function PaymentTable({
                         <div>
 
                             <span
-                                className={`rounded-full px-3 py-1 text-xs font-semibold ${statusStyle[item.status]}`}
+                                className={`${geist.className} rounded-full px-3 py-1 text-[10px] uppercase  font-semibold text-[#005321] bg-[#4AE17633]`}
                             >
                                 {item.status}
                             </span>
@@ -214,7 +203,7 @@ export default function PaymentTable({
                         <div className="flex justify-end">
 
                             <button className="rounded-lg p-2 transition hover:bg-[#F3F4F6]">
-                                <MoreHorizontal size={20} />
+                                <MoreVertical size={20} />
                             </button>
 
                         </div>

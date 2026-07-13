@@ -245,24 +245,7 @@ export default function ProjectPaymentPage() {
     return (
         <div className="mx-auto w-full max-w-7xl space-y-8 px-4 py-6 lg:px-8">
 
-            {/* Header */}
-
-            <div>
-
-                <h1
-                    className={`${geist.className} text-3xl font-bold text-[#006E2F] lg:text-[40px]`}
-                >
-                    Secure Checkout
-                </h1>
-
-                <p
-                    className={`${inter.className} mt-2 text-[#667085]`}
-                >
-                    Complete your purchase to unlock full access to this premium project.
-                </p>
-
-            </div>
-
+           
             {/* Layout */}
 
             <div className="grid gap-8 xl:grid-cols-[360px_1fr]">
@@ -272,7 +255,7 @@ export default function ProjectPaymentPage() {
                 <div className="space-y-6">
 
                     <PurchaseSummaryCard
-                        image="/Projects/project-1.jpg"
+                        image="/preview/preview-2.jpg"
                         title="Eco Smart Bridge Infrastructure"
                         category="Civil Engineering"
                         rating={4.9}
@@ -323,15 +306,7 @@ export default function ProjectPaymentPage() {
                                             tab.id as PaymentMethod
                                         )
                                     }
-                                    className={`
-                                    flex
-                                    flex-col
-                                    items-center
-                                    justify-center
-                                    rounded-xl
-                                    border
-                                    py-4
-                                    transition
+                                    className={` flex flex-col items-center justify-center rounded-xl border py-4 transition
 
                                     ${active
                                             ? "border-[#22C55E] bg-[#ECFDF3]"

@@ -51,7 +51,7 @@ const menu = [
             },
             {
                 name: "Issues",
-                href: "/Chat",
+                href: "/Issue",
                 icon: ChatIcon,
             },
         ],

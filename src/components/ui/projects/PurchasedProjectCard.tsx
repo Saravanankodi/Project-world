@@ -10,6 +10,8 @@ interface PurchasedProjectCardProps {
     author: string;
     date: string;
     price: string;
+    userimage: string;
+
 }
 
 export default function PurchasedProjectCard({
@@ -18,6 +20,7 @@ export default function PurchasedProjectCard({
     author,
     date,
     price,
+    userimage,
 }: PurchasedProjectCardProps) {
     return (
         <div className="overflow-hidden rounded-2xl border border-[#D8E3D3] bg-white shadow-sm">
@@ -34,7 +37,7 @@ export default function PurchasedProjectCard({
                 />
 
                 <span
-                    className={`${inter.className} absolute right-3 top-3 rounded-full bg-[#16A34A] px-3 py-1 text-[10px] font-bold uppercase text-white shadow`}
+                    className={`${inter.className} absolute right-3 top-3 rounded-full bg-[#006E2FE5] px-3 py-1 text-[10px] font-bold uppercase text-white shadow`}
                 >
                     Purchased
                 </span>
@@ -48,7 +51,7 @@ export default function PurchasedProjectCard({
                 <div>
 
                     <h2
-                        className={`${geist.className} text-xl font-semibold text-[#161D16]`}
+                        className={`${geist.className} text-sm font-semibold text-[#161D16]`}
                     >
                         {title}
                     </h2>
@@ -56,11 +59,18 @@ export default function PurchasedProjectCard({
                     <div
                         className={`${inter.className} mt-3 flex items-center gap-2 text-sm text-[#667085]`}
                     >
-                        <User size={16} />
-
+                        <div className="h-auto w-6 rounded-full">
+                            <Image
+                                src={userimage}
+                                alt={title}
+                                width={20}
+                                height={20}
+                                className="h-full w-full object-contain rounded-full"
+                            />
+                        </div>
                         <span>
                             by{" "}
-                            <span className="font-medium text-[#344054]">
+                            <span className={`${inter.className} text-sm font-medium text-[#565E74]`}>
                                 {author}
                             </span>
                         </span>
@@ -69,23 +79,21 @@ export default function PurchasedProjectCard({
 
                 </div>
 
-                <div className="border-t border-[#EEF2EE]" />
+                <div className="border-t border-[#e1e1e1]" />
 
                 <div className="flex items-center justify-between">
 
                     <div>
 
                         <p
-                            className={`${inter.className} text-[11px] uppercase tracking-wide text-[#98A2B3]`}
+                            className={`${inter.className} text-[9px] uppercase tracking-wide text-[#6D7B6C]`}
                         >
                             Date
                         </p>
 
                         <div
-                            className={`${inter.className} mt-2 flex items-center gap-2 text-sm font-medium text-[#161D16]`}
+                            className={`${inter.className} mt-2 text-sm font-medium text-[#161D16]`}
                         >
-                            <CalendarDays size={15} />
-
                             {date}
                         </div>
 
@@ -94,13 +102,13 @@ export default function PurchasedProjectCard({
                     <div className="text-right">
 
                         <p
-                            className={`${inter.className} text-[11px] uppercase tracking-wide text-[#98A2B3]`}
+                            className={`${inter.className} text-[9px] uppercase tracking-wide text-[#6D7B6C]`}
                         >
                             Paid
                         </p>
 
                         <p
-                            className={`${geist.className} mt-2 text-xl font-bold text-[#027A48]`}
+                            className={`${geist.className} mt-2 text-sm font-medium text-[#006E2F]`}
                         >
                             {price}
                         </p>

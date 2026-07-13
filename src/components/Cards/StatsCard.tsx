@@ -58,7 +58,7 @@ export default function StatsCard({
     return (
         <div
             onClick={onClick}
-            className={`rounded-2xl   shadow-sm transition hover:shadow-md
+            className={`rounded-2xl p-2  shadow-sm transition hover:shadow-md
                  ${onClick ? "cursor-pointer hover:scale-[1.02] hover:bg-[#c1f4c4a9]" : ""}
                   ${largeValue ? "bg-[#EDF6EA] p-5" : "bg-white p-1" } ${className}`}
         >
