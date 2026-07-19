@@ -158,8 +158,9 @@ export interface VerificationCardProps {
 
 export type IssusesCardProps = {
     icon:ReactNode;
-    tittle:string;
+    title:string;
     value:string;
+    variant?: "default" | "reverse" | "category";
 }
 export interface IssueDetailsProps {
   projectName: string;

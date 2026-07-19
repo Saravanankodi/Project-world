@@ -21,11 +21,3 @@ workspace."
     );
 }
 
-
-
-// <p className="text-sm text-center mt-4 text-gray-600">
-//     Don't have an account?{" "}
-//     <Link href="/signup" className="text-blue-600 font-medium">
-//         Sign up
-//     </Link>
-// </p>

@@ -18,10 +18,3 @@ image="/Auth/signup.png"
     );
 }
 
-
-// <p className="text-sm text-center mt-4 text-gray-600">
-//     Already have an account?{" "}
-//     <Link href="/login" className="text-green-600 font-medium">
-//         Login
-//     </Link>
-// </p>

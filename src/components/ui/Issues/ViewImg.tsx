@@ -5,7 +5,7 @@ import React from 'react'
 const ViewImg = () => {
   return (
     <>
-    <section className="w-full max-w-115 bg-white border border-[#BCCBB94D] rounded-xl shadow-lg p-4">
+    <section className="w-full  bg-white border border-[#BCCBB94D] rounded-xl shadow-lg p-4">
         <header className="w-full flex items-center justify-between p-2">
             <aside className="w-fit flex">
                 <ImageIcon className='w-5 h-5 text-[#006E2F] '/>

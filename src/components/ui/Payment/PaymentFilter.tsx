@@ -3,6 +3,7 @@
 import Search from "@/components/Navbar/Search";
 import { geist } from "@/lib/fonts";
 import { Filter } from "lucide-react";
+import Dropdown from "../base/Dropdown";
 
 interface PaymentFilterProps {
     day: string;
@@ -30,13 +31,13 @@ export default function PaymentFilter({
     onFilterClick,
 }: PaymentFilterProps) {
     return (
-        <div className="rounded-2xl bg-[#EDF6EA] p-2.5 py-5">
+        <div className="rounded-2xl bg-[#EDF6EA] p-2.5 sm:py-5">
 
             <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
 
                 {/* Search */}
 
-                <div className="flex-1">
+                <div className="flex-1 hidden sm:block">
                     <Search className="bg-white border border-[#BCCBB9] text-[#6B7280]"/>
                 </div>
 
@@ -83,7 +84,7 @@ export default function PaymentFilter({
                     <select
                         value={status}
                         onChange={(e) => onStatusChange(e.target.value)}
-                        className={` ${geist.className} h-10 w-30 rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none`}
+                        className={` ${geist.className}   h-8 sm:h-10 w-30 rounded-lg border border-[#D0D5DD] bg-white px-3 text-sm text-[#161D16] outline-none`}
                     >
                         <option>Status: All</option>
                         <option>Paid</option>
@@ -95,7 +96,7 @@ export default function PaymentFilter({
 
                     <button
                         onClick={onFilterClick}
-                        className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#D0D5DD] bg-[#E8F2E4] transition hover:bg-[#DDEBD8]"
+                        className="hidden sm:flex h-10 w-10 items-center justify-center rounded-lg border border-[#D0D5DD] bg-[#E8F2E4] transition hover:bg-[#DDEBD8]"
                     >
                         <Filter size={18} className="text-[#3D4A3D]" />
                     </button>

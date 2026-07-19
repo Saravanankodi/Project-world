@@ -17,11 +17,11 @@ export default function ProfilePhoto() {
   };
 
   return (
-    <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-md">
+    <div className="w-full max-w-md rounded-2xl bg-white p-8  shadow-lg shadow-[#00000034]">
       <div className="flex justify-center">
         <div className="relative">
           {/* Upload Circle */}
-          <div className="flex h-56 w-56 items-center justify-center overflow-hidden rounded-full bg-[#EDF3EB]">
+          <div className="flex h-36 w-36 sm:h-56 sm:w-56 items-center justify-center overflow-hidden rounded-full bg-[#EDF3EB]">
             {image ? (
               <img
                 src={image}
@@ -41,13 +41,13 @@ export default function ProfilePhoto() {
           <button
             type="button"
             onClick={() => inputRef.current?.click()}
-            className="absolute bottom-4 right-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-700 text-white shadow-lg transition hover:bg-green-800"
+            className="absolute bottom-4 right-4 flex h-10 w-10  sm:h-14 sm:w-14 items-center justify-center rounded-full bg-green-700 text-white shadow-lg transition hover:bg-green-800"
           >
             <Camera size={20} />
 
             <Plus
               size={12}
-              className="absolute right-3 top-3 rounded-full bg-green-700"
+              className="absolute right-0 top-0 sm:right-3 sm:top-3 rounded-full bg-green-700"
             />
           </button>
 
@@ -62,11 +62,11 @@ export default function ProfilePhoto() {
       </div>
 
       <div className="mt-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-900">
+        <h2 className="text-lg md:text-3xl font-bold text-gray-900">
           Profile Photo
         </h2>
 
-        <p className="mt-4 text-lg text-gray-500">
+        <p className="mt-4 text-sm md:text-lg text-gray-500">
           Clear photos help members recognize
           <br />
           you (400×400px recommended).

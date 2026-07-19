@@ -56,7 +56,7 @@ export default function ImageGallery() {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="w-full space-y-5">
 
       {/* Main Preview */}
 

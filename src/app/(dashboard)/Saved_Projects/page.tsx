@@ -121,7 +121,7 @@ const Saved_ProjectsPage = () => {
                         leftIcon={<Filter />}
                         className={`md:px-6 md:py-3 px-3 py-2  bg-[#DCE5D9] text-sm text-[#161D16] ${geist.className} `}
                     >
-                        Create Project
+                        Filter Collection
                     </Button></div>
                 </div>
             </div>

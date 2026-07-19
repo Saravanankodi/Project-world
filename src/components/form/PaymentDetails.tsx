@@ -22,7 +22,7 @@ const PaymentDetails = () => {
 
   return (
     <>
-    <section className="w-full h-auto p-3 space-y-3">
+          <section className="w-full h-auto p-5 space-y-2  bg-white shadow-lg shadow-[#00000034] rounded-2xl">
         <header className="w-full flex items-center gap-3">
             <aside className="flex items-center justify-center p-3 bg-[#22C55E] rounded-lg">
                 <Wallet className='w-8 h-8 text-white'/>
@@ -46,7 +46,7 @@ const PaymentDetails = () => {
 
         {
             isBank && (
-                <div className="w-full grid grid-cols-2 gap-4 ">
+                <div className="w-full  grid grid-cols-2 gap-4 ">
                     <FormInput
                         type='text'
                         label='Account Holder Name'
@@ -66,7 +66,7 @@ const PaymentDetails = () => {
         }
         {
             !isBank && (
-                <div className="w-full space-y-3 ">
+                <div className="w-full space-y-1 ">
                     <FormInput
                         type='text'
                         label='Enter your UPI ID'

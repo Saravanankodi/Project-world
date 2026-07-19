@@ -65,7 +65,7 @@ export default function ProjectsTabs() {
   const currentTab = tabs.find((tab) => tab.id === activeTab);
 
   return (
-    <div className="max-w-185 bg-white rounded-xl shadow">
+    <div className=" bg-white rounded-xl shadow">
       <div className="flex border-b border-[#BCCBB9] ">
         {tabs.map((tab) => (
           <button

@@ -40,7 +40,7 @@ const BasicInfo = () => {
 
   return (
     <>
-    <section className="w-full h-auto bg-white rounded-xl p-6 space-y-6">
+          <section className="w-full h-auto bg-white  shadow-lg shadow-[#00000034] rounded-2xl p-6 space-y-6">
         <h2 className="text-base text-[#161D16] font-bold ">
             Basic Information
         </h2>

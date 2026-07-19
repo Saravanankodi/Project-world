@@ -1,11 +1,16 @@
 import StatsCard from "@/components/Cards/StatsCard"
+import BasicInfo from "@/components/form/BasicInfo"
 import MissingItemsCard from "@/components/ui/profile/MissingItemsCard"
 import PortfolioSocialsCard from "@/components/ui/profile/PortfolioSocialsCard"
 import ProfileBanner from "@/components/ui/profile/ProfileBanner"
 import ProfileCompletionCard from "@/components/ui/profile/ProfileCompletionCard"
 import ProfileInfo from "@/components/ui/profile/ProfileInfo"
+import PaymentDetails from "@/components/ui/projects/PaymentDetails"
+import PaymentDetailsform from "@/components/form/PaymentDetails"
 import { geist, inter } from "@/lib/fonts"
 import { Heart, ShoppingCart, Tag, Users } from "lucide-react"
+import PortfolioLinks from "@/components/form/PortfolioLinks"
+import ProfilePhoto from "@/components/form/ProfilePhoto"
 
 const ProfilePage = () => {
     return (
@@ -125,7 +130,7 @@ const ProfilePage = () => {
                     <PortfolioSocialsCard />
 
                 </main>
-                {/* <BasicInfo /> */}
+               
 
             </section>
         </>

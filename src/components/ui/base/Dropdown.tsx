@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 
 const Dropdown = ({name,option,value,onChange}:DropdownProps) => {
     const [open,setOpen] = useState(false);
-    // const [select,setSelect] = useState<Option | null>(null)
+    
 
     const handleSelect =(option:Option)=>{
         // setSelect(option)
@@ -25,7 +25,7 @@ const Dropdown = ({name,option,value,onChange}:DropdownProps) => {
       <button
         type='button'
         onClick={() => setOpen(!open)}
-        className={`w-full h-11  rounded-md border border-[#D7E6D6] focus:border-[#22C55E] text-left pl-4 bg-[#F9FFF8] placeholder-[#6B7280] text-[#161D16]
+          className={`w-full  h-11  rounded-md border border-[#D7E6D6] focus:border-[#22C55E] text-left pl-4 bg-[#F3FCEF] placeholder-[#6B7280] text-[#161D16]
                   text-sm ${inter.className} outline-none transition`}
       >
          {selectedOption ? selectedOption.label : "Select"}

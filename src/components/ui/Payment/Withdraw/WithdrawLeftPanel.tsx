@@ -54,7 +54,7 @@ export default function WithdrawLeftPanel({
 
             {/* Available Balance */}
 
-            <section className="rounded-2xl border border-[#D8E3D3] bg-white p-6 shadow-sm">
+            <section className="rounded-2xl border border-[#D8E3D3] bg-white p-3 sm:p-6 shadow-sm">
 
                 <div className="flex items-center justify-between">
 
@@ -97,7 +97,7 @@ export default function WithdrawLeftPanel({
 
             {/* Withdrawal Amount */}
 
-            <section className="rounded-2xl border border-[#BCCBB91A] bg-white p-6 shadow-sm shadow-[#0F172A0D]">
+            <section className="rounded-2xl border border-[#BCCBB91A] bg-white sm:p-6 shadow-sm shadow-[#0F172A0D]">
 
                 <h3
                     className={`${geist.className} text-sm font-semibold text-[#161D16]`}
@@ -110,7 +110,7 @@ export default function WithdrawLeftPanel({
                     <div className="flex items-center gap-3">
 
                         <span
-                            className={`${geist.className} text-3xl font-bold text-[#161D16]`}
+                            className={`${geist.className} text-lg sm:text-3xl font-bold text-[#161D16]`}
                         >
                             ₹
                         </span>
@@ -128,7 +128,7 @@ export default function WithdrawLeftPanel({
                                     )
                                 )
                             }
-                            className={`${geist.className} w-full bg-transparent text-4xl font-bold text-[#161D16] outline-none`}
+                            className={`${geist.className} w-full bg-transparent text-2xl sm:text-4xl font-bold text-[#161D16] outline-none`}
                         />
 
                     </div>
@@ -162,7 +162,7 @@ export default function WithdrawLeftPanel({
 
             {/* Withdrawal Method */}
 
-            <section className="rounded-2xl border border-[#D8E3D3] bg-white p-6 shadow-sm">
+            <section className="w-full rounded-2xl border border-[#D8E3D3] bg-white sm:p-6 p-3 shadow-sm">
 
                 <h3
                     className={`${geist.className} text-2xl font-normal text-[#161D16]`}
@@ -176,7 +176,7 @@ export default function WithdrawLeftPanel({
 
                     <div
                         onClick={() => setMethod("UPI")}
-                        className={`cursor-pointer rounded-xl border p-5 transition ${method === "UPI"
+                        className={`cursor-pointer rounded-xl border p-2 sm:p-5 transition ${method === "UPI"
                             ? "border-[#22C55E] bg-[#006E2F0D]"
                             : "border-[#D8E3D3]"
                             }`}

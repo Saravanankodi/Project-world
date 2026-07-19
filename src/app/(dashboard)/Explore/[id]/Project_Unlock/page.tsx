@@ -67,7 +67,6 @@ const UnlockHeader = () => (
 
             <CheckCircle2
                 size={48}
-                // className="text-[#006E2F]"
                 className="h-12 w-12 fill-[#006E2F] text-[#006E2F] stroke-[#c4e7d3]"
             />
 
@@ -98,15 +97,15 @@ const AssetCard = ({
     iconColor,
     iconBg,
 }: any) => (
-    <div className="rounded-2xl border border-[#BCCBB94D] bg-white p-6 shadow-sm transition hover:shadow-md shadow-[#0000000D]">
+    <div className="rounded-2xl border border-[#BCCBB94D] bg-white p-2 sm:p-6 shadow-sm transition hover:shadow-md shadow-[#0000000D]">
 
-        <div className="flex gap-4">
+        <div className="flex sm:gap-4 gap-1">
 
-            <div className={`flex h-12 w-12 items-center justify-center rounded-xl  ${iconBg}`}>
+            <div className={`flex h-8 w-8 sm:h-12 sm:w-12 items-center justify-center rounded-xl  ${iconBg}`}>
 
                 <Icon
                     className={iconColor}
-                    size={22}
+                    size={20}
                 />
 
             </div>
@@ -114,19 +113,19 @@ const AssetCard = ({
             <div className="flex-1">
 
                 <h3
-                    className={`${inter.className} font-semibold text-[#161D16] text-sm`}
+                    className={`${inter.className} font-semibold text-[#161D16] text-xs sm:text-sm`}
                 >
                     {title}
                 </h3>
 
                 <p
-                    className={`${inter.className} mt-1 text-xs text-[#565E74]`}
+                    className={`${inter.className} mt-1 text-[10px] sm:text-xs text-[#565E74]`}
                 >
                     {description}
                 </p>
 
                 <button
-                    className={` ${inter.className} mt-5 flex items-center gap-2 text-sm font-semibold ${color}`}
+                    className={` ${inter.className} mt-1 sm:mt-5 flex items-center gap-2 text-[10px] sm:text-sm font-semibold ${color}`}
                 >
                     {action}
 
@@ -254,7 +253,7 @@ export default function ProjectUnlockedPage() {
 
                         {/* Asset Cards */}
 
-                        <div className="grid gap-5 md:grid-cols-2">
+                        <div className="grid  gap-1 sm:gap-5 grid-cols-2">
 
                             {assets.map((asset) => (
 

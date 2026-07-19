@@ -11,7 +11,7 @@ const IssuesPage = () => {
   return (
     <>
     <section className="w-full h-auto p-6">
-        <header className="w-full h-auto flex items-center justify-between p-3">
+        <header className="w-full h-auto flex flex-col sm:flex-row items-start gap-2 justify-between p-3">
             <aside className="w-fit">
                 <h2 className="text-[32px] text-[#006E2F] font-semibold ">
                     My Issues
@@ -25,23 +25,27 @@ const IssuesPage = () => {
             </Button>
         </header>
 
-        <aside className="w-full mt-2 grid grid-cols-2 gap-3 md:grid-cols-4">
+        <aside className="w-full my-2 grid grid-cols-2 gap-3 md:grid-cols-4">
             <Issusescard
-                tittle='Total Issues'
+                title='Total Issues'
                 value='12'
-                icon={<List/>}/>
+                icon={<List/>}
+                variant='default'/>
             <Issusescard
-                tittle='New Issues'
+                title='New Issues'
                 value='12'
-                icon={<New/>}/>
+                icon={<New/>}
+                variant='default'/>
             <Issusescard
-                tittle='Ongoing Issues'
+                title='Ongoing Issues'
                 value='12'
-                icon={<Ongoing/>}/>
+                icon={<Ongoing/>}
+                variant='default'/>
             <Issusescard
-                tittle='Resolved Issues'
+                title='Resolved Issues'
                 value='12'
-                icon={<Done/>}/>
+                icon={<Done/>}
+                variant='default'/>
         </aside>
         <main className="w-full">
             <aside className="w-full">

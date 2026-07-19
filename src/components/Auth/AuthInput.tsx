@@ -1,39 +1,3 @@
-// import React from "react";
-
-// interface AuthInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-//     label: string;
-//     error?: string;
-// }
-
-// const AuthInput: React.FC<AuthInputProps> = ({
-//     label,
-//     error,
-//     id,
-//     ...props
-// }) => {
-//     return (
-//         <div className="w-full mb-4">
-//             <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
-//                 {label}
-//             </label>
-
-//             <input
-//                 id={id}
-//                 {...props}
-//                 className={`w-full px-4 py-2 border rounded-md outline-none transition
-//         focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-//         ${error ? "border-red-500" : "border-gray-300"}`}
-//             />
-
-//             {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
-//         </div>
-//     );
-// };
-
-// export default AuthInput;
-
-
-
 import { geist,inter } from "@/lib/fonts";
 import Image from "next/image";
 import React from "react";

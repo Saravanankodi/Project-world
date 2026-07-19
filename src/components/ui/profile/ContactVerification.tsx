@@ -3,7 +3,7 @@ import { Mail, Phone } from "lucide-react";
 
 export default function ContactVerification() {
   return (
-    <div className="max-w-115 rounded-xl bg-white p-6 shadow-lg border border-[#006E2F1A] ">
+    <div className="max-w-115 rounded-xl bg-white p-6  shadow-lg shadow-[#00000034] border border-[#006E2F1A] ">
       <h2 className="mb-4 text-base font-bold text-[#161D16] ">
         Contact Verification
       </h2>

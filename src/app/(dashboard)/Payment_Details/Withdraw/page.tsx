@@ -1,74 +1,3 @@
-// "use client";
-
-// import { useState } from "react";
-// import UploadHeader from "@/components/ui/Upload_Project/UploadHeader";
-
-// import WithdrawBalanceCard from "@/components/ui/Payment/Withdraw/WithdrawBalanceCard";
-// import WithdrawAmountCard from "@/components/ui/Payment/Withdraw/WithdrawAmountCard";
-// import WithdrawalMethod from "@/components/ui/Payment/Withdraw/WithdrawalMethod";
-// import TransactionSummary from "@/components/ui/Payment/Withdraw/TransactionSummary";
-
-// export default function WithdrawPage() {
-//     const balance = 7300;
-
-//     const [amount, setAmount] = useState(0);
-
-//     const [method, setMethod] = useState<"UPI" | "BANK">("UPI");
-
-//     const processingFee = 0;
-
-//     const finalAmount = amount - processingFee;
-
-//     return (
-//         <div className="space-y-6">
-
-//             <UploadHeader
-//                 title="Withdraw Earnings"
-//                 description="Withdraw your available earnings securely to your preferred payment method."
-//             />
-
-//             <div className="grid gap-6 xl:grid-cols-[1.3fr_0.9fr]">
-
-//                 {/* LEFT */}
-
-//                 <div className="space-y-6">
-
-//                     <WithdrawBalanceCard
-//                         balance={balance}
-//                     />
-
-//                     <WithdrawAmountCard
-//                         balance={balance}
-//                         amount={amount}
-//                         setAmount={setAmount}
-//                     />
-
-//                     <WithdrawalMethod
-//                         method={method}
-//                         setMethod={setMethod}
-//                     />
-
-//                 </div>
-
-//                 {/* RIGHT */}
-
-//                 <TransactionSummary
-//                     balance={balance}
-//                     amount={amount}
-//                     processingFee={processingFee}
-//                     finalAmount={finalAmount}
-//                 />
-
-//             </div>
-
-//         </div>
-//     );
-// }
-
-
-
-
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -97,20 +26,20 @@ export default function WithdrawPage() {
     }, [amount]);
 
     return (
-        <div className="space-y-6 py-4 px-5">
+        <div className="space-y-6 p-4 sm:py-4 sm:px-5">
 
             {/* Header */}
 
             <div>
 
                 <h1
-                    className={`${geist.className} text-3xl font-bold text-[#006E2F]`}
+                    className={`${geist.className} text-lg sm:text-3xl font-bold text-[#006E2F]`}
                 >
                     Withdraw Earnings
                 </h1>
 
                 <p
-                    className={`${inter.className} mt-2 text-lg text-[#3D4A3D]`}
+                    className={`${inter.className} mt-2 text-sm sm:text-lg text-[#3D4A3D]`}
                 >
                     Withdraw your available earnings securely to your preferred payment method.
                 </p>

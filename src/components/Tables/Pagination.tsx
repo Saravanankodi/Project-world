@@ -46,8 +46,8 @@ const Pagination = ({
         ];
     };
     return (
-        <div className="flex items-center justify-between  px-4 py-2 border-t border-[#D8E3D3] bg-[#F5FAF3]">
-            <p className="text-sm text-black">
+        <div className="flex items-center gap-1 justify-between  px-4 py-2 border-t border-[#D8E3D3] bg-[#F5FAF3]">
+            <p className="text-[10px] sm:text-sm text-black">
                 Showing{" "}
                 <span className="font-medium">{startIndex + 1}</span> to{" "}
                 <span className="font-medium">
@@ -56,12 +56,12 @@ const Pagination = ({
                 of <span className="font-medium">{totalItems}</span> projects
             </p>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center  gap-1 sm:gap-2">
                 {/* Previous */}
                 <button
                     onClick={() => onPageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-300 text-gray-600 disabled:opacity-40 hover:bg-gray-100 bg-white"
+                    className="flex h-6 w-6 sm:h-9 sm:w-9 items-center justify-center rounded-sm sm:rounded-lg border border-gray-300 text-gray-600 disabled:opacity-40 hover:bg-gray-100 bg-white"
                 >
                     &#8249;
                 </button>
@@ -84,7 +84,7 @@ const Pagination = ({
                             <button
                                 key={`${item}-${index}`}
                                 onClick={() => onPageChange(item as number)}
-                                className={`flex h-9 w-9 items-center justify-center rounded-lg transition
+                                className={`flex h-6 w-6 sm:h-9 sm:w-9 items-center justify-center rounded-sm sm:rounded-lg text-xs  transition
                 ${currentPage === item
                                         ? "bg-[#0A8A43] text-white"
                                         : "text-gray-700 hover:bg-gray-100"
@@ -100,7 +100,7 @@ const Pagination = ({
                 <button
                     onClick={() => onPageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-300 text-gray-600 disabled:opacity-40 hover:bg-gray-100 bg-white"
+                    className="flex h-6 w-6 sm:h-9 sm:w-9 items-center justify-center rounded-sm sm:rounded-lg border border-gray-300 text-gray-600 disabled:opacity-40 hover:bg-gray-100 bg-white"
                 >
                     &#8250;
                 </button>

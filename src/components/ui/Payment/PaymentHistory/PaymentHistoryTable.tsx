@@ -118,7 +118,7 @@ export default function PaymentHistoryTable({
                                     <span
                                         className={`${inter.className} text-sm font-semibold ${item.amount >= 10000
                                             ? "text-[#BA1A1A]"
-                                                : "text-[#161D16]"
+                                            : "text-[#161D16]"
                                             }`}
                                     >
                                         ₹{item.amount.toLocaleString()}
@@ -133,18 +133,18 @@ export default function PaymentHistoryTable({
                                         <span
                                             className={`h-2 w-2 rounded-full ${item.status === "Completed"
                                                 ? "bg-[#006E2F]"
-                                                    : item.status === "Processing"
-                                                        ? "bg-[#667085]"
-                                                        : "bg-[#DC2626]"
+                                                : item.status === "Processing"
+                                                    ? "bg-[#667085]"
+                                                    : "bg-[#DC2626]"
                                                 }`}
                                         />
 
                                         <span
                                             className={`${inter.className} font-medium text-sm ${item.status === "Completed"
                                                 ? "text-[#006E2F]"
-                                                    : item.status === "Processing"
-                                                        ? "text-[#344054]"
-                                                        : "text-[#DC2626]"
+                                                : item.status === "Processing"
+                                                    ? "text-[#344054]"
+                                                    : "text-[#DC2626]"
                                                 }`}
                                         >
                                             {item.status}

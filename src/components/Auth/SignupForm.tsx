@@ -1,62 +1,3 @@
-// "use client";
-
-// import React, { useState } from "react";
-// import AuthInput from "./AuthInput";
-
-// const SignupForm = () => {
-//     const [name, setName] = useState("");
-//     const [email, setEmail] = useState("");
-//     const [password, setPassword] = useState("");
-
-//     const handleSubmit = (e: React.FormEvent) => {
-//         e.preventDefault();
-//         console.log({ name, email, password });
-//     };
-
-//     return (
-//         <form onSubmit={handleSubmit}>
-//             <AuthInput
-//                 id="name"
-//                 label="Full Name"
-//                 type="text"
-//                 placeholder="Enter name"
-//                 value={name}
-//                 onChange={(e) => setName(e.target.value)}
-//             />
-
-//             <AuthInput
-//                 id="email"
-//                 label="Email"
-//                 type="email"
-//                 placeholder="Enter email"
-//                 value={email}
-//                 onChange={(e) => setEmail(e.target.value)}
-//             />
-
-//             <AuthInput
-//                 id="password"
-//                 label="Password"
-//                 type="password"
-//                 placeholder="Create password"
-//                 value={password}
-//                 onChange={(e) => setPassword(e.target.value)}
-//             />
-
-//             <button
-//                 type="submit"
-//                 className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition"
-//             >
-//                 Sign Up
-//             </button>
-//         </form>
-//     );
-// };
-
-// export default SignupForm;
-
-
-
-
 "use client";
 
 import Image from "next/image";
@@ -69,7 +10,6 @@ import { loginWithGoogle, register } from "@/services/auth";
 
 export default function SignupForm() {
     const [name, setName] = useState("");
-    // const [phone,setPhone] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [Error,setError] = useState('');

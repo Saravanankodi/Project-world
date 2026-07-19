@@ -32,12 +32,12 @@ export default function PaymentDetails() {
         <div className="rounded-2xl border border-[#D8E3D3] bg-[#F5FAF3] p-6 shadow-sm">
 
             <h3
-                className={`${geist.className} text-sm font-bold uppercase tracking-wide text-[#667085]`}
+                className={`${geist.className} text-xs sm:text-sm font-bold uppercase tracking-wide text-[#667085]`}
             >
                 After Successful Payment You Will Get:
             </h3>
 
-            <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="mt-5 grid  gap-4 grid-cols-2">
 
                 {benefits.map(({ icon: Icon, title }) => (
 
@@ -46,17 +46,17 @@ export default function PaymentDetails() {
                         className="flex items-center gap-3"
                     >
 
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white">
+                        <div className="flex h-6 w-6 sm:h-9 sm:w-9 items-center justify-center rounded-lg ">
 
                             <Icon
-                                size={18}
+                                size={17}
                                 className="text-[#027A48]"
                             />
 
                         </div>
 
                         <span
-                            className={`${inter.className} text-sm font-medium text-[#161D16]`}
+                            className={`${inter.className} text-[10px] sm:text-sm font-medium text-[#161D16]`}
                         >
                             {title}
                         </span>

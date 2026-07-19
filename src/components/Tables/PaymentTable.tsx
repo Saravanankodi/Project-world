@@ -28,7 +28,7 @@ export default function PaymentTable({
         <>
             {/* Mobile */}
 
-            <div className="space-y-4 md:hidden">
+            {/* <div className="space-y-4 md:hidden">
                 {payments.map((item) => (
                     <div
                         key={item.id}
@@ -107,37 +107,37 @@ export default function PaymentTable({
                         </div>
                     </div>
                 ))}
-            </div>
+            </div> */}
 
             {/* Desktop */}
 
-            <div className="hidden overflow-hidden rounded-3xl border border-[#BCCBB9]  md:block">
+            <div className=" overflow-auto rounded-2xl sm:rounded-3xl border border-[#BCCBB9]  md:block">
 
                 {/* Header */}
 
-                <div className="grid grid-cols-[1.2fr_2.4fr_1fr_1fr_1fr_80px] border-b border-[#D8E3D3] bg-[#EDF6EA] px-8 py-5">
+                <div className="grid grid-cols-[1fr_3fr_1fr] sm:grid-cols-[1.2fr_2.4fr_1fr_1fr_1fr_80px] border-b border-[#D8E3D3] bg-[#6D7B6C] sm:bg-[#EDF6EA] sm:px-8 py-5 px-4 ">
 
-                    <h3 className={`${geist.className} text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
+                    <h3 className={`${geist.className} text-xs font-semibold uppercase tracking-wider text-white sm:text-[#3D4A3D]`}>
                         Date
                     </h3>
 
-                    <h3 className={`${geist.className} text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
+                    <h3 className={`${geist.className} text-xs font-semibold uppercase tracking-wider text-white sm:text-[#3D4A3D]`}>
                         Project
                     </h3>
 
-                    <h3 className={`${geist.className} text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
+                    <h3 className={`${geist.className} text-xs font-semibold uppercase tracking-wider text-white sm:text-[#3D4A3D]`}>
                         Amount
                     </h3>
 
-                    <h3 className={`${geist.className} text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
+                    <h3 className={`${geist.className} hidden sm:block text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
                         Method
                     </h3>
 
-                    <h3 className={`${geist.className} text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
+                    <h3 className={`${geist.className}  hidden sm:block text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
                         Status
                     </h3>
 
-                    <h3 className={`${geist.className} text-right text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
+                    <h3 className={`${geist.className} hidden sm:block text-right text-xs font-semibold uppercase tracking-wider text-[#3D4A3D]`}>
                         Actions
                     </h3>
 
@@ -148,10 +148,10 @@ export default function PaymentTable({
                 {payments.map((item) => (
                     <div
                         key={item.id}
-                        className="grid grid-cols-[1.2fr_2.4fr_1fr_1fr_1fr_80px] items-center border-b border-[#E5E7EB] px-8 py-5 transition hover:bg-[#FAFAFA]"
+                        className="grid grid-cols-[1fr_3fr_1fr] sm:grid-cols-[1.2fr_2.4fr_1fr_1fr_1fr_80px] items-center border-b border-[#E5E7EB] sm:px-8 sm:py-5 px-4 py-2 transition hover:bg-[#FAFAFA]"
                     >
                         <div>
-                            <p className={`${inter.className} text-sm text-[#161D16] font-medium`}>
+                            <p className={`${inter.className} text-[10px] sm:text-sm text-[#161D16] font-medium`}>
                                 {item.date}
                             </p>
                         </div>
@@ -159,13 +159,13 @@ export default function PaymentTable({
                         <div>
 
                             <h3
-                                className={`${geist.className} text-sm font-semibold text-[#161D16]`}
+                                className={`${geist.className} text-sm font-semibold text-[#161D16] line-clamp-1`}
                             >
                                 {item.project}
                             </h3>
 
                             <p
-                                className={`${inter.className} mt-1 text-sm font-medium text-[#3D4A3D]`}
+                                className={`${inter.className} mt-1 text-[10px] sm:text-sm font-medium text-[#3D4A3D] line-clamp-1`}
                             >
                                 {item.category}
                             </p>
@@ -180,7 +180,7 @@ export default function PaymentTable({
                             </h3>
                         </div>
 
-                        <div>
+                        <div className="hidden sm:block ">
 
                             <span
                                 className={`${geist.className} uppercase rounded-full px-3 py-1 text-[10px] font-medium  bg-[#E8F0E4]`}
@@ -190,7 +190,7 @@ export default function PaymentTable({
 
                         </div>
 
-                        <div>
+                        <div className="hidden sm:block ">
 
                             <span
                                 className={`${geist.className} rounded-full px-3 py-1 text-[10px] uppercase  font-semibold text-[#005321] bg-[#4AE17633]`}
@@ -200,7 +200,7 @@ export default function PaymentTable({
 
                         </div>
 
-                        <div className="flex justify-end">
+                        <div className="sm:flex justify-end hidden ">
 
                             <button className="rounded-lg p-2 transition hover:bg-[#F3F4F6]">
                                 <MoreVertical size={20} />

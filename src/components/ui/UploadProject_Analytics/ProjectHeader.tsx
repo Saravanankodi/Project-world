@@ -89,7 +89,7 @@ export default function ProjectHeader({
 
                     <button
                         onClick={onEdit}
-                        // leftIcon={<Edit size={16} />}
+                        
                         className={`${inter.className} bg-[#006E2F] text-white hover:bg-[#005424] text-[11px] sm:text-base flex items-center justify-center gap-1 p-2 rounded-lg  font-medium`}
                     >
                         <Edit size={16} />Edit Project
@@ -97,7 +97,7 @@ export default function ProjectHeader({
 
                     <button
                         onClick={onMentorship}
-                        // leftIcon={<GraduationCap size={16} />}
+                       
                         className={`${inter.className} bg-[#565E74] text-white hover:bg-[#556070] text-[11px] sm:text-base flex items-center justify-center gap-1 p-2 rounded-lg  font-medium`}
                     >
                         <GraduationCap size={16} />Manage Mentorship
@@ -105,7 +105,7 @@ export default function ProjectHeader({
 
                     <button
                         onClick={onView}
-                        // leftIcon={<ExternalLink size={16} />}
+                        
                         className={`${inter.className} border border-[#D0D5DD] bg-white text-[#161D16] hover:bg-[#F9FAFB]  text-[11px]  sm:text-base flex items-center justify-center gap-1 p-2 rounded-lg font-medium`}
                     >
                         <ExternalLink size={16} />View Page

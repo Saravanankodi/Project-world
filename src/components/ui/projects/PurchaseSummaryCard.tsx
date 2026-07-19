@@ -14,6 +14,7 @@ interface PurchaseSummaryCardProps {
     creatorRole: string;
     projectPrice: number;
     platformFee: number;
+    userimage: string;
 }
 
 export default function PurchaseSummaryCard({
@@ -26,11 +27,12 @@ export default function PurchaseSummaryCard({
     creatorRole,
     projectPrice,
     platformFee,
+    userimage
 }: PurchaseSummaryCardProps) {
     const total = projectPrice + platformFee;
 
     return (
-        <div className="overflow-hidden rounded-2xl border border-[#D8E3D3] bg-white shadow-sm">
+        <div className="overflow-hidden rounded-2xl border border-[#BCCBB94D] bg-white shadow-sm shadow-[#0F172A0D]">
 
             {/* Thumbnail */}
 
@@ -53,23 +55,23 @@ export default function PurchaseSummaryCard({
 
             {/* Project */}
 
-            <div className="space-y-5 p-5">
+            <div className="space-y-5 p-3 sm:p-5">
 
                 <div>
 
                     <h2
-                        className={`${geist.className} text-xl font-semibold text-[#161D16]`}
+                        className={`${geist.className} text-sm font-semibold text-[#161D16]`}
                     >
                         {title}
                     </h2>
 
-                    <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
+                    <div className={` ${geist.className} mt-2 flex flex-wrap items-center gap-2 text-sm`}>
 
-                        <span className="text-[#027A48]">
+                        <span className="text-[#006E2F]">
                             {category}
                         </span>
 
-                        <span className="text-[#98A2B3]">
+                        <span className="text-[#BCCBB9]">
                             •
                         </span>
 
@@ -77,15 +79,15 @@ export default function PurchaseSummaryCard({
 
                             <Star
                                 size={14}
-                                fill="#FACC15"
-                                className="text-[#FACC15]"
+                                fill="#FBBF24"
+                                className="text-[#FBBF24]"
                             />
 
-                            <span className="font-medium">
+                            <span className={`${inter.className} font-semibold text-[#161D16]`}>
                                 {rating}
                             </span>
 
-                            <span className="text-[#667085]">
+                            <span className={`${inter.className} text-[#3D4A3D]`}>
                                 ({reviews} reviews)
                             </span>
 
@@ -95,7 +97,7 @@ export default function PurchaseSummaryCard({
 
                 </div>
 
-                <div className="border-t border-[#EEF2EE]" />
+                <div className="border-t border-[#dfe0df]" />
 
                 {/* Creator */}
 
@@ -103,9 +105,12 @@ export default function PurchaseSummaryCard({
 
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ECFDF3]">
 
-                        <User
-                            size={22}
-                            className="text-[#027A48]"
+                        <Image
+                            src={userimage}
+                            alt={title}
+                            width={6}
+                            height={6}
+                            className="rounded-full w-full h-full object-cover"
                         />
 
                     </div>
@@ -113,13 +118,13 @@ export default function PurchaseSummaryCard({
                     <div>
 
                         <h4
-                            className={`${geist.className} font-medium`}
+                            className={`${geist.className} font-medium text-sm  text-[#161D16]`}
                         >
                             {creator}
                         </h4>
 
                         <p
-                            className={`${inter.className} text-sm text-[#667085]`}
+                            className={`${inter.className} text-sm font-medium text-[#3D4A3D]`}
                         >
                             {creatorRole}
                         </p>
@@ -128,19 +133,19 @@ export default function PurchaseSummaryCard({
 
                 </div>
 
-                <div className="border-t border-[#EEF2EE]" />
+                
 
                 {/* Price */}
 
-                <div className="space-y-3">
+                <div className="space-y-3 bg-[#EDF6EA] rounded-xl p-5">
 
                     <div className="flex justify-between">
 
-                        <span className="text-[#667085]">
+                        <span className={`${inter.className} text-sm text-[#3D4A3D]`}>
                             Project Price
                         </span>
 
-                        <span className="font-medium">
+                        <span className={` ${inter.className} text-sm font-medium text-[#3D4A3D]`}>
                             ${projectPrice.toFixed(2)}
                         </span>
 
@@ -148,28 +153,28 @@ export default function PurchaseSummaryCard({
 
                     <div className="flex justify-between">
 
-                        <span className="text-[#667085]">
+                        <span className={`${inter.className} test-sm text-[#3D4A3D]`}>
                             Platform Fee
                         </span>
 
-                        <span className="font-medium">
+                        <span className={` ${inter.className} text-sm font-medium text-[#3D4A3D]`}>
                             ${platformFee.toFixed(2)}
                         </span>
 
                     </div>
 
-                    <div className="border-t border-[#EEF2EE]" />
+                    <div className="border-t border-[#dfe0df]" />
 
-                    <div className="flex justify-between">
+                    <div className={`${inter.className} flex justify-between font-semibold text-sm text-[#161D16]`}>
 
                         <span
-                            className={`${geist.className} text-lg font-semibold`}
+                            className={`${geist.className} text-base font-semibold`}
                         >
                             Total Amount
                         </span>
 
                         <span
-                            className={`${geist.className} text-xl font-bold text-[#027A48]`}
+                            className={`${geist.className} text-sm font-semibold text-[#006E2F]`}
                         >
                             ${total.toFixed(2)}
                         </span>

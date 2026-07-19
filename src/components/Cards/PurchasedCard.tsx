@@ -13,7 +13,7 @@ const PurchasedCard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
     const [isBookmarked, setIsBookmarked] = useState(bookmarked);
 
     return (
-        <section className="w-full h-full flex flex-col xl:max-w-82 2xl:max-w-83 overflow-hidden xl:rounded-2xl 2xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D] m-auto">
+        <section className="w-full h-full flex flex-col xl:max-w-82 2xl:max-w-83 overflow-hidden rounded-2xl xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D] m-auto">
             {/* Image */}
             <header className="relative aspect-2/1 w-full">
                 <Image

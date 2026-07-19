@@ -7,6 +7,8 @@ import {
     CreditCard,
     Landmark,
     Lock,
+    ShieldCheck,
+    Unlock,
 } from "lucide-react";
 
 import Button from "@/components/Button/Button";
@@ -61,10 +63,10 @@ export default function ProjectPaymentPage() {
     ];
     const OrderSummary = () => (
 
-        <div className="rounded-2xl bg-[#F5FAF3] p-6">
+        <div className="rounded-2xl bg-[#EDF6EA] p-6">
 
             <h3
-                className={`${geist.className} mb-6 font-semibold`}
+                className={`${geist.className} text-sm uppercase text-[#161D16] mb-6 font-semibold`}
             >
                 ORDER SUMMARY
             </h3>
@@ -73,11 +75,11 @@ export default function ProjectPaymentPage() {
 
                 <div className="flex justify-between">
 
-                    <span className="text-[#667085]">
+                    <span className={`${inter.className} text-xs text-[#3D4A3D]`}>
                         Project Price
                     </span>
 
-                    <span>
+                    <span className={`${inter.className} text-semibold text-xs text-[#161D16]`}>
                         ${projectPrice.toFixed(2)}
                     </span>
 
@@ -85,11 +87,11 @@ export default function ProjectPaymentPage() {
 
                 <div className="flex justify-between">
 
-                    <span className="text-[#667085]">
+                    <span className={`${inter.className} text-xs text-[#3D4A3D]`}>
                         Discount
                     </span>
 
-                    <span className="text-[#027A48]">
+                    <span className={`${inter.className} text-semibold text-xs text-[#006E2F]`}>
                         -${discount.toFixed(2)}
                     </span>
 
@@ -98,13 +100,13 @@ export default function ProjectPaymentPage() {
                 <div className="border-t pt-4 flex justify-between">
 
                     <span
-                        className={`${geist.className} text-lg font-bold`}
+                        className={`${inter.className} text-sm text-[#161D16] font-semibold`}
                     >
                         Final Amount
                     </span>
 
                     <span
-                        className={`${geist.className} text-3xl font-bold text-[#161D16]`}
+                        className={`${inter.className} text-2xl font-semibold text-[#161D16]`}
                     >
                         ${finalAmount.toFixed(2)}
                     </span>
@@ -122,25 +124,24 @@ export default function ProjectPaymentPage() {
         <div className="space-y-4">
 
             <Button
-                className="w-full bg-[#22C55E] py-4 text-lg font-bold text-[#004B1E]"
+                className="w-full  bg-[#22C55E] py-4 text-lg font-bold text-[#004B1E]"
+                rightIcon={<Unlock className="ml-2 h-5 w-5" />}
             >
-
-                Pay & Unlock Project
-
-                <Lock className="ml-2 h-5 w-5" />
+                <span className={` ${geist.className} text-[#004B1E] text-sm font-medium`}>
+                    Pay & Unlock Project
+                </span>
 
             </Button>
 
             <p
-                className={`${inter.className} flex items-center justify-center gap-2 text-sm text-[#667085]`}
+                className={`${inter.className} flex  items-center justify-center gap-2 text-xs text-[#004B1E] font-medium`}
             >
-
-                <Lock
+                <ShieldCheck
                     className="h-4 w-4 text-[#027A48]"
+                    fill="#027A48"
+                    stroke="white"
                 />
-
-                SSL Secure Transaction
-
+                <span>SSL Secure Transaction</span>
             </p>
 
         </div>
@@ -148,11 +149,12 @@ export default function ProjectPaymentPage() {
     );
 
     const CardPaymentForm = () => (
-        <div className="space-y-5">
+        <div className="space-y-2 sm:space-y-5 ">
 
             <Input
                 label="Card Number"
                 placeholder="XXXX XXXX XXXX XXXX"
+                className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
             />
 
             <div className="grid grid-cols-2 gap-4">
@@ -160,12 +162,16 @@ export default function ProjectPaymentPage() {
                 <Input
                     label="Expiry Date"
                     placeholder="MM / YY"
+                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+
                 />
 
                 <Input
                     label="CVV"
                     placeholder="•••"
                     type="password"
+                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+
                 />
 
             </div>
@@ -174,11 +180,13 @@ export default function ProjectPaymentPage() {
     );
 
     const UpiPaymentForm = () => (
-        <div className="space-y-5">
+        <div className="space-y-2 sm:space-y-5 ">
 
             <Input
                 label="UPI ID"
                 placeholder="example@upi"
+                className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+
             />
 
             <div className="grid grid-cols-2 gap-4">
@@ -194,6 +202,8 @@ export default function ProjectPaymentPage() {
                     label="Verify UPI ID"
                     placeholder="Verified"
                     readOnly
+                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+
                 />
 
             </div>
@@ -202,7 +212,7 @@ export default function ProjectPaymentPage() {
     );
 
     const NetBankingForm = () => (
-        <div className="space-y-5">
+        <div className="space-y-2 sm:space-y-5 ">
 
             <Dropdown
                 name="Choose your Bank"
@@ -216,12 +226,16 @@ export default function ProjectPaymentPage() {
                 <Input
                     label="User ID"
                     placeholder="Enter User ID"
+                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+
                 />
 
                 <Input
                     label="Password"
                     type="password"
                     placeholder="********"
+                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+
                 />
 
             </div>
@@ -243,19 +257,20 @@ export default function ProjectPaymentPage() {
     };
 
     return (
-        <div className="mx-auto w-full max-w-7xl space-y-8 px-4 py-6 lg:px-8">
+        <div className="mx-auto w-full max-w-7xl space-y-3 sm:space-y-6 px-4 py-6 lg:px-8">
 
-           
+
             {/* Layout */}
 
-            <div className="grid gap-8 xl:grid-cols-[360px_1fr]">
+            <div className="grid gap-3 sm:gap-8 xl:grid-cols-[1.5fr_2fr]">
 
                 {/* Left */}
 
-                <div className="space-y-6">
+                <div className="space-y-3 sm:space-y-6">
 
                     <PurchaseSummaryCard
                         image="/preview/preview-2.jpg"
+                        userimage="/preview/preview-2.jpg"
                         title="Eco Smart Bridge Infrastructure"
                         category="Civil Engineering"
                         rating={4.9}
@@ -272,23 +287,18 @@ export default function ProjectPaymentPage() {
 
                 {/* Right */}
 
-                <div className="rounded-2xl border border-[#D8E3D3] bg-white p-6 shadow-sm">
+                <div className="rounded-2xl border border-[#D8E3D3] bg-white p-3 sm:p-6 shadow-sm">
 
                     <h2
-                        className={`${geist.className} text-2xl font-semibold text-[#161D16]`}
+                        className={`${geist.className} text-sm font-semibold text-[#161D16]`}
                     >
                         Payment Details
                     </h2>
 
-                    <p
-                        className={`${inter.className} mt-2 text-[#667085]`}
-                    >
-                        Choose your preferred payment method.
-                    </p>
 
                     {/* Tabs */}
 
-                    <div className="mt-8 grid grid-cols-3 gap-3">
+                    <div className="mt-3 sm:mt-8 grid grid-cols-3 gap-3">
 
                         {paymentTabs.map((tab) => {
 
@@ -309,8 +319,8 @@ export default function ProjectPaymentPage() {
                                     className={` flex flex-col items-center justify-center rounded-xl border py-4 transition
 
                                     ${active
-                                            ? "border-[#22C55E] bg-[#ECFDF3]"
-                                            : "border-[#D8E3D3] hover:border-[#22C55E]"
+                                            ? "border-[#22C55E] bg-[#006E2F0D]"
+                                            : "border-[#BCCBB9] hover:border-[#22C55E]"
                                         }
                                 `}
                                 >
@@ -319,13 +329,18 @@ export default function ProjectPaymentPage() {
                                         size={22}
                                         className={
                                             active
-                                                ? "text-[#027A48]"
-                                                : "text-[#667085]"
+                                                ? "text-[#006E2F]"
+                                                : "text-[#3D4A3D]"
                                         }
                                     />
 
                                     <span
-                                        className={`${inter.className} mt-2 text-sm font-medium`}
+                                        className={`${inter.className} mt-1 sm:mt-2 text-xs sm:text-sm font-medium
+                                         ${active
+                                                ? "text-[#006E2F]"
+                                                : "text-[#3D4A3D]"
+                                            }
+                                        `}
                                     >
                                         {tab.label}
                                     </span>
@@ -340,7 +355,7 @@ export default function ProjectPaymentPage() {
 
                     {/* Dynamic Form */}
 
-                    <div className="mt-8">
+                    <div className="mt-3 sm:mt-8">
 
                         {renderPaymentForm()}
 
@@ -348,7 +363,7 @@ export default function ProjectPaymentPage() {
 
                     {/* Summary */}
 
-                    <div className="mt-8">
+                    <div className="mt-3 sm:mt-8">
 
                         <OrderSummary />
 
@@ -356,7 +371,7 @@ export default function ProjectPaymentPage() {
 
                     {/* Button */}
 
-                    <div className="mt-8">
+                    <div className="mt-3 sm:mt-8">
 
                         <PayButton />
 

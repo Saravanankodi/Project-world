@@ -4,8 +4,8 @@ const DashboardIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
    
-    // width={15}
-    // height={15}
+    width={15}
+    height={15}
     fill="none"
     {...props}
   >
