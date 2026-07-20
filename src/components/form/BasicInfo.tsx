@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import AuthInput from '../Auth/AuthInput'
-import { Option } from '@/types/types'
+import { Option, Profile } from '@/types/types'
 import Dropdown from '../ui/base/Dropdown'
 import { LocationEdit } from 'lucide-react'
 
@@ -31,12 +31,7 @@ const GENDER = [
     },
 ]
 
-const BasicInfo = () => {
-    const [userType,setUserType] = useState('');
-    const [gender,setGender] = useState('');
-    const [name,setName] = useState('');
-    const [age,setAge] = useState(18);
-    const [location,setLocation] = useState('');
+const BasicInfo = ({profile,setProfile}:Profile) => {
 
   return (
     <>
@@ -47,36 +42,62 @@ const BasicInfo = () => {
         <form action="" className="w-full grid grid-cols-2 gap-5">
             <AuthInput 
                 label='FULL NAME' 
-                type='text' 
+                type='text'
                 placeholder='Alex Rivera'
-                value={name}
-                onChange={(e)=>(setName(e.target.value))} />
+                value={profile.name}
+                onChange={(e)=>(setProfile(
+                    (prev:any)=>({
+                        ...prev,
+                        name:e.target.value
+                    })
+                ))} />
 
-            <Dropdown 
-                name='USER TYPE'
-                option={USER_TYPE}
-                value={userType}
-                onChange={setUserType}
-                />
-            <Dropdown 
-                name='GENDER'
-                option={GENDER}
-                value={gender}
-                onChange={setGender}
-                />
+            <Dropdown
+            name="USER TYPE"
+            option={USER_TYPE}
+            value={profile.userType}
+            onChange={(value) =>
+                setProfile((prev:any) => ({
+                ...prev,
+                userType: value as "student" | "professional",
+                }))
+            }
+            />
+
+            <Dropdown
+            name="GENDER"
+            option={GENDER}
+            value={profile.gender}
+            onChange={(value) =>
+                setProfile((prev:any) => ({
+                ...prev,
+                gender: value as "none" | "male" | "female",
+                }))
+            }
+            />
             <AuthInput 
                 label='AGE' 
                 type='number' 
                 placeholder='Years'
-                value={age}
-                onChange={(e)=>(setAge(Number(e.target.value)))} />
+                value={profile.age}
+                onChange={(e)=>(setProfile(
+                    (prev:any)=>({
+                        ...prev,
+                        age: e.target.value
+                    })
+                ))} />
             <div className="col-span-2">
                 <AuthInput 
                     label='LOCATION' 
                     type='text' 
                     placeholder='City, Country'
-                    value={location}
-                    onChange={(e)=>(setLocation(e.target.value))} />
+                    value={profile.location}
+                    onChange={(e)=>(setProfile(
+                        (prev:any)=>({
+                            ...prev,
+                            location: e.target.value,
+                        })
+                    ))} />
             </div>
         </form>
     </section>

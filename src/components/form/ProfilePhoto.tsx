@@ -17,11 +17,11 @@ export default function ProfilePhoto() {
   };
 
   return (
-    <div className="w-full max-w-md rounded-2xl bg-white p-8  shadow-lg shadow-[#00000034]">
+    <div className="w-full max-w-100 rounded-2xl bg-white p-6 2xl:p-8  shadow-lg shadow-[#00000034]">
       <div className="flex justify-center">
         <div className="relative">
           {/* Upload Circle */}
-          <div className="flex h-36 w-36 sm:h-56 sm:w-56 items-center justify-center overflow-hidden rounded-full bg-[#EDF3EB]">
+          <div className="flex h-36 w-36 md:h-42 md:w-42 xl:h-48 xl:w-48 2xl:h-56 2xl:w-56 items-center justify-center overflow-hidden rounded-full bg-[#EDF3EB]">
             {image ? (
               <img
                 src={image}
