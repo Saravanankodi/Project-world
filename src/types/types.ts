@@ -170,26 +170,54 @@ export interface IssueDetailsProps {
 }
 
 // For firestore and state management
+
 export type Portfolio = {
-    siteName: string;
-    url:string;
+    github: string;
+    linkedin: string;
+    website: string;
+    behance: string;
+}
+// payment details for user profile
+export interface PaymentDetails {
+  method: "bank" | "upi";
+
+  accountHolder?: string;
+  bankName?: string;
+  accountNumber?: string;
+  ifsc?: string;
+
+  upiId?: string;
+  phoneNumber?: string;
 }
 
-export type UserProfile = {
-    uid:string;
-    name:string;
-    email:string;
-    phone:number;
-    age:number;
-    userType: 'student' | 'professional';
-    portfolioLinks:Portfolio[];
-    experience:number;
-    location:string;
-    gender:'none' | 'male' | 'female';
-    intro:string;
-    createdAt:Timestamp;
-    updatedAt:Timestamp;
-    profileImg:string;    
+export interface UserProfile {
+  uid: string;
+
+  name: string;
+  email: string;
+  phone: string;
+
+  age: number;
+
+  gender: "none" | "male" | "female";
+
+  userType: "student" | "professional";
+
+  experience: number;
+
+  location: string;
+
+  intro: string;
+
+  profileImg: string;
+
+  portfolioLinks: Portfolio;
+
+  payment: PaymentDetails;
+
+  createdAt: Timestamp;
+
+  updatedAt: Timestamp;
 }
 
 export interface Payment {
@@ -200,4 +228,11 @@ export interface Payment {
     amount: string;
     method: "UPI" | "CARD" | "BANK";
     status: "PAID" | "PENDING" | "FAILED";
+}
+
+// for local profile update
+
+export interface Profile{
+    profile:any;
+    setProfile:React.Dispatch<any>;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Option } from '@/types/types'
+import { Option, Profile, UserProfile } from '@/types/types'
 import { Wallet } from 'lucide-react'
 import React, { useState } from 'react'
 import Dropdown from '../ui/base/Dropdown';
@@ -16,9 +16,22 @@ const PAYMENT_METHOD:Option[] = [
         value:"upi"
     }
 ] 
-const PaymentDetails = () => {
+const PaymentDetails = ({profile,setProfile}:Profile) => {
     const [paymentMethod,setPaymentmethod] = useState('bank')
-    const isBank = paymentMethod == 'bank'
+    const isBank = profile.payment.method == 'bank'
+
+    const updatePayment = (
+        field: keyof UserProfile["payment"],
+        value: string
+        ) => {
+        setProfile((prev:any) => ({
+            ...prev,
+            payment: {
+            ...prev.payment,
+            [field]: value,
+            },
+        }));
+    };
 
   return (
     <>
@@ -40,8 +53,8 @@ const PaymentDetails = () => {
             <Dropdown
                 name='Preferred Payment Method'
                 option={PAYMENT_METHOD}
-                value={paymentMethod}
-                onChange={setPaymentmethod} />
+                value={profile.payment.method}
+                onChange={(e) => updatePayment("method", e as 'bank' | 'upi')} />
         </div>
 
         {
@@ -50,17 +63,29 @@ const PaymentDetails = () => {
                     <FormInput
                         type='text'
                         label='Account Holder Name'
-                        placeholder='Full legal name' />
+                        placeholder='Full legal name'
+                        value={profile.payment.accountHolder}
+                        onChange={(e)=>{updatePayment('accountHolder', e.target.value)}}
+                         />
                     <FormInput
                         type='text'
                         label='Bank Name'
-                        placeholder='e.g. HDFC Bank' />
+                        placeholder='e.g. HDFC Bank'
+                        value={profile.payment.bankName}
+                        onChange={(e)=>{updatePayment('bankName', e.target.value)}}
+                         />
                     <FormInput
                         label='Account Number'
-                        placeholder='••••••••••••' />
+                        placeholder='••••••••••••' 
+                        value={profile.payment.accountNumber}
+                        onChange={(e)=>{updatePayment('accountNumber', e.target.value)}}
+                        />
                     <FormInput
                         label='IFSC Code'
-                        placeholder='IFSC0001234' />
+                        placeholder='IFSC0001234'
+                        value={profile.payment.ifsc}
+                        onChange={(e)=>{updatePayment('ifsc', e.target.value)}}
+                        />
                 </div>
             )
         }
@@ -70,11 +95,17 @@ const PaymentDetails = () => {
                     <FormInput
                         type='text'
                         label='Enter your UPI ID'
-                        placeholder='UPI ID' />
+                        placeholder='UPI ID' 
+                        value={profile.payment.upiId}
+                        onChange={(e)=>{updatePayment('upiId', e.target.value)}}
+                        />
                     <FormInput
                         type='text'
                         label='Phone Number'
-                        placeholder='0000000000' />
+                        placeholder='0000000000'
+                        value={profile.payment.phoneNumber}
+                        onChange={(e)=>{updatePayment('phoneNumber', e.target.value)}}
+                        />
                 </div>
             )
         }
