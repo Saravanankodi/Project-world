@@ -145,6 +145,8 @@ export default function Pricing({
                         {/* Bottom */}
                         <div className="mt-6 grid sm:grid-cols-[1fr_1.3fr] gap-6">
 
+
+
                             {/* Price */}
                             <div>
 
