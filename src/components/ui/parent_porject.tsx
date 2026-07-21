@@ -1,28 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import ProjectInformationForm from "./Upload_Project/ProjectInformation";
+import TechnicalDetailsForm from "./Technical_Details/TechnicalDetails";
+import { PriceDetails, ProjectInformation, TechnicalDetails } from "@/types/project";
+import PricingForm from "./Pricing/Pricing";
 
-import ProjectInformation from "./Upload_Project/ProjectInformation";
-import TechnicalDetails from ".//Technical_Details/TechnicalDetails";
-import Pricing from ".//Pricing/Pricing";
 
 export default function UploadProject() {
     const [step, setStep] = useState(1);
 
     // STEP 1 DATA
     const [projectInformation, setProjectInformation] =
-        useState({
+        useState<ProjectInformation>({
             title: "",
             domain: "",
             technology: "",
             projectType: "",
             description: "",
-            tags: [],
+            tags: [''],
         });
 
     // STEP 2 DATA
     const [technicalDetails, setTechnicalDetails] =
-        useState({
+        useState<TechnicalDetails>({
             languages: [
                 {
                     language: "",
@@ -30,10 +31,9 @@ export default function UploadProject() {
                 },
             ],
 
-            operatingSystems: [],
+            operatingSystems: [''],
 
             hardwareRequirements: "",
-            softwareRequirements: "",
             dependencies: "",
 
             resources: {
@@ -46,7 +46,7 @@ export default function UploadProject() {
 
     // STEP 3 DATA
     const [priceDetails, setPriceDetails] =
-        useState({
+        useState<PriceDetails>({
             pricingType: "paid",
             basePrice: 4999,
             discountEnabled: true,
@@ -60,7 +60,7 @@ export default function UploadProject() {
         <div>
 
             {step === 1 && (
-                <ProjectInformation
+                <ProjectInformationForm
                     data={projectInformation}
                     setData={setProjectInformation}
                     onContinue={() => setStep(2)}
@@ -68,7 +68,7 @@ export default function UploadProject() {
             )}
 
             {step === 2 && (
-                <TechnicalDetails
+                <TechnicalDetailsForm
                     data={technicalDetails}
                     setData={setTechnicalDetails}
                     onBack={() => setStep(1)}
@@ -77,7 +77,7 @@ export default function UploadProject() {
             )}
 
             {step === 3 && (
-                <Pricing
+                <PricingForm
                     data={priceDetails}
                     setData={setPriceDetails}
                     projectInformation={projectInformation}

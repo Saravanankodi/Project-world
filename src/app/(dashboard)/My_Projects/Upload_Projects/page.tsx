@@ -1,73 +1,97 @@
 "use client";
 
 import { useState } from "react";
-
-import Stepper from "@/components/ui/Upload_Project/Stepper";
-import { useRouter } from "next/navigation";
-import ProjectInformation from "@/components/ui/Upload_Project/ProjectInformation";
-import TechnicalDetails from "@/components/ui/Technical_Details/TechnicalDetails";
-import Pricing from "@/components/ui/Pricing/Pricing";
+import { PriceDetails, ProjectInformation, TechnicalDetails } from "@/types/project";
+import ProjectInformationForm from "@/components/ui/Upload_Project/ProjectInformation";
+import TechnicalDetailsForm from "@/components/ui/Technical_Details/TechnicalDetails";
+import PricingForm from "@/components/ui/Pricing/Pricing";
 
 
 
-export default function UploadProjectPage() {
+export default function UploadProject() {
     const [step, setStep] = useState(1);
 
-    const handleContinue = () => {
-        setStep((prev) => Math.min(prev + 1, 3));
-    };
+    // STEP 1 DATA
+    const [projectInformation, setProjectInformation] =
+        useState<ProjectInformation>({
+            title: "",
+            domain: "",
+            technology: "",
+            projectType: "",
+            description: "",
+            tags: [''],
+        });
 
-    const handleBack = () => {
-        setStep((prev) => Math.max(prev - 1, 1));
-    };
+    // STEP 2 DATA
+    const [technicalDetails, setTechnicalDetails] =
+        useState<TechnicalDetails>({
+            languages: [
+                {
+                    language: "",
+                    percentage: "",
+                },
+            ],
 
-    const handleSaveDraft = () => {
-        console.log("Draft Saved");
-        alert("Draft saved successfully!");
-    };
-    const router = useRouter();
+            operatingSystems: [''],
 
-    const handleSubmit = () => {
-        console.log("Project Submitted");
-        // API Call
-        alert("Project submitted successfully!");
-        // later:
-        router.push("/My_Projects");
-    };
+            hardwareRequirements: "",
+            dependencies: "",
 
+            resources: {
+                sourceCode: null,
+                documentation: null,
+                demoVideo: null,
+                screenshots: null,
+            },
+        });
+
+    // STEP 3 DATA
+    const [priceDetails, setPriceDetails] =
+        useState<PriceDetails>({
+            pricingType: "paid",
+            basePrice: 4999,
+            discountEnabled: true,
+            discount: 20,
+            chatEnabled: true,
+            enableRatings: true,
+            acceptFeedback: true,
+        });
+
+        const SaveDraft = ()=>{
+            console.log(technicalDetails)
+        }
     return (
-
-        <div className="mx-auto max-w-7xl px-4 py-5">
-
-            <Stepper currentStep={step} />
-
-           
+        <div>
 
             {step === 1 && (
-                <ProjectInformation
-                    onContinue={handleContinue}
-                    onSaveDraft={handleSaveDraft}
+                <ProjectInformationForm
+                    data={projectInformation}
+                    setData={setProjectInformation}
+                    onContinue={() => setStep(2)}
+                    onSaveDraft={SaveDraft}
                 />
             )}
 
             {step === 2 && (
-                <TechnicalDetails
-                    onBack={handleBack}
-                    onContinue={handleContinue}
-                    onSaveDraft={handleSaveDraft}
+                <TechnicalDetailsForm
+                    data={technicalDetails}
+                    setData={setTechnicalDetails}
+                    onBack={() => setStep(1)}
+                    onContinue={() => setStep(3)}
+                    onSaveDraft={SaveDraft}
                 />
             )}
 
             {step === 3 && (
-                <Pricing
-                    onBack={handleBack}
-                    onSaveDraft={handleSaveDraft}
-                    onSubmit={handleSubmit}
+                <PricingForm
+                    data={priceDetails}
+                    setData={setPriceDetails}
+                    projectInformation={projectInformation}
+                    technicalDetails={technicalDetails}
+                    onBack={() => setStep(2)}
                 />
             )}
 
         </div>
-
     );
-
 }

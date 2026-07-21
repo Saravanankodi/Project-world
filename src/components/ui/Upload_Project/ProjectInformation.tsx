@@ -10,17 +10,22 @@ import BottomActions from "./BottomActions";
 import CustomSelect from "./CustomSelect";
 import { useState } from "react";
 import UploadHeader from "./UploadHeader";
+import { ProjectInformation } from "@/types/project";
 
 interface ProjectInformationProps {
+    data: ProjectInformation;
+    setData: React.Dispatch<React.SetStateAction<ProjectInformation>>;
     onContinue: () => void;
     onSaveDraft?: () => void;
 }
 
-export default function ProjectInformation({
+export default function ProjectInformationForm({
+    data,
+    setData,
     onContinue,
     onSaveDraft,
 }: ProjectInformationProps) {
-    const [tags, setTags] = useState<string[]>([]);
+    
     
     return (
         <section className="mb-10 sm:my-8">
@@ -59,6 +64,13 @@ export default function ProjectInformation({
                 <FormInput
                     label="Project Title"
                     placeholder="Enter your project title"
+                    value={data.title}
+                    onChange={(e)=>(setData(
+                        (prev)=>({
+                            ...prev,
+                            title:e.target.value
+                        })
+                    ))}
                 />
                 <div className="w-full flex gap-5">
                     <CustomSelect
@@ -71,6 +83,13 @@ export default function ProjectInformation({
                             "Cyber Security",
                             "IoT",
                         ]}
+                        value={data.domain}
+                        onChange={(value)=>(setData(
+                            (prev)=>({
+                                ...prev,
+                                domain: value
+                            })
+                        ))}
                     />
 
                     <CustomSelect
@@ -83,14 +102,35 @@ export default function ProjectInformation({
                             "MongoDB",
                             "Express",
                         ]}
+                        value={data.technology}
+                        onChange={(value)=>(
+                            setData((prev)=>({
+                                ...prev,
+                                technology: value
+                            }))
+                        )}
                     />
                 </div>
-                <ProjectType />
+                <ProjectType 
+                    value={data.projectType}
+                    onChange={(value) =>
+                        setData((prev) => ({
+                            ...prev,
+                            projectType: value,
+                        }))
+                    } />
 
                 <div className="lg:col-span-2">
                     <FormTextarea
                         label="Short Description"
                         placeholder="Describe your project, its purpose, features, and target audience..."
+                        value={data.description}
+                        onChange={(e)=>(setData(
+                            (prev)=>({
+                                ...prev,
+                                description: e.target.value
+                            })
+                        ))}
                     />
                 </div>
 
@@ -98,8 +138,13 @@ export default function ProjectInformation({
                     <TagInput
                         label="Keywords / Tags"
                         placeholder="Add tags..."
-                        value={tags}
-                        onChange={setTags}
+                        value={data.tags}
+                        onChange={(value)=>(setData(
+                            (prev)=>({
+                                ...prev,
+                                tags:value
+                            })
+                        ))}
                     />
                 </div>
 

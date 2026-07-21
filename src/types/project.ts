@@ -16,7 +16,6 @@ export interface TechnicalDetails {
     operatingSystems: string[];
 
     hardwareRequirements: string;
-    softwareRequirements: string;
     dependencies: string;
 
     resources?: {
@@ -52,4 +51,9 @@ export interface Project {
     status: "draft" | "published";
     createdAt?: unknown;
     updatedAt?: unknown;
+}
+
+export interface ProjectTypeProps {
+    value: string;
+    onChange: (value: string) => void;
 }
