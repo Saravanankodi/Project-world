@@ -1,28 +1,42 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import { geist, inter } from "@/lib/fonts";
 import { Eye, Lock } from "lucide-react";
 import UploadHeader from "../Upload_Project/UploadHeader";
 import FinalSubmissionCard from "./FinalSubmissionCard";
 import {useRouter} from "next/navigation"
+import { PriceDetails, ProjectInformation, TechnicalDetails } from "@/types/project";
 
 interface PricingProps {
+    data:PriceDetails;
+    setData:React.Dispatch<React.SetStateAction<PriceDetails>>;
+    projectInformation:ProjectInformation;
+    technicalDetails: TechnicalDetails;
     onBack: () => void;
     onSaveDraft?: () => void;
-    onSubmit: () => void;
+    onSubmit?: () => void;
 }
 
 
-export default function Pricing({
+export default function PricingForm({
+    data,
+    setData,
+
     onBack,
     onSaveDraft,
     onSubmit,
 }: PricingProps) {
 
-    const [pricingType, setPricingType] = useState<"free" | "paid">("paid");
-    const [discountEnabled, setDiscountEnabled] = useState(true);
-    const [discount, setDiscount] = useState(20);
-    const [chatEnabled, setChatEnabled] = useState(true);
+    const updateData = <K extends keyof PriceDetails>(
+            key: K,
+            value: PriceDetails[K]
+        ) => {
+            setData((prev) => ({
+                ...prev,
+                [key]: value,
+            }));
+    };
+
     const router = useRouter();
 
     return (
@@ -52,9 +66,9 @@ export default function Pricing({
 
                             {/* Free */}
                             <label
-                                onClick={() => setPricingType("free")}
+                                onClick={() => updateData("pricingType", "free")}
                                 className={`cursor-pointer rounded-xl sm:rounded-2xl border p-2 sm:p-6 transition
-        ${pricingType === "free"
+        ${data.pricingType === "free"
                                         ? "border-[#006E2F] border-2 bg-[#EDF6EA]"
                                         : "border-[#BCCBB9]"
                                     }`}
@@ -62,8 +76,8 @@ export default function Pricing({
                                 <input
                                     type="radio"
                                     name="pricing"
-                                    checked={pricingType === "free"}
-                                    onChange={() => setPricingType("free")}
+                                    checked={data.pricingType === "free"}
+                                    onChange={() => updateData("pricingType", "free")}
                                     className="hidden"
                                 />
 
@@ -71,12 +85,12 @@ export default function Pricing({
 
                                     <div
                                         className={`mt-1 flex h-5 w-5 items-center justify-center rounded-full border
-                ${pricingType === "free"
+                ${data.pricingType === "free"
                                                 ? "border-[#006E2F]"
                                                 : "border-[#98A2B3]"
                                             }`}
                                     >
-                                        {pricingType === "free" && (
+                                        {data.pricingType === "free" && (
                                             <div className="h-2.5 w-2.5 rounded-full bg-[#006E2F]" />
                                         )}
                                     </div>
@@ -97,9 +111,9 @@ export default function Pricing({
 
                             {/* Paid */}
                             <label
-                                onClick={() => setPricingType("paid")}
+                                onClick={() => updateData("pricingType", "paid")}
                                 className={`cursor-pointer rounded-xl sm:rounded-2xl border p-2 sm:p-6 transition
-        ${pricingType === "paid"
+        ${data.pricingType === "paid"
                                         ? "border-[#006E2F] border-2 bg-[#EDF6EA]"
                                         : "border-[#BCCBB9]"
                                     }`}
@@ -107,8 +121,8 @@ export default function Pricing({
                                 <input
                                     type="radio"
                                     name="pricing"
-                                    checked={pricingType === "paid"}
-                                    onChange={() => setPricingType("paid")}
+                                    checked={data.pricingType === "paid"}
+                                    onChange={() => updateData("pricingType","paid")}
                                     className="hidden"
                                 />
 
@@ -116,12 +130,12 @@ export default function Pricing({
 
                                     <div
                                         className={`mt-1 flex h-5 w-5 items-center justify-center rounded-full border
-                ${pricingType === "paid"
+                ${data.pricingType === "paid"
                                                 ? "border-[#006E2F]"
                                                 : "border-[#98A2B3]"
                                             }`}
                                     >
-                                        {pricingType === "paid" && (
+                                        {data.pricingType === "paid" && (
                                             <div className="h-2.5 w-2.5 rounded-full bg-[#006E2F]" />
                                         )}
                                     </div>
@@ -145,6 +159,8 @@ export default function Pricing({
                         {/* Bottom */}
                         <div className="mt-6 grid sm:grid-cols-[1fr_1.3fr] gap-6">
 
+
+
                             {/* Price */}
                             <div>
 
@@ -160,9 +176,15 @@ export default function Pricing({
 
                                     <input
                                         type="number"
-                                        defaultValue={4999}
-                                        className="w-full bg-transparent outline-none text-base"
+                                        value={data.basePrice}
+                                        onChange={(e) =>
+                                            updateData(
+                                                "basePrice",
+                                                Number(e.target.value)
+                                            )
+                                        }
                                     />
+
 
                                 </div>
 
@@ -188,8 +210,10 @@ export default function Pricing({
                                             type="number"
                                             min={0}
                                             max={100}
-                                            value={discount}
-                                            onChange={(e) => setDiscount(Number(e.target.value))}
+                                            value={data.discount}
+                                            onChange={(e) =>
+                                                updateData("discount", Number(e.target.value))
+                                            }
                                             className=" sm:h-9 sm:w-16 h-7 w-13 rounded-lg border border-[#D0D5DD]
                                              focus:border-[#22C55E] pr-5 text-center text-xs sm:text-sm font-semibold text-[#16A34A  
                                              [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none
@@ -205,14 +229,19 @@ export default function Pricing({
 
                                     <button
                                         type="button"
-                                        onClick={() => setDiscountEnabled((prev) => !prev)}
+                                        onClick={() =>
+                                            updateData(
+                                                "discountEnabled",
+                                                !data.discountEnabled
+                                            )
+                                        }
                                         className={`relative sm:h-7 sm:w-12 h-5 w-10 rounded-full transition-colors
-                                             duration-300 ${discountEnabled ? "bg-[#22C55E]" : "bg-[#D0D5DD]"
+                                             duration-300 ${data.discountEnabled ? "bg-[#22C55E]" : "bg-[#D0D5DD]"
                                             }`}
                                     >
                                         <div
                                             className={`absolute top-1 sm:h-5 sm:w-5 h-3 w-3 rounded-full bg-white shadow 
-                                                transition-transform duration-300 ${discountEnabled ? "translate-x-6" : "translate-x-1"
+                                                transition-transform duration-300 ${data.discountEnabled ? "translate-x-6" : "translate-x-1"
                                                 }`}
                                         />
                                     </button>
@@ -254,15 +283,20 @@ export default function Pricing({
                             {/* Toggle */}
                             <button
                                 type="button"
-                                onClick={() => setChatEnabled((prev) => !prev)}
+                                onClick={() =>
+                                    updateData(
+                                        "chatEnabled",
+                                        !data.chatEnabled
+                                    )
+                                }
                                 className={`relative sm:h-7 sm:w-12 h-5 w-10 rounded-full transition-colors 
-                                    duration-300 ${chatEnabled ? "bg-[#22C55E]" : "bg-[#D0D5DD]"
+                                    duration-300 ${data.chatEnabled ? "bg-[#22C55E]" : "bg-[#D0D5DD]"
                                     }`}
                             >
                                 <div
                                     className={`absolute top-1 sm:h-5 sm:w-5 h-3 w-3 rounded-full
                                          bg-white shadow transition-transform duration-300
-                                          ${chatEnabled ? "translate-x-6" : "translate-x-1"
+                                          ${data.chatEnabled ? "translate-x-6" : "translate-x-1"
                                         }`}
                                 />
                             </button>
@@ -357,9 +391,16 @@ export default function Pricing({
 
                                 <input
                                     type="checkbox"
-                                    defaultChecked
+                                    checked={data.enableRatings}
                                     className="h-5 sm:w-5 w-4 rounded border-gray-300 accent-[#16A34A]"
+                                    onChange={(e) =>
+                                        updateData(
+                                            "enableRatings",
+                                            e.target.checked
+                                        )
+                                    }
                                 />
+
 
                                 <span className={`${inter.className} text-xs sm:text-sm font-medium text-[#344054]`}>
                                     Enable project ratings
@@ -371,9 +412,16 @@ export default function Pricing({
 
                                 <input
                                     type="checkbox"
-                                    defaultChecked
+                                    checked={data.acceptFeedback}
                                     className="h-5 sm:w-5 w-4 rounded border-gray-300 accent-[#16A34A]"
+                                    onChange={(e) =>
+                                        updateData(
+                                            "acceptFeedback",
+                                            e.target.checked
+                                        )
+                                    }
                                 />
+
 
                                 <span className={`${inter.className} text-xs sm:text-sm font-medium text-[#344054]`}>
                                     Accept public feedback

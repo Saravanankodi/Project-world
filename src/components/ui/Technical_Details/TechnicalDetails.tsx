@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Monitor, Laptop, Server } from "lucide-react";
 import BottomActions from "../Upload_Project/BottomActions";
 import TechnologyStack from "./TechnologyStack";
@@ -8,48 +8,55 @@ import UsageDistribution from "./UsageDistribution";
 import RequirementsCard from "./RequirementsCard";
 import ProjectResources from "./ProjectResources";
 import UploadHeader from "../Upload_Project/UploadHeader";
+import { TechnicalDetails } from "@/types/project";
 
 interface TechnicalDetailsProps {
+    data:TechnicalDetails;
+    setData: React.Dispatch<React.SetStateAction<TechnicalDetails>>;
     onBack: () => void;
     onContinue: () => void;
     onSaveDraft?: () => void;
 }
 
-export default function TechnicalDetails({
+export default function TechnicalDetailsForm({
+    data,
+    setData,
     onBack,
     onContinue,
     onSaveDraft,
 }: TechnicalDetailsProps) {
-
-    const [languages, setLanguages] = useState([
-        {
-            language: "",
-            percentage: "",
-        },
-    ]);
 
     const handleChange = (
         index: number,
         field: "language" | "percentage",
         value: string
     ) => {
-        const updated = [...languages];
+        const updated = [...data.languages];
         updated[index][field] = value;
-        setLanguages(updated);
+        setData((prev)=>({
+            ...prev,
+            languages:updated
+        }))
     };
 
     const addLanguage = () => {
-        setLanguages([
-            ...languages,
+        setData((prev)=>({
+            ...prev,
+            languages: [
+            ...data.languages,
             {
                 language: "",
                 percentage: "",
             },
-        ]);
+        ]
+        }));
     };
 
     const removeLanguage = (index: number) => {
-        setLanguages(languages.filter((_, i) => i !== index));
+        setData((prev)=>({
+            ...prev,
+            languages: data.languages.filter((_, i) => i !== index)
+        }));
     };
 
     const operatingSystems = [
@@ -70,20 +77,15 @@ export default function TechnicalDetails({
         },
     ];
 
-    const [selectedOS, setSelectedOS] = useState<string[]>([]);
-
     const toggleOS = (os: string) => {
-        if (selectedOS.includes(os)) {
-            setSelectedOS(selectedOS.filter((item) => item !== os));
-        } else {
-            setSelectedOS([...selectedOS, os]);
-        }
+        setData((prev) => ({
+            ...prev,
+            operatingSystems: prev.operatingSystems.includes(os)
+                ? prev.operatingSystems.filter((item) => item !== os)
+                : [...prev.operatingSystems, os],
+        }));
     };
 
-    const [hardwareRequirements, setHardwareRequirements] = useState("");
-
-    const [softwareRequirements, setSoftwareRequirements] = useState("");
-    const [dependencies, setDependencies] = useState("");
 
     const [resources, setResources] = useState({
         sourceCode: null as File | null,
@@ -122,13 +124,13 @@ export default function TechnicalDetails({
                 <div className="flex flex-col space-y-6 h-full">
                     {/* Technology Stack */}
                     <TechnologyStack
-                        languages={languages}
+                        languages={data.languages}
                         onAdd={addLanguage}
                         onChange={handleChange}
                         onRemove={removeLanguage}
                     />
                     <UsageDistribution
-                        languages={languages}
+                        languages={data.languages}
                     />
                 </div>
 
@@ -136,14 +138,21 @@ export default function TechnicalDetails({
 
                 <RequirementsCard
                     operatingSystems={operatingSystems}
-                    selectedOS={selectedOS}
+                    selectedOS={data.operatingSystems}
                     toggleOS={toggleOS}
-                    hardwareRequirements={hardwareRequirements}
-                    setHardwareRequirements={setHardwareRequirements}
-                    softwareRequirements={softwareRequirements}
-                    setSoftwareRequirements={setSoftwareRequirements}
-                    dependencies={dependencies}
-                    setDependencies={setDependencies}
+                    hardwareRequirements={data.hardwareRequirements}
+                    setHardwareRequirements={(value) =>
+                        setData((prev) => ({
+                            ...prev,
+                            hardwareRequirements: value,
+                    }))}
+                    dependencies={data.dependencies}
+                    setDependencies={(value)=>(setData(
+                        (prev)=>({
+                            ...prev,
+                            dependencies: value
+                        })
+                    ))}
                 />
             </div>
 

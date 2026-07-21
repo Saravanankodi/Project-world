@@ -17,13 +17,10 @@ interface RequirementsCardProps {
     toggleOS: (os: string) => void;
 
     hardwareRequirements: string;
-    setHardwareRequirements: React.Dispatch<React.SetStateAction<string>>;
-
-    softwareRequirements: string;
-    setSoftwareRequirements: React.Dispatch<React.SetStateAction<string>>;
+    setHardwareRequirements: (value: string) => void;
 
     dependencies: string;
-    setDependencies: React.Dispatch<React.SetStateAction<string>>;
+    setDependencies: (value: string) => void;
 }
 
 export default function RequirementsCard({
@@ -32,7 +29,7 @@ export default function RequirementsCard({
     toggleOS,
     hardwareRequirements,
     setHardwareRequirements,
-   
+
     dependencies,
     setDependencies,
 }: RequirementsCardProps) {

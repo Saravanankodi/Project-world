@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import ProjectInformationForm from "./Upload_Project/ProjectInformation";
+import TechnicalDetailsForm from "./Technical_Details/TechnicalDetails";
 import { PriceDetails, ProjectInformation, TechnicalDetails } from "@/types/project";
-import ProjectInformationForm from "@/components/ui/Upload_Project/ProjectInformation";
-import TechnicalDetailsForm from "@/components/ui/Technical_Details/TechnicalDetails";
-import PricingForm from "@/components/ui/Pricing/Pricing";
-
+import PricingForm from "./Pricing/Pricing";
 
 
 export default function UploadProject() {
@@ -57,9 +56,6 @@ export default function UploadProject() {
             acceptFeedback: true,
         });
 
-        const SaveDraft = ()=>{
-            console.log(technicalDetails)
-        }
     return (
         <div>
 
@@ -68,7 +64,6 @@ export default function UploadProject() {
                     data={projectInformation}
                     setData={setProjectInformation}
                     onContinue={() => setStep(2)}
-                    onSaveDraft={SaveDraft}
                 />
             )}
 
@@ -78,7 +73,6 @@ export default function UploadProject() {
                     setData={setTechnicalDetails}
                     onBack={() => setStep(1)}
                     onContinue={() => setStep(3)}
-                    onSaveDraft={SaveDraft}
                 />
             )}
 
