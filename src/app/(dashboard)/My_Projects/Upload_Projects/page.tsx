@@ -5,12 +5,20 @@ import { PriceDetails, ProjectInformation, TechnicalDetails } from "@/types/proj
 import ProjectInformationForm from "@/components/ui/Upload_Project/ProjectInformation";
 import TechnicalDetailsForm from "@/components/ui/Technical_Details/TechnicalDetails";
 import PricingForm from "@/components/ui/Pricing/Pricing";
+import { saveDraft, submitProject, updateProject } from "@/services/project";
+import { getUserProfile } from "@/services/user";
+import { getAuth } from "firebase/auth";
 
 
 
 export default function UploadProject() {
-    const [step, setStep] = useState(1);
 
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    const [step, setStep] = useState(1);
+    const [projectId, setProjectId] = useState<string | null>(null);
+     
     // STEP 1 DATA
     const [projectInformation, setProjectInformation] =
         useState<ProjectInformation>({
@@ -57,9 +65,67 @@ export default function UploadProject() {
             acceptFeedback: true,
         });
 
-        const SaveDraft = ()=>{
-            console.log(technicalDetails)
-        }
+        const handleSaveDraft = async () => {
+            if (!user) return;
+
+            try {
+                if (!projectId) {
+                    const id = await saveDraft({
+                        ownerId: user.uid,
+                        projectInformation,
+                        technicalDetails,
+                        priceDetails,
+                        status: "draft",
+                    });
+
+                    setProjectId(id);
+                } else {
+                    await updateProject(projectId, {
+                        projectInformation,
+                        technicalDetails,
+                        priceDetails,
+                    });
+                }
+
+                console.log("Draft saved");
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        const handleSubmit = async () => {
+            if (!user) return;
+
+            try {
+                if (!projectId) {
+                    const id = await saveDraft({
+                        ownerId: user.uid,
+                        projectInformation,
+                        technicalDetails,
+                        priceDetails,
+                        status: "draft",
+                    });
+
+                    setProjectId(id);
+
+                    await submitProject(id, {
+                        projectInformation,
+                        technicalDetails,
+                        priceDetails,
+                    });
+                } else {
+                    await submitProject(projectId, {
+                        projectInformation,
+                        technicalDetails,
+                        priceDetails,
+                    });
+                }
+
+                console.log("Project submitted");
+            } catch (err) {
+                console.error(err);
+            }
+        };
     return (
         <div>
 
@@ -68,7 +134,7 @@ export default function UploadProject() {
                     data={projectInformation}
                     setData={setProjectInformation}
                     onContinue={() => setStep(2)}
-                    onSaveDraft={SaveDraft}
+                    onSaveDraft={handleSaveDraft}
                 />
             )}
 
@@ -78,7 +144,7 @@ export default function UploadProject() {
                     setData={setTechnicalDetails}
                     onBack={() => setStep(1)}
                     onContinue={() => setStep(3)}
-                    onSaveDraft={SaveDraft}
+                    onSaveDraft={handleSaveDraft}
                 />
             )}
 
@@ -89,6 +155,8 @@ export default function UploadProject() {
                     projectInformation={projectInformation}
                     technicalDetails={technicalDetails}
                     onBack={() => setStep(2)}
+                    onSaveDraft={handleSaveDraft}
+                    onSubmit={handleSubmit}
                 />
             )}
 
