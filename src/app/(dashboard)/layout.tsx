@@ -43,17 +43,17 @@ export default function Layout({
                 <Topbar />
             </header>
 
-            <div className="h-full w-full flex flex-1 overflow-hidden">
-                <aside className="hidden lg:block border-r border-[#BCCBB94D] ">
+            <div className="h-full w-full flex flex-1 overflow-hidden ">
+                <aside className="hidden lg:block max-h-screen overflow-y-scroll scrollbar-hide border-r border-[#BCCBB94D] ">
                     <Sidebar />
                 </aside>
 
-                <main className="flex-1 overflow-y-auto  md:pb-10">
+                <main className="flex-1 overflow-y-auto scrollbar-hide">
                     {children}
                 </main>
             </div>
             <MobileBottomNav/>
-            <footer className=" md:fixed bottom-0 left-0 w-full">
+            <footer className=" w-full">
                 <Footer />
             </footer>
         </section>
