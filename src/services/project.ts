@@ -22,12 +22,12 @@ import {
 
 export type ProjectStatus =
   | "draft"
-  | "pending"
-  | "approved"
-  | "rejected"
+  // | "pending"
+  // | "approved"
+  // | "rejected"
   | "published"
-  | "archived";
-
+  // | "archived"
+;
 export interface Project {
   id?: string;
 

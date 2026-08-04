@@ -7,34 +7,12 @@ import { useState , useEffect} from "react";
 import { Plus,Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ProjectBanner from "@/components/Cards/ProjectBanner";
-import { getProjectsByStatus } from "@/services/project";
-import type { Project as FirestoreProject } from "@/types/project";
-import type { Project as TableProject } from "@/types/types";
-
-const [projects, setProjects] = useState<TableProject[]>([]);
-
-
-
-
+import { getProjectsByStatus, Project } from "@/services/project";
+// import type { Project as FirestoreProject } from "@/types/project";
+// import type { Project as TableProject } from "@/types/types";
 
 const My_ProjectsPage = () => {
 const [projects, setProjects] = useState<Project[]>([]);
-const [loading, setLoading] = useState(true);
-useEffect(() => {
-  async function loadProjects() {
-    try {
-      const data = await getProjectsByStatus("approved");
-setProjects(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  loadProjects();
-}, []);
-
 
     const rowsPerPage = 3;
 

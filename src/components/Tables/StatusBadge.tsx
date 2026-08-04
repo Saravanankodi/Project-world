@@ -3,7 +3,7 @@
 "use client";
 
 import { inter } from "@/lib/fonts";
-import { ProjectStatus } from "@/types/types";
+import { ProjectStatus } from "@/services/project";
 
 interface StatusBadgeProps {
     status: ProjectStatus;
@@ -11,7 +11,7 @@ interface StatusBadgeProps {
 
 
 const statusStyles = {
-    marketplace: {
+    published: {
         text: "In Marketplace",
         className:
             "bg-[#22C55E33] text-[#004B1E] border border-[#22C55E4D]",

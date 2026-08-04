@@ -13,7 +13,7 @@ export interface ProjectCardProps {
 
 import { Timestamp } from "firebase/firestore";
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { PriceDetails, ProjectInformation, TechnicalDetails } from "./project";
+import { PriceDetails, Project, ProjectInformation, TechnicalDetails } from "./project";
 import { User } from "@/services/user";
 
 export interface ButtonProps
@@ -63,23 +63,23 @@ export type ProjectStatus =
     | "review"
     | "draft";
 
-export interface Project {
-    id: number;
-    image: string;
-    title: string;
-    website: string;
-    technologies: string[];
-    uploadDate: string;
-    status: ProjectStatus;
-    metrics: {
-        sales?: number;
-        revenue?: string;
-        views?: string;
-        likes?: number;
-        progress?: number;
-    };
+// export interface Project {
+//     id: number;
+//     image: string;
+//     title: string;
+//     website: string;
+//     technologies: string[];
+//     uploadDate: string;
+//     status: ProjectStatus;
+//     metrics: {
+//         sales?: number;
+//         revenue?: string;
+//         views?: string;
+//         likes?: number;
+//         progress?: number;
+//     };
    
-}
+// }
 
 export interface ProjectTableProps {
     projects: Project[];

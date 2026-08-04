@@ -1,3 +1,5 @@
+import { ProjectStatus } from "@/services/project";
+
 export interface ProjectInformation {
     title: string;
     domain: string;
@@ -42,7 +44,7 @@ export interface Project {
     projectInformation: ProjectInformation;
     technicalDetails: TechnicalDetails;
     priceDetails: PriceDetails;
-    status: "draft" | "published";
+    status: ProjectStatus;
     createdAt?: unknown;
     updatedAt?: unknown;
 }
