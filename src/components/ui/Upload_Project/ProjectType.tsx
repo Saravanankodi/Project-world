@@ -3,10 +3,9 @@
 import { geist, inter } from "@/lib/fonts";
 
 const types = [
-    "Web App",
-    "Mobile App",
-    "Desktop App",
-    "Other",
+    "Software",
+    "Hardware",
+    "Hybrid",
 ];
 
 interface ProjectTypeProps {

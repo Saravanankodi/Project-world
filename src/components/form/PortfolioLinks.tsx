@@ -18,7 +18,7 @@ const PortfolioLinks = ({profile,setProfile}:Profile) => {
   };
   return (
     <>
-      <section className="w-full h-auto bg-white  shadow-lg shadow-[#00000034] border-2 border-[#22C55E] rounded-2xl p-4  space-y-5">
+    <section className="w-full h-auto bg-white  shadow-lg shadow-[#00000034] border-2 border-[#22C55E] rounded-2xl p-4  space-y-5">
         <h2 className="text-base text-black font-bold">
             PORTFOLIO LINKS
         </h2>

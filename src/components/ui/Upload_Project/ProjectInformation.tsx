@@ -18,6 +18,14 @@ interface ProjectInformationProps {
     onContinue: () => void;
     onSaveDraft?: () => void;
 }
+interface ProjectInformationErrors {
+  title?: string;
+  domain?: string;
+  technology?: string;
+  projectType?: string;
+  description?: string;
+  tags?: string;
+}
 
 export default function ProjectInformationForm({
     data,
@@ -25,8 +33,69 @@ export default function ProjectInformationForm({
     onContinue,
     onSaveDraft,
 }: ProjectInformationProps) {
-    
-    
+
+    const [errors, setErrors] = useState<ProjectInformationErrors>({});
+
+    const validateProjectInformation = (
+        data: ProjectInformation
+        ): {
+        isValid: boolean;
+        errors: ProjectInformationErrors;
+        } => {
+        const errors: ProjectInformationErrors = {};
+
+        // Project title
+        if (!data.title.trim()) {
+            errors.title = "Project title is required.";
+        } else if (data.title.trim().length < 5) {
+            errors.title = "Project title must be at least 5 characters.";
+        }
+
+        // Domain
+        if (!data.domain.trim()) {
+            errors.domain = "Please select a domain.";
+        }
+
+        // Technology
+        if (!data.technology || data.technology.length === 0) {
+            errors.technology = "Please select a technology.";
+        }
+
+        // Project Type
+        if (!data.projectType) {
+            errors.projectType = "Please select a project type.";
+        }
+
+        // Description
+        if (!data.description.trim()) {
+            errors.description = "Project description is required.";
+        } else if (data.description.trim().length < 30) {
+            errors.description =
+            "Description should be at least 30 characters.";
+        }
+
+        // Tags
+        // if (!data.tags || data.tags.length === 0) {
+        //     errors.tags = "Please add at least one tag.";
+        // }
+
+        return {
+            isValid: Object.keys(errors).length === 0,
+            errors,
+        };
+    };
+
+    const handleContinue = () => {
+        const validation = validateProjectInformation(data);
+
+        if (!validation.isValid) {
+            setErrors(validation.errors);
+            return;
+        }
+ 
+        setErrors({});
+        onContinue();
+    };
     return (
         <section className="mb-10 sm:my-8">
             <UploadHeader
@@ -63,6 +132,7 @@ export default function ProjectInformationForm({
 
                 <FormInput
                     label="Project Title"
+                    error={errors.title}
                     placeholder="Enter your project title"
                     value={data.title}
                     onChange={(e)=>(setData(
@@ -92,16 +162,9 @@ export default function ProjectInformationForm({
                         ))}
                     />
 
-                    <CustomSelect
+                    <TagInput
                         label="Technology "
                         placeholder="Select Technology"
-                        options={[
-                            "React",
-                            "Next.js",
-                            "Node.js",
-                            "MongoDB",
-                            "Express",
-                        ]}
                         value={data.technology}
                         onChange={(value)=>(
                             setData((prev)=>({
@@ -123,6 +186,7 @@ export default function ProjectInformationForm({
                 <div className="lg:col-span-2">
                     <FormTextarea
                         label="Short Description"
+                        error={errors.description}
                         placeholder="Describe your project, its purpose, features, and target audience..."
                         value={data.description}
                         onChange={(e)=>(setData(
@@ -134,7 +198,7 @@ export default function ProjectInformationForm({
                     />
                 </div>
 
-                <div className="lg:col-span-2">
+                {/* <div className="lg:col-span-2">
                     <TagInput
                         label="Keywords / Tags"
                         placeholder="Add tags..."
@@ -146,7 +210,7 @@ export default function ProjectInformationForm({
                             })
                         ))}
                     />
-                </div>
+                </div> */}
 
             </div>
             <div className="w-full flex flex-col md:flex-row mt-5">
@@ -163,7 +227,7 @@ export default function ProjectInformationForm({
                 </div>
                 <div className="w-full md:w-2/6 flex flex-row items-center justify-center md:justify-end ">
                     <BottomActions
-                        onContinue={onContinue}
+                        onContinue={handleContinue}
                         onSaveDraft={onSaveDraft}
                     />
                 </div>

@@ -12,13 +12,14 @@ import ProfileInfo from '@/components/ui/profile/ProfileInfo'
 import FormTextarea from '@/components/ui/Upload_Project/FormTextarea'
 import { auth } from '@/lib/firebase';
 import { geist, inter } from '@/lib/fonts'
+import { uploadProfilePhoto } from '@/services/storage';
 import { getUserProfile, saveUserProfile } from '@/services/user';
 import { ArrowRightToLine } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 
 function page() {
     const [loading, setLoading] = useState(false);
-    // const [photo, setPhoto] = useState<File | null>(null);
+    const [photo, setPhoto] = useState<File | null>(null);
     const [profile, setProfile] = useState({
         name: "",
         email: "",
@@ -48,43 +49,47 @@ function page() {
     });
 
     const handleSubmit = async () => {
-        const user = auth.currentUser;
+  const user = auth.currentUser;
 
-        if (!user) {
-            alert("Please sign in first.");
-            return;
-        }
+  if (!user) {
+    alert("Please sign in first.");
+    return;
+  }
 
-        try {
-            setLoading(true);
+  try {
+    setLoading(true);
 
-            let profileImg = profile.profileImg;
+    let profileImg = profile.profileImg;
 
-            // Upload new image if selected
-            // if (photo) {
-            // profileImg = await uploadProfileImage(user.uid, photo);
-            // }
+    if (photo) {
+      const url = await uploadProfilePhoto(photo);
 
-            await saveUserProfile(user.uid, {
-                ...profile,
+      if (url) {
+        profileImg = url;
+      }
+    }
 
-                uid: user.uid,
+    await saveUserProfile(user.uid, {
+      ...profile,
+      uid: user.uid,
+      email: user.email ?? "",
+      phone: user.phoneNumber ?? "",
+      profileImg,
+    });
 
-                email: user.email ?? "",
+    setProfile((prev) => ({
+      ...prev,
+      profileImg,
+    }));
 
-                phone: user.phoneNumber ?? "",
-
-                profileImg,
-            });
-
-            alert("Profile saved successfully!");
-        } catch (error) {
-            console.error(error);
-            alert("Failed to save profile.");
-        } finally {
-            setLoading(false);
-        }
-    };
+    alert("Profile saved successfully!");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to save profile.");
+  } finally {
+    setLoading(false);
+  }
+};
 
     useEffect(() => {
         const loadProfile = async () => {
@@ -121,7 +126,16 @@ function page() {
 
 
             <div className='flex  sm:flex-row flex-col gap-6'>
-                <ProfilePhoto />
+               <ProfilePhoto
+                image={profile.profileImg}
+                setImage={(image) =>
+                    setProfile((prev) => ({
+                    ...prev,
+                    profileImg: image,
+                    }))
+                }
+                setPhoto={setPhoto}
+                />
 
                 <BasicInfo
                     profile={profile}

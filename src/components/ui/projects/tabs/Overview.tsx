@@ -12,7 +12,7 @@ const Overview = ({overview,techStacklist,requirements}:OverviewProps) => {
             <h2 className="text-[20px] text-[#161D16] font-semibold  ">
                 Project Overview
             </h2>
-            <p className="text-sm text-[#3D4A3D] ">
+            <p className="max-w-full text-sm text-wrap text-[#3D4A3D] ">
                 {overview}
             </p>
         </header>
@@ -25,8 +25,8 @@ const Overview = ({overview,techStacklist,requirements}:OverviewProps) => {
                     techStacklist.map((items,index)=>(
                         <Progress 
                             type='line'
-                            label={items.label}
-                            value={items.value}
+                            label={items.language}
+                            value={Number(items.percentage)}
                             key={index}
                         />
                     ))

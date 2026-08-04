@@ -1,3 +1,11 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { getUserProfile } from '@/services/user' // adjust path
+import { UserProfile } from '@/types/types'
+import { auth } from '@/lib/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+
 import StatsCard from "@/components/Cards/StatsCard"
 import BasicInfo from "@/components/form/BasicInfo"
 import MissingItemsCard from "@/components/ui/profile/MissingItemsCard"
@@ -11,8 +19,27 @@ import { geist, inter } from "@/lib/fonts"
 import { Heart, ShoppingCart, Tag, Users } from "lucide-react"
 import PortfolioLinks from "@/components/form/PortfolioLinks"
 import ProfilePhoto from "@/components/form/ProfilePhoto"
+import SocialLinks from '@/components/ui/profile/SocialLinks'
 
 const ProfilePage = () => {
+
+ const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const data = await getUserProfile(user.uid)
+        setUserProfile(data)
+      }
+      setLoading(false)
+    })
+
+    return () => unsubscribe()
+  }, [])
+  console.log(userProfile)
+
+  if (loading) return <p>Loading...</p>
     return (
         <>
             <section className="w-full h-auto  p-5">
@@ -21,16 +48,16 @@ const ProfilePage = () => {
 
                 <div className={`${inter.className} mb-2 text-sm xl:text-base font-normal text-[#3D4A3D]`}>Manage, update, and track your uploaded projects.</div>
 
-                <ProfileBanner />
+                <ProfileBanner data={userProfile} />
                 <main className="w-full mt-5 ">
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center">
+                    <div className="flex flex-col sm:flex-row justify-center">
                         <div className="sm:w-1/2">
                             <div className="w-full h-full grid gap-8">
-                                <div className="grid gap-2 sm:gap-6 grid-cols-[2fr_1.5fr]">
+                                {/* <div className="grid gap-2 sm:gap-6 grid-cols-[2fr_1.5fr]">
 
                                     <ProfileCompletionCard
-                                        percentage={75}
+                                        percentage={100}
                                     />
 
                                     <MissingItemsCard
@@ -40,8 +67,13 @@ const ProfilePage = () => {
                                         ]}
                                     />
 
+                                </div> */}
+                                <div className="w-full">
+                                    <ProfileInfo info={userProfile}/>
                                 </div>
-                                <div className="w-full"><ProfileInfo /></div>
+                                <div className="w-full">
+                                    <SocialLinks href={userProfile?.portfolioLinks}/>
+                                </div>
                             </div>
                         </div>
                         <div className="sm:w-1/2 grid">

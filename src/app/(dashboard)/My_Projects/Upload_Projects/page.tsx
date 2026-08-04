@@ -6,8 +6,8 @@ import ProjectInformationForm from "@/components/ui/Upload_Project/ProjectInform
 import TechnicalDetailsForm from "@/components/ui/Technical_Details/TechnicalDetails";
 import PricingForm from "@/components/ui/Pricing/Pricing";
 import { saveDraft, submitProject, updateProject } from "@/services/project";
-import { getUserProfile } from "@/services/user";
 import { getAuth } from "firebase/auth";
+import { uploadFile } from "@/services/storage";
 
 
 
@@ -19,17 +19,22 @@ export default function UploadProject() {
     const [step, setStep] = useState(1);
     const [projectId, setProjectId] = useState<string | null>(null);
      
+    
     // STEP 1 DATA
     const [projectInformation, setProjectInformation] =
         useState<ProjectInformation>({
             title: "",
             domain: "",
-            technology: "",
+            technology: [""],
             projectType: "",
             description: "",
-            tags: [''],
         });
-
+const [projectFiles, setProjectFiles] = useState({
+    sourceCode: null as File | null,
+    documentation: null as File | null,
+    demoVideo: null as File | null,
+    screenshots: [] as File[],
+});
     // STEP 2 DATA
     const [technicalDetails, setTechnicalDetails] =
         useState<TechnicalDetails>({
@@ -40,7 +45,7 @@ export default function UploadProject() {
                 },
             ],
 
-            operatingSystems: [''],
+            operatingSystems: [],
 
             hardwareRequirements: "",
             dependencies: "",
@@ -49,7 +54,7 @@ export default function UploadProject() {
                 sourceCode: null,
                 documentation: null,
                 demoVideo: null,
-                screenshots: null,
+                screenshots: [],
             },
         });
 
@@ -65,67 +70,130 @@ export default function UploadProject() {
             acceptFeedback: true,
         });
 
-        const handleSaveDraft = async () => {
-            if (!user) return;
+        
+const handleSaveDraft = async () => {
+    if (!user) return;
 
-            try {
-                if (!projectId) {
-                    const id = await saveDraft({
-                        ownerId: user.uid,
-                        projectInformation,
-                        technicalDetails,
-                        priceDetails,
-                        status: "draft",
-                    });
+    try {
+        const sourceCodeURL = await uploadFile(
+            projectFiles.sourceCode,
+            "sourceCode"
+        );
 
-                    setProjectId(id);
-                } else {
-                    await updateProject(projectId, {
-                        projectInformation,
-                        technicalDetails,
-                        priceDetails,
-                    });
-                }
+        const documentationURL = await uploadFile(
+            projectFiles.documentation,
+            "documentation"
+        );
 
-                console.log("Draft saved");
-            } catch (err) {
-                console.error(err);
-            }
+        const demoVideoURL = await uploadFile(
+            projectFiles.demoVideo,
+            "videos"
+        );
+
+       const screenshotsURL = await Promise.all(
+    projectFiles.screenshots.map((file) =>
+        uploadFile(file, "screenshots")
+    )
+);
+
+        const technicalData = {
+            ...technicalDetails,
+            resources: {
+                sourceCode: sourceCodeURL,
+                documentation: documentationURL,
+                demoVideo: demoVideoURL,
+                screenshots: screenshotsURL,
+            },
         };
 
-        const handleSubmit = async () => {
-            if (!user) return;
+        if (!projectId) {
+            const id = await saveDraft({
+                ownerId: user.uid,
+                projectInformation,
+                technicalDetails: technicalData,
+                priceDetails,
+                status: "draft",
+            });
 
-            try {
-                if (!projectId) {
-                    const id = await saveDraft({
-                        ownerId: user.uid,
-                        projectInformation,
-                        technicalDetails,
-                        priceDetails,
-                        status: "draft",
-                    });
+            setProjectId(id);
+        } else {
+            await updateProject(projectId, {
+                projectInformation,
+                technicalDetails: technicalData,
+                priceDetails,
+            });
+        }
 
-                    setProjectId(id);
+        alert("Draft saved.");
+    } catch (err) {
+        console.error(err);
+        alert("Failed to save draft.");
+    }
+};
 
-                    await submitProject(id, {
-                        projectInformation,
-                        technicalDetails,
-                        priceDetails,
-                    });
-                } else {
-                    await submitProject(projectId, {
-                        projectInformation,
-                        technicalDetails,
-                        priceDetails,
-                    });
-                }
+const handleSubmit = async () => {
+    if (!user) return;
 
-                console.log("Project submitted");
-            } catch (err) {
-                console.error(err);
-            }
+    try {
+        // Upload files
+        const sourceCodeURL = await uploadFile(
+            projectFiles.sourceCode,
+            "sourceCode"
+        );
+
+        const documentationURL = await uploadFile(
+            projectFiles.documentation,
+            "documentation"
+        );
+
+        const demoVideoURL = await uploadFile(
+            projectFiles.demoVideo,
+            "videos"
+        );
+
+      const screenshotsURL = await Promise.all(
+    projectFiles.screenshots.map((file) =>
+        uploadFile(file, "screenshots")
+    )
+);
+
+        // Create technical details with URLs
+        const technicalData = {
+            ...technicalDetails,
+            resources: {
+                sourceCode: sourceCodeURL,
+                documentation: documentationURL,
+                demoVideo: demoVideoURL,
+                screenshots: screenshotsURL,
+            },
         };
+
+        let id = projectId;
+
+        if (!id) {
+            id = await saveDraft({
+                ownerId: user.uid,
+                projectInformation,
+                technicalDetails: technicalData,
+                priceDetails,
+                status: "draft",
+            });
+
+            setProjectId(id);
+        }
+
+        await submitProject(id, {
+            projectInformation,
+            technicalDetails: technicalData,
+            priceDetails,
+        });
+
+        alert("Project submitted successfully.");
+    } catch (err) {
+        console.error(err);
+        alert("Submission failed.");
+    }
+};
     return (
         <div>
 
@@ -142,6 +210,8 @@ export default function UploadProject() {
                 <TechnicalDetailsForm
                     data={technicalDetails}
                     setData={setTechnicalDetails}
+                    projectFiles={projectFiles}
+                    setProjectFiles={setProjectFiles}
                     onBack={() => setStep(1)}
                     onContinue={() => setStep(3)}
                     onSaveDraft={handleSaveDraft}

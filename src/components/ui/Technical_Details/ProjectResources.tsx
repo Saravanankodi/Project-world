@@ -14,7 +14,7 @@ interface Resources {
     sourceCode: File | null;
     documentation: File | null;
     demoVideo: File | null;
-    screenshots: File | null;
+    screenshots: File[];
 }
 
 interface ProjectResourcesProps {
@@ -69,15 +69,45 @@ export default function ProjectResources({
                     onChange={(e) => onFileChange(e, "demoVideo")}
                 />
 
-                <ResourceUploadCard
-                    title="Screenshots"
-                    description="Upload preview images."
-                    icon={<ImageIcon size={36} className="text-[#039855]" />}
-                    file={resources.screenshots}
-                    accept="image/*"
-                    multiple
-                    onChange={(e) => onFileChange(e, "screenshots")}
-                />
+                <div className="border rounded-xl p-4">
+
+                    <div className="flex items-center gap-2 mb-3">
+                        <ImageIcon size={36} className="text-[#039855]" />
+
+                        <div>
+                            <h4 className="font-medium">
+                                Screenshots
+                            </h4>
+
+                            <p className="text-sm text-gray-500">
+                                Upload preview images.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={(e) => onFileChange(e, "screenshots")}
+                    />
+
+
+                    <div className="mt-3 space-y-1">
+
+                        {resources.screenshots.map((file, index) => (
+                            <p 
+                            key={index}
+                            className="text-sm text-gray-600"
+                            >
+                                {file.name}
+                            </p>
+                        ))}
+
+                    </div>
+
+                </div>
 
             </div>
 

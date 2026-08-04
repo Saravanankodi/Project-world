@@ -1,10 +1,9 @@
 export interface ProjectInformation {
     title: string;
     domain: string;
-    technology: string;
+    technology: string[];
     projectType: string;
     description: string;
-    tags: string[];
 }
 
 export interface TechnicalDetails {
@@ -18,12 +17,12 @@ export interface TechnicalDetails {
     hardwareRequirements: string;
     dependencies: string;
 
-    resources?: {
-        sourceCode?: FileResource | null;
-        documentation?: FileResource | null;
-        demoVideo?: FileResource | null;
-        screenshots?: FileResource | null;
-    };
+    resources: {
+    sourceCode: string | null;
+    documentation: string | null;
+    demoVideo: string | null;
+    screenshots:(string | null)[];
+}
 }
 
 export interface PriceDetails {
@@ -36,15 +35,10 @@ export interface PriceDetails {
     acceptFeedback: boolean;
 }
 
-export interface FileResource {
-    name: string;
-    url: string;
-    path: string;
-    size: number;
-    type: string;
-}
+
 
 export interface Project {
+    id?:string;
     projectInformation: ProjectInformation;
     technicalDetails: TechnicalDetails;
     priceDetails: PriceDetails;

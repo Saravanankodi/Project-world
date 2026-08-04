@@ -7,6 +7,7 @@ import { useState } from "react";
 import {inter, geist} from "@/lib/fonts"
 import { ProjectCardProps } from "@/types/types";
 
+
 const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
     const [isBookmarked, setIsBookmarked] = useState(bookmarked);
 
@@ -14,12 +15,18 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
         <div className="w-full h-full flex flex-col rounded-xl  xl:max-w-82 xl:max-h-80 2xl:max-w-83 2xl:max-h-86 overflow-hidden xl:rounded-2xl 2xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D] m-auto">
             {/* Image */}
             <div className="relative aspect-2/1 w-full">
-                <Image
-                    src={props.image}
-                    alt={props.title}
-                    fill
-                    className="object-cover"
-                />
+                        <Image
+                src={
+                    props.image &&
+                    (props.image.startsWith("http") ||
+                    props.image.startsWith("/"))
+                        ? props.image
+                        : "/img/Image.png"
+                }
+                alt={props.title}   
+                fill
+                className="object-cover"
+            />
 
                 <button
                     onClick={() => setIsBookmarked(!isBookmarked)}
@@ -58,7 +65,11 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
 
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        {props.authorAvatar ? (
+                       {props.authorAvatar &&
+                        (
+                            props.authorAvatar.startsWith("http") ||
+                            props.authorAvatar.startsWith("/")
+                        ) ? (
                             <Image
                                 src={props.authorAvatar}
                                 alt={props.author}

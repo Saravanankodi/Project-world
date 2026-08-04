@@ -13,6 +13,8 @@ export interface ProjectCardProps {
 
 import { Timestamp } from "firebase/firestore";
 import { ButtonHTMLAttributes, ReactNode } from "react";
+import { PriceDetails, ProjectInformation, TechnicalDetails } from "./project";
+import { User } from "@/services/user";
 
 export interface ButtonProps
     extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -39,8 +41,8 @@ export type ProjectInfoProps = {
     discount:number;
 }
 export type technicalStack ={
-    label:string;
-    value:number;
+    language:string;
+    percentage:string;
 }
 export type OverviewProps ={
     overview:string;
@@ -235,4 +237,18 @@ export interface Payment {
 export interface Profile{
     profile:any;
     setProfile:React.Dispatch<any>;
+}
+
+export type projectsWithUsers = {
+ owner: User | undefined;
+ id?: string;
+ ownerId: string;
+ projectInformation: ProjectInformation;
+ technicalDetails: TechnicalDetails;
+ priceDetails: PriceDetails;
+ status: ProjectStatus;
+ rejectionReason?: string;
+ createdAt?: unknown;
+ updatedAt?: unknown;
+ publishedAt?: unknown;
 }

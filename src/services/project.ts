@@ -15,9 +15,9 @@ import {
 
 import { db } from "@/lib/firebase";
 import {
-  ProjectInformation,
-  TechnicalDetails,
-  PriceDetails,
+    ProjectInformation,
+    TechnicalDetails,
+    PriceDetails,
 } from "@/types/project";
 
 export type ProjectStatus =
@@ -125,20 +125,38 @@ export async function archiveProject(id: string) {
 
 // Get All Projects
 
-export async function getProjects() {
+export async function getProjects(): Promise<Project[]> {
   const snapshot = await getDocs(collection(db, "projects"));
 
   return snapshot.docs.map((doc) => ({
     id: doc.id,
-    ...doc.data(),
+    ...(doc.data() as Omit<Project, "id">),
   }));
+}
+
+// Get Project by id
+export async function getProjectById(
+  id: string
+): Promise<Project | null> {
+  const projectRef = doc(db, "projects", id);
+
+  const snapshot = await getDoc(projectRef);
+
+  if (!snapshot.exists()) {
+    return null;
+  }
+
+  return {
+    id: snapshot.id,
+    ...(snapshot.data() as Omit<Project, "id">),
+  };
 }
 
 // Get Projects by Status
 
 export async function getProjectsByStatus(
   status: ProjectStatus
-) {
+): Promise<Project[]> {
   const q = query(
     collection(db, "projects"),
     where("status", "==", status)
@@ -148,7 +166,7 @@ export async function getProjectsByStatus(
 
   return snapshot.docs.map((doc) => ({
     id: doc.id,
-    ...doc.data(),
+    ...(doc.data() as Omit<Project, "id">),
   }));
 }
 

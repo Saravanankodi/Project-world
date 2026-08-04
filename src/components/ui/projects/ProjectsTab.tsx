@@ -5,6 +5,8 @@ import Overview from "./tabs/Overview";
 import Features from "./tabs/Features";
 import TechnicalDetails from "./tabs/TechnicalDetails";
 import Review from "./tabs/Review";
+import { Project } from "@/services/project";
+
 
 const overview = "This comprehensive bridge monitoring system leverages cutting-edge IoT sensors and AutoCAD precise modeling to create a real-time structural health platform. The Eco-Smart Bridge Infrastructure project includes full architectural source files, sensor calibration scripts in Python, and a responsive React dashboard for monitoring vibration, tension, and environmental factors."
 
@@ -36,31 +38,36 @@ const architecture = [
     'Python scripts analyze and manage collected datas of the language',
     'React dashboard displays like live insights and the alerts'
 ]
-const tabs = [
-  {
-    id: "overview",
-    title: "Overview",
-    content: <Overview overview={overview} techStacklist={techStack} requirements={Requirements} />,
-  },
-  {
-    id: "features",
-    title: "Features",
-    content: <Features overview={overview} feature={features}/>
-  },
-  {
-    id: "technical",
-    title: "Technical Details",
-    content: <TechnicalDetails techStacklist={techStack} requirements={Requirements} architecture={architecture}/>
-  },
-  {
-    id: "reviews",
-    title: "Reviews",
-    content: <Review/>
-  },
-];
 
-export default function ProjectsTabs() {
+type prop = {
+  data:Project;
+}
+
+export default function ProjectsTabs({data}:prop) {
   const [activeTab, setActiveTab] = useState("overview");
+
+  const tabs = [
+    {
+      id: "overview",
+      title: "Overview",
+      content: <Overview overview={data.projectInformation.description} techStacklist={data.technicalDetails.languages} requirements={[data.technicalDetails.hardwareRequirements]} />,
+    },
+    // {
+    //   id: "features",
+    //   title: "Features",
+    //   content: <Features overview={overview} feature={features}/>
+    // },
+    // {
+    //   id: "technical",
+    //   title: "Technical Details",
+    //   content: <TechnicalDetails techStacklist={techStack} requirements={Requirements} architecture={architecture}/>
+    // },
+    {
+      id: "reviews",
+      title: "Reviews",
+      content: <Review/>
+    },
+  ];
 
   const currentTab = tabs.find((tab) => tab.id === activeTab);
 

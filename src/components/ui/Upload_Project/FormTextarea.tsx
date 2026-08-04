@@ -5,11 +5,13 @@ import { geist, inter } from "@/lib/fonts";
 interface Props
     extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     label: string;
+    error?:string;
 }
 
 export default function FormTextarea({
     label,
     className = "",
+    error,
     ...props
 }: Props) {
     return (
@@ -25,7 +27,11 @@ export default function FormTextarea({
                 className={` rounded-xl border border-[#D8E3D8] bg-white p-4 text-sm outline-none resize-none placeholder:text-[#98A2B3] focus:border-[#22C55E] focus:ring-2 focus:ring-[#22C55E]/20 ${className} ${inter.className} text-base
                 `}
             />
-
+            {error && (
+                <p className="mt-1 text-sm text-red-500">
+                    {error}
+                </p>
+            )}
         </div>
     );
 }

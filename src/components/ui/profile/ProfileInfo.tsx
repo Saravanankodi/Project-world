@@ -2,31 +2,13 @@
 
 import { Edit2 } from "lucide-react";
 import { geist, inter } from "@/lib/fonts";
+import { UserProfile } from "@/types/types";
 
-const info = [
-    {
-        label: "FULL NAME",
-        value: "Alex Rivera",
-    },
-    {
-        label: "AGE",
-        value: "22",
-    },
-    {
-        label: "EMAIL ADDRESS",
-        value: "alex.rivera@iitb.ac.in",
-    },
-    {
-        label: "PHONE NUMBER",
-        value: "+91 98765 43210",
-    },
-    {
-        label: "USER TYPE",
-        value: "Student",
-    },
-];
+type ProfileProps = {
+    info: UserProfile | null;
+}
 
-export default function ProfileInfo() {
+export default function ProfileInfo({info}:ProfileProps) {
     return (
         <section className="w-full rounded-3xl border border-[#E4E7EC] bg-white p-6 shadow-sm md:p-8">
 
@@ -50,26 +32,81 @@ export default function ProfileInfo() {
 
             {/* Information Grid */}
             <div className="grid grid-cols-1 gap-y-7 gap-x-16 sm:grid-cols-2">
-
-                {info.map((item) => (
-                    <div
-                        key={item.label}
+                <div
                         className="space-y-1"
                     >
                         <p
                             className={`${geist.className} text-xs font-semibold uppercase tracking-[0.08em] text-[#3D4A3D]`}
                         >
-                            {item.label}
+                            FULL NAME
                         </p>
 
                         <p
                             className={`${inter.className} text-base font-medium text-[#161D16]`}
                         >
-                            {item.value}
+                            {info?.name}
                         </p>
-                    </div>
-                ))}
+                </div>
+                <div
+                        className="space-y-1"
+                    >
+                        <p
+                            className={`${geist.className} text-xs font-semibold uppercase tracking-[0.08em] text-[#3D4A3D]`}
+                        >
+                            AGE
+                        </p>
 
+                        <p
+                            className={`${inter.className} text-base font-medium text-[#161D16]`}
+                        >
+                            {info?.age}
+                        </p>
+                </div>
+                <div
+                        className="space-y-1"
+                    >
+                        <p
+                            className={`${geist.className} text-xs font-semibold uppercase tracking-[0.08em] text-[#3D4A3D]`}
+                        >
+                            EMAIL ADDRESS
+                        </p>
+
+                        <p
+                            className={`${inter.className} text-base font-medium text-[#161D16]`}
+                        >
+                            {info?.email}
+                        </p>
+                </div>
+                <div
+                        className="space-y-1"
+                    >
+                        <p
+                            className={`${geist.className} text-xs font-semibold uppercase tracking-[0.08em] text-[#3D4A3D]`}
+                        >
+                            PHONE NUMBER
+                        </p>
+
+                        <p
+                            className={`${inter.className} text-base font-medium text-[#161D16]`}
+                        >
+                            {info?.phone || 12345678}
+                        </p>
+                </div>
+                <div
+                        className="space-y-1"
+                    >
+                        <p
+                            className={`${geist.className} text-xs font-semibold uppercase tracking-[0.08em] text-[#3D4A3D]`}
+                        >
+                            USER TYPE
+                        </p>
+
+                        <p
+                            className={`${inter.className} text-base font-medium text-[#161D16]`}
+                        >
+                            {info?.userType}
+                        </p>
+                </div>
             </div>
 
         </section>

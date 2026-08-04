@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Button from "@/components/Button/Button";
 import { geist, hanken, inter } from "@/lib/fonts";
 import {
@@ -10,8 +11,14 @@ import {
     Award,
 } from "lucide-react";
 import Image from "next/image";
+import { UserProfile } from "@/types/types";
 
-export default function ProfileBanner() {
+type ProfileBannerProps = {
+    data:UserProfile | null;
+}
+
+export default function ProfileBanner({data}:ProfileBannerProps) {
+      const router = useRouter();
     return (
         <section className="rounded-2xl border border-[#E4E7EC] bg-white p-4 shadow-sm">
 
@@ -21,7 +28,7 @@ export default function ProfileBanner() {
                 {/* Image */}
                 <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl">
                     <Image
-                        src="/Topbar/ProfileImage.jpg"
+                        src={data?.profileImg || "/Topbar/ProfileImage.jpg"}
                         alt="Profile"
                         fill
                         className="object-cover"
@@ -48,7 +55,7 @@ export default function ProfileBanner() {
 
                     {/* Name */}
                         <h2 className={`${hanken.className} text-xl font-bold text-[#151C27]`}>
-                        Alex Rivera
+                        {data?.name}
                     </h2>
 
                     {/* Details */}
@@ -56,17 +63,17 @@ export default function ProfileBanner() {
 
                         <div className="flex items-center gap-2">
                             <GraduationCap size={15} />
-                            IIT Bombay
+                            {data?.experience}
                         </div>
 
                         <div className="flex items-center gap-2">
                             <MapPin size={15} />
-                            Chennai, India
+                            {data?.location}
                         </div>
 
                         <div className="flex items-center gap-2">
                             <GraduationCap size={15} />
-                            Civil Engineering, IoT, AI/ML
+                            {data?.userType}
                         </div>
 
                     </div>
@@ -76,6 +83,7 @@ export default function ProfileBanner() {
                 <div className="relative z-10 mt-5 grid grid-cols-2 gap-3 place-items-center">
 
                     <Button
+                         onClick={() => router.push("/Profile/Edit_Profile")}
                         className="w-full h-fit border border-[#BCCBB9] bg-white text-sm sm:text-base text-[#161D16]"
                     >
                         Edit Profile

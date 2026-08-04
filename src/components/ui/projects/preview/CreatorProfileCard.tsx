@@ -5,12 +5,12 @@ import { BadgeCheck } from "lucide-react";
 import { geist, inter } from "@/lib/fonts";
 
 interface CreatorProfileCardProps {
-    creatorName: string;
-    creatorRole: string;
-    projects: number;
-    rating: number;
-    avatar: string;
-    profileHref: string;
+    creatorName?: string;
+    creatorRole?: string;
+    projects?: number;
+    rating?: number;
+    avatar?: string;
+    profileHref?: string;
 }
 
 const CreatorProfileCard = ({
@@ -28,8 +28,8 @@ const CreatorProfileCard = ({
                 <div className="flex items-center gap-4">
 
                     <Image
-                        src={avatar}
-                        alt={creatorName}
+                        src={avatar ?? '/img/profile.jpg'}
+                        alt={creatorName ?? "profile"}
                         width={60}
                         height={60}
                         className="rounded-full object-cover"
@@ -40,7 +40,7 @@ const CreatorProfileCard = ({
                         <div className="flex items-center gap-2">
 
                             <h2 className={` ${geist.className} text-sm font-bold text-[#161D16]`}>
-                                {creatorName}
+                                {creatorName ?? "profile"}
                             </h2>
 
                             <BadgeCheck
@@ -65,11 +65,11 @@ const CreatorProfileCard = ({
 
                 </div>
 
-                <Link href={profileHref}>
+                
                     <Button className="border border-[#006E2F] text-[#006e2f] font-bold text-xs rounded-xl px-6">
                         View Profile
                     </Button>
-                </Link>
+               
 
             </div>
         </section>

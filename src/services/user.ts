@@ -4,6 +4,8 @@ import {
   setDoc,
   updateDoc,
   deleteDoc,
+  getDocs,
+  collection,
   serverTimestamp,
 } from "firebase/firestore";
 
@@ -63,4 +65,22 @@ export async function deleteUserProfile(uid: string) {
   const ref = doc(db, "users", uid);
 
   await deleteDoc(ref);
+}
+
+
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  photoURL?: string;
+}
+
+export async function getUsers() {
+  const snapshot = await getDocs(collection(db, "users"));
+
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as User[];
 }

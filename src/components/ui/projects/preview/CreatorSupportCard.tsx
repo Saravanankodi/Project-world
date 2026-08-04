@@ -4,7 +4,7 @@ import { Lock, ShieldCheck } from "lucide-react";
 import { geist, inter } from "@/lib/fonts";
 
 interface CreatorSupportCardProps {
-    creatorName: string;
+    creatorName?: string;
     availability: string;
     chatHref: string;
 }
@@ -19,7 +19,7 @@ const CreatorSupportCard = ({
 
             {/* Mentorship */}
 
-            <section className="rounded-2xl border border-[#D8E3D3] bg-white p-4">
+            {/* <section className="rounded-2xl border border-[#D8E3D3] bg-white p-4">
 
                 <h2 className={`${geist.className} text-sm font-bold text-[#161D16]`}>
                     Learn directly from {creatorName}
@@ -51,7 +51,7 @@ const CreatorSupportCard = ({
                     </Button>
                 </Link>
 
-            </section>
+            </section> */}
 
             {/* Secure Access */}
 

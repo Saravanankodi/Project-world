@@ -17,16 +17,21 @@ interface PricingProps {
     onSubmit?: () => void;
 }
 
+interface PricingErrors {
+  pricingType?: string;
+  basePrice?: string;
+  discount?: string;
+}
 
 export default function PricingForm({
     data,
     setData,
-
     onBack,
     onSaveDraft,
     onSubmit,
 }: PricingProps) {
 
+    const [errors, setErrors] = useState<PricingErrors>({});
     const updateData = <K extends keyof PriceDetails>(
             key: K,
             value: PriceDetails[K]
@@ -39,6 +44,47 @@ export default function PricingForm({
 
     const router = useRouter();
 
+    const validatePricingForm = (
+        data: PriceDetails
+        ): { isValid: boolean; errors: PricingErrors } => {
+        const errors: PricingErrors = {};
+
+        // Pricing type
+        if (!data.pricingType) {
+            errors.pricingType = "Please select a pricing type.";
+        }
+
+        // Base price validation
+        if (data.pricingType === "paid") {
+            if (!data.basePrice || data.basePrice <= 0) {
+            errors.basePrice = "Base price must be greater than 0.";
+            }
+        }
+
+        // Discount validation
+        if (data.discountEnabled) {
+            if (data.discount < 0 || data.discount > 100) {
+            errors.discount = "Discount must be between 0 and 100.";
+            }
+        }
+
+        return {
+            isValid: Object.keys(errors).length === 0,
+            errors,
+        };
+    };
+
+    const handleSubmit = () => {
+        const validation = validatePricingForm(data);
+
+        if (!validation.isValid) {
+            setErrors(validation.errors);
+            return;
+        }
+
+        setErrors({});
+        onSubmit?.();
+    };
     return (
         <section className="mt-8 ">
 
@@ -433,15 +479,11 @@ export default function PricingForm({
 
                     </div>
                     {/* Final Submission */}
-                    <FinalSubmissionCard
-                        onSubmit={() =>
-                            router.push(
-                                "/My_Projects/Upload_Projects/UploadProject_Analytics"
-                            )
-                        }
-                        onSaveDraft={onSaveDraft}
-                        onBack={onBack}
-                    />
+                   <FinalSubmissionCard
+                            onSubmit={handleSubmit}
+                            onSaveDraft={onSaveDraft}
+                            onBack={onBack}
+                        />
 
                 </div>
 

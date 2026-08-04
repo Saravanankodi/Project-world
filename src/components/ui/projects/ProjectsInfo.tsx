@@ -1,7 +1,10 @@
+"use client";
+
 import Button from "@/components/Button/Button";
 import { MyPurchasesIcon, SaveProjectsIcon } from "@/components/icons/Sidebar";
 import { ProjectInfoProps } from "@/types/types";
 import { MessageSquareMore, Star } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 const ProjectsInfo = ({
     tittle,
@@ -13,6 +16,9 @@ const ProjectsInfo = ({
     price,
     discount,
 }: ProjectInfoProps) => {
+    const router = useRouter();
+    const path = usePathname();
+
     return (
         <section className="w-full  rounded-2xl border border-[#E3E8E2] bg-white p-5 shadow-sm space-y-7">
 
@@ -103,6 +109,7 @@ const ProjectsInfo = ({
 
                 <Button
                     className="h-12 w-full rounded-xl bg-[#22C55E] text-sm font-semibold text-white hover:bg-[#16A34A]"
+                    onClick={()=>(router.push(`${path}/Project_Payment`))}
                 >
                     Buy Now
                 </Button>

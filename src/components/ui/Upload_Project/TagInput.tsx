@@ -33,7 +33,7 @@ export default function TagInput({
     };
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex w-full max-h-12 flex-col gap-2">
             <label
                 className={`${geist.className} text-sm font-semibold text-[#161D16]`}
             >
@@ -68,7 +68,7 @@ export default function TagInput({
                         }
                     }}
                     placeholder={placeholder}
-                    className={`${inter.className} min-w-[120px] flex-1 bg-transparent text-sm outline-none`}
+                    className={`${inter.className} min-w-30 flex-1 bg-transparent text-sm outline-none`}
                 />
             </div>
         </div>

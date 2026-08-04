@@ -148,113 +148,113 @@ export default function ProjectPaymentPage() {
 
     );
 
-    const CardPaymentForm = () => (
-        <div className="space-y-2 sm:space-y-5 ">
+    // const CardPaymentForm = () => (
+    //     <div className="space-y-2 sm:space-y-5 ">
 
-            <Input
-                label="Card Number"
-                placeholder="XXXX XXXX XXXX XXXX"
-                className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
-            />
+    //         <Input
+    //             label="Card Number"
+    //             placeholder="XXXX XXXX XXXX XXXX"
+    //             className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+    //         />
 
-            <div className="grid grid-cols-2 gap-4">
+    //         <div className="grid grid-cols-2 gap-4">
 
-                <Input
-                    label="Expiry Date"
-                    placeholder="MM / YY"
-                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+    //             <Input
+    //                 label="Expiry Date"
+    //                 placeholder="MM / YY"
+    //                 className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
 
-                />
+    //             />
 
-                <Input
-                    label="CVV"
-                    placeholder="•••"
-                    type="password"
-                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+    //             <Input
+    //                 label="CVV"
+    //                 placeholder="•••"
+    //                 type="password"
+    //                 className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
 
-                />
+    //             />
 
-            </div>
+    //         </div>
 
-        </div>
-    );
+    //     </div>
+    // );
 
-    const UpiPaymentForm = () => (
-        <div className="space-y-2 sm:space-y-5 ">
+    // const UpiPaymentForm = () => (
+    //     <div className="space-y-2 sm:space-y-5 ">
 
-            <Input
-                label="UPI ID"
-                placeholder="example@upi"
-                className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+    //         <Input
+    //             label="UPI ID"
+    //             placeholder="example@upi"
+    //             className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
 
-            />
+    //         />
 
-            <div className="grid grid-cols-2 gap-4">
+    //         <div className="grid grid-cols-2 gap-4">
 
-                <Dropdown
-                    name="Select UPI App"
-                    option={upiOptions}
-                    value={upiApp}
-                    onChange={setUpiApp}
-                />
+    //             <Dropdown
+    //                 name="Select UPI App"
+    //                 option={upiOptions}
+    //                 value={upiApp}
+    //                 onChange={setUpiApp}
+    //             />
 
-                <Input
-                    label="Verify UPI ID"
-                    placeholder="Verified"
-                    readOnly
-                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+    //             <Input
+    //                 label="Verify UPI ID"
+    //                 placeholder="Verified"
+    //                 readOnly
+    //                 className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
 
-                />
+    //             />
 
-            </div>
+    //         </div>
 
-        </div>
-    );
+    //     </div>
+    // );
 
-    const NetBankingForm = () => (
-        <div className="space-y-2 sm:space-y-5 ">
+    // const NetBankingForm = () => (
+    //     <div className="space-y-2 sm:space-y-5 ">
 
-            <Dropdown
-                name="Choose your Bank"
-                option={bankOptions}
-                value={bank}
-                onChange={setBank}
-            />
+    //         <Dropdown
+    //             name="Choose your Bank"
+    //             option={bankOptions}
+    //             value={bank}
+    //             onChange={setBank}
+    //         />
 
-            <div className="grid grid-cols-2 gap-4">
+    //         <div className="grid grid-cols-2 gap-4">
 
-                <Input
-                    label="User ID"
-                    placeholder="Enter User ID"
-                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+    //             <Input
+    //                 label="User ID"
+    //                 placeholder="Enter User ID"
+    //                 className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
 
-                />
+    //             />
 
-                <Input
-                    label="Password"
-                    type="password"
-                    placeholder="********"
-                    className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
+    //             <Input
+    //                 label="Password"
+    //                 type="password"
+    //                 placeholder="********"
+    //                 className="bg-[#F3FCEF] border border-[#BCCBB9] text-sm text-[#6B7280]"
 
-                />
+    //             />
 
-            </div>
+    //         </div>
 
-        </div>
-    );
+    //     </div>
+    // );
 
-    const renderPaymentForm = () => {
-        switch (paymentMethod) {
-            case "upi":
-                return <UpiPaymentForm />;
+    // const renderPaymentForm = () => {
+    //     switch (paymentMethod) {
+    //         case "upi":
+    //             return <UpiPaymentForm />;
 
-            case "bank":
-                return <NetBankingForm />;
+    //         case "bank":
+    //             return <NetBankingForm />;
 
-            default:
-                return <CardPaymentForm />;
-        }
-    };
+    //         default:
+    //             return <CardPaymentForm />;
+    //     }
+    // };
 
     return (
         <div className="mx-auto w-full max-w-7xl space-y-3 sm:space-y-6 px-4 py-6 lg:px-8">
@@ -268,7 +268,7 @@ export default function ProjectPaymentPage() {
 
                 <div className="space-y-3 sm:space-y-6">
 
-                    <PurchaseSummaryCard
+                    {/* <PurchaseSummaryCard
                         image="/preview/preview-2.jpg"
                         userimage="/preview/preview-2.jpg"
                         title="Eco Smart Bridge Infrastructure"
@@ -279,7 +279,7 @@ export default function ProjectPaymentPage() {
                         creatorRole="Top Rated Creator"
                         projectPrice={249}
                         platformFee={10}
-                    />
+                    /> */}
 
                     <PaymentDetails />
 
@@ -298,7 +298,7 @@ export default function ProjectPaymentPage() {
 
                     {/* Tabs */}
 
-                    <div className="mt-3 sm:mt-8 grid grid-cols-3 gap-3">
+                    {/* <div className="mt-3 sm:mt-8 grid grid-cols-3 gap-3">
 
                         {paymentTabs.map((tab) => {
 
@@ -351,15 +351,15 @@ export default function ProjectPaymentPage() {
 
                         })}
 
-                    </div>
+                    </div> */}
 
                     {/* Dynamic Form */}
 
-                    <div className="mt-3 sm:mt-8">
+                    {/* <div className="mt-3 sm:mt-8">
 
                         {renderPaymentForm()}
 
-                    </div>
+                    </div> */}
 
                     {/* Summary */}
 

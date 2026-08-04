@@ -20,32 +20,38 @@ import "swiper/css/free-mode";
 import "swiper/css/thumbs";
 import "swiper/css/effect-fade";
 
-const gallery = [
-  {
-    id: 1,
-    type: "image",
-    src: "/preview/preview-1.jpg",
-  },
-  {
-    id: 2,
-    type: "image",
-    src: "/preview/preview-2.jpg",
-  },
-  {
-    id: 3,
-    type: "image",
-    src: "/preview/preview-3.jpg",
-  },
-  {
-    id: 4,
-    type: "video",
-    src: "/images/video-thumbnail.jpg",
-  },
-];
+interface ImageGalleryProps {
+  images: string[];
+  video?: string;
+}
 
-export default function ImageGallery() {
+export default function ImageGallery({
+  images,
+  video,
+}: ImageGalleryProps) {
+
   const thumbsSwiper = useRef<SwiperType | null>(null);
   const mainSwiper = useRef<SwiperType | null>(null);
+
+
+  const gallery = [
+    ...images.map((src, index) => ({
+      id: `image-${index}`,
+      type: "image",
+      src,
+    })),
+
+    ...(video
+      ? [
+          {
+            id: "video",
+            type: "video",
+            src: video,
+          },
+        ]
+      : []),
+  ];
+
 
   const handleFullscreen = () => {
     const el = document.getElementById("gallery-preview");
@@ -54,6 +60,7 @@ export default function ImageGallery() {
       el.requestFullscreen();
     }
   };
+
 
   return (
     <div className="w-full space-y-5">
@@ -69,7 +76,9 @@ export default function ImageGallery() {
           navigation
           effect="fade"
           fadeEffect={{ crossFade: true }}
-          onSwiper={(swiper) => (mainSwiper.current = swiper)}
+          onSwiper={(swiper) =>
+            (mainSwiper.current = swiper)
+          }
           thumbs={{
             swiper:
               thumbsSwiper.current &&
@@ -78,63 +87,109 @@ export default function ImageGallery() {
                 : null,
           }}
         >
+
           {gallery.map((item) => (
             <SwiperSlide key={item.id}>
+
               <div className="relative aspect-video">
-                <Image
-                  src={item.src}
-                  alt=""
-                  fill
-                  className="object-cover"
-                />
+
+                {item.type === "image" ? (
+
+                  <Image
+                    src={item.src}
+                    alt="Project screenshot"
+                    fill
+                    className="object-cover"
+                  />
+
+                ) : (
+
+                  <video
+                    src={item.src}
+                    controls
+                    className="h-full w-full object-cover"
+                  />
+
+                )}
+
               </div>
+
             </SwiperSlide>
           ))}
+
         </Swiper>
+
 
         <button
           onClick={handleFullscreen}
-          className="absolute top-5 right-5 z-20 rounded-full bg-black/40 p-3 text-white transition hover:bg-black/60"
+          className="absolute right-5 top-5 z-20 rounded-full bg-black/40 p-3 text-white hover:bg-black/60"
         >
-          <Expand size={22} />
+          <Expand size={22}/>
         </button>
+
       </div>
+
+
 
       {/* Thumbnails */}
 
       <Swiper
         modules={[FreeMode, Thumbs]}
-        onSwiper={(swiper) => (thumbsSwiper.current = swiper)}
+        onSwiper={(swiper) =>
+          (thumbsSwiper.current = swiper)
+        }
         watchSlidesProgress
         freeMode
         slidesPerView={4}
         spaceBetween={15}
       >
-        {gallery.map((item, index) => (
-          <SwiperSlide key={item.id}>
-            <button
-              onClick={() => mainSwiper.current?.slideTo(index)}
-              className="relative aspect-video w-full overflow-hidden rounded-xl border-2 border-transparent transition hover:border-green-600"
-            >
-              <Image
-                src={item.src}
-                alt=""
-                fill
-                className="object-cover"
-              />
 
-              {item.type === "video" && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                  <Play
-                    size={40}
-                    className="fill-white text-white"
+        {gallery.map((item,index)=>(
+
+          <SwiperSlide key={item.id}>
+
+            <button
+              onClick={() =>
+                mainSwiper.current?.slideTo(index)
+              }
+              className="relative aspect-video w-full overflow-hidden rounded-xl border-2 border-transparent hover:border-green-600"
+            >
+
+              {item.type === "image" ? (
+
+                <Image
+                  src={item.src}
+                  alt="thumbnail"
+                  fill
+                  className="object-cover"
+                />
+
+              ) : (
+
+                <>
+                  <video
+                    src={item.src}
+                    className="h-full w-full object-cover"
                   />
-                </div>
+
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                    <Play
+                      size={40}
+                      className="fill-white text-white"
+                    />
+                  </div>
+                </>
+
               )}
+
             </button>
+
           </SwiperSlide>
+
         ))}
+
       </Swiper>
+
     </div>
   );
 }
