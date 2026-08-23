@@ -14,6 +14,7 @@ import StatusBadge from "./StatusBadge";
 import { ProjectTableProps, Project } from "@/types/types";
 import TableTabs from "./TableTabs";
 import Pagination from "./Pagination";
+import { useRouter } from "next/navigation";
 
 
 export default function ProjectTable({
@@ -25,10 +26,11 @@ export default function ProjectTable({
     onPageChange,
 }: ProjectTableProps) {
 
+    const router = useRouter();
     const renderMetrics = (project: Project) => {
         switch (project.status) {
 
-            case "marketplace":
+            case "published":
                 return (
                     <div className="flex md:flex-col xl:flex-row md:gap-4 xl:gap-12 ">
                         <div>
@@ -53,7 +55,7 @@ export default function ProjectTable({
                     </div>
                 );
 
-            case "review":
+            case "pending":
                 return (
                     <div className="flex md:flex-col xl:flex-row md:gap-4 xl:gap-12 ">
                         <div>
@@ -109,15 +111,21 @@ export default function ProjectTable({
 
         return (
             <div className="flex items-center justify-end xl:gap-2">
-                <button className="rounded-lg p-2 hover:bg-gray-100">
+                <button className="rounded-lg p-2 hover:bg-gray-100"
+                 onClick={() => router.push(`/My_Projects/Upload_Projects?id=${project.id}`)}>
                     <Edit3 className="h-5 w-5 text-[#565E74]" />
+                    
                 </button>
 
-                <button className="rounded-lg p-2 hover:bg-gray-100 hidden lg:block">
+                <button 
+                    className="rounded-lg p-2 hover:bg-gray-100 hidden lg:block"
+                    onClick={()=>(router.push('My_Projects/Upload_Projects/UploadProject_Analytics'))}>
                     <ChartColumn className="h-5 w-5 text-[#565E74]" />
                 </button>
 
-                <button className="rounded-lg p-2 hover:bg-gray-100 hidden lg:block">
+                <button 
+                    className="rounded-lg p-2 hover:bg-gray-100 hidden lg:block"
+                    onClick={()=>(router.push('My_Projects/Upload_Projects/UploadProject_Analytics'))}>
                     <Eye className="h-5 w-5 text-[#565E74]" />
                 </button>
 
@@ -172,7 +180,7 @@ export default function ProjectTable({
                     />
                 </div >
                 {/* Header */}
-                <div className="grid xl:grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_2fr_1fr_1fr]   border-b border-[#BCCBB9] px-8 py-5">
+                <div className="grid xl:grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_2fr_1fr_1fr] items-center justify-center text-center border-b border-[#BCCBB9] px-8 py-5">
 
                     <h3 className={`text-xs font-semibold uppercase tracking-wider  text-[#3D4A3D] ${geist.className}`}>
                         Project
@@ -187,7 +195,7 @@ export default function ProjectTable({
                     </h3>
 
                     <h3 className={`text-xs font-semibold uppercase tracking-wider  text-[#3D4A3D] ${geist.className}`}>
-                        Metrics
+                        Domain
                     </h3>
 
                     <h3 className={`text-right text-xs font-semibold uppercase tracking-wider  text-[#3D4A3D] ${geist.className}`}>
@@ -198,7 +206,7 @@ export default function ProjectTable({
                 {projects.map((project) => (
                     <div
                         key={project.id}
-                        className="grid xl:grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_2fr_1fr_1fr] items-center border-b border-[#BCCBB9] md:px-4 xl:px-8 py-2 transition hover:bg-[#FAFAFA]"
+                        className="grid xl:grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_2fr_1fr_1fr] items-center justify-center text-center border-b border-[#BCCBB9] md:px-4 xl:px-8 py-2 transition hover:bg-[#FAFAFA]"
                     >
                         {/* Project */}
                         <div className="flex items-center gap-4">
@@ -252,7 +260,7 @@ export default function ProjectTable({
 
                         {/* Metrics */}
                         <div>
-                            {renderMetrics(project)}
+                            {project.domain}
                         </div>
 
                         {/* Actions */}

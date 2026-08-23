@@ -1,4 +1,5 @@
 export interface ProjectCardProps {
+    id: string ;
     image: string;
     category: string;
     title: string;
@@ -8,13 +9,13 @@ export interface ProjectCardProps {
     authorAvatar?: string;
     price: number | string;
     bookmarked?: boolean;
-   
 }
 
 import { Timestamp } from "firebase/firestore";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { PriceDetails, ProjectInformation, TechnicalDetails } from "./project";
 import { User } from "@/services/user";
+import { ProjectStatus } from "@/services/project";
 
 export interface ButtonProps
     extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -58,10 +59,6 @@ export type TechnicalDetailsProps = {
     requirements: string[];
     architecture: string[];
 }
-export type ProjectStatus =
-    | "marketplace"
-    | "review"
-    | "draft";
 
 export interface Project {
     id: number;
@@ -71,6 +68,7 @@ export interface Project {
     technologies: string[];
     uploadDate: string;
     status: ProjectStatus;
+    domain:string;
     metrics: {
         sales?: number;
         revenue?: string;

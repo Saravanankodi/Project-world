@@ -7,35 +7,51 @@ import { useState , useEffect} from "react";
 import { Plus,Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ProjectBanner from "@/components/Cards/ProjectBanner";
-import { getProjectsByStatus } from "@/services/project";
+import { getProjectsByStatus, getUserProjects } from "@/services/project";
 import type { Project as FirestoreProject } from "@/types/project";
 import type { Project as TableProject } from "@/types/types";
-
-const [projects, setProjects] = useState<TableProject[]>([]);
-
-
-
-
+import { getAuth } from "firebase/auth";
 
 const My_ProjectsPage = () => {
-const [projects, setProjects] = useState<Project[]>([]);
 const [loading, setLoading] = useState(true);
+const [projects, setProjects] = useState<any[]>([]);
 useEffect(() => {
   async function loadProjects() {
     try {
-      const data = await getProjectsByStatus("approved");
-setProjects(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+      const auth = getAuth();
+      const user = auth.currentUser;
 
-  loadProjects();
-}, []);
+      if (!user) return;
 
+      const data = await getUserProjects(user.uid);
 
+                const tableProjects = data.map((p: any) => ({
+                id: p.id,
+                title: p.projectInformation.title,
+                image: p.technicalDetails.resources.screenshots?.[0], // or your image URL
+                technologies: p.projectInformation.technology ?? [],
+                uploadDate: p.createdAt?.toDate().toLocaleDateString(),
+                status: p.status,
+                domain:p.projectInformation.domain,
+                metrics: {
+                    sales: 0,
+                    revenue: "$0",
+                    views: 0,
+                    likes: 0,
+                    progress: 0,
+                },
+                }));
+
+                setProjects(tableProjects);
+                    } catch (err) {
+                    console.error(err);
+                    } finally {
+                    setLoading(false);
+                    }
+                }
+
+                loadProjects();
+                }, []);
     const rowsPerPage = 3;
 
     const [page, setPage] = useState(1);

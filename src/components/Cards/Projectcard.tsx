@@ -5,14 +5,40 @@ import BookMarkFilled from "../icons/cards/BookMarkFilled";
 import { BookMark,  Star } from "@/components/icons/cards";
 import { useState } from "react";
 import {inter, geist} from "@/lib/fonts"
-import { ProjectCardProps } from "@/types/types";
+import { ProjectCardProps } from "@/types/types";import { auth } from "@/lib/firebase";
+import { 
+ addSavedProject,
+ removeSavedProject
+} from "@/services/user";
+import Button from "../Button/Button";
+import { useRouter } from "next/navigation";
 
 
-const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
+const Projectcard = ({ id,bookmarked = false, ...props }: ProjectCardProps) => {
     const [isBookmarked, setIsBookmarked] = useState(bookmarked);
 
+    const router = useRouter();
+        const handleBookmark = async()=>{
+            const user = auth.currentUser;
+            if(!user) return;
+            if(isBookmarked){
+                await removeSavedProject(
+                    user.uid,
+                    id
+                );
+                setIsBookmarked(false);
+            }
+            else{
+                await addSavedProject(
+                    user.uid,
+                    id
+                );
+                setIsBookmarked(true);
+            }
+        };
+
     return (
-        <div className="w-full h-full flex flex-col rounded-xl  xl:max-w-82 xl:max-h-80 2xl:max-w-83 2xl:max-h-86 overflow-hidden xl:rounded-2xl 2xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D] m-auto">
+        <div className="w-full h-full flex flex-col rounded-xl  xl:max-w-82 xl:max-h-96 2xl:max-w-83 overflow-hidden xl:rounded-2xl 2xl:rounded-3xl  shadow-lg shadow-[#0000000D] transition-all hover:shadow-xl border border-[#BCCBB94D] m-auto">
             {/* Image */}
             <div className="relative aspect-2/1 w-full">
                         <Image
@@ -28,8 +54,8 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                 className="object-cover"
             />
 
-                <button
-                    onClick={() => setIsBookmarked(!isBookmarked)}
+                {/* <button
+                    onClick={handleBookmark}
                     className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur"
                 >
                     {isBookmarked ? (
@@ -37,7 +63,7 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                     ) : (
                         <BookMark className="h-5 w-5 text-green-500" />
                     )}
-                </button>
+                </button> */}
             </div>
 
             {/* Content */}
@@ -75,7 +101,7 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                                 alt={props.author}
                                 width={40}
                                 height={40}
-                                className="rounded-full object-cover"
+                                className="max-h-10 max-w-10 rounded-full object-cover"
                             />
                         ) : (
                             <div className="h-12 w-12 rounded-full bg-indigo-200" />
@@ -85,10 +111,21 @@ const Projectcard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                             {props.author}
                         </span>
                     </div>
-
                     <span className={` ${inter.className} text-lg font-semibold text-[#006E2F]`}>
                         ${props.price}
                     </span>
+                </div>
+                <div className="w-full flex items-center justify-center gap-3 mt-3">
+                    <Button 
+                        onClick={()=>{router.push(`Explore/${id}`)}}
+                        className="w-1/2 bg-[#006E2F] text-sm text-white">
+                        Open
+                    </Button>
+                    <Button
+                        onClick={handleBookmark}
+                        className="w-1/2 bg-[#161D16] text-white text-sm">
+                            Save
+                    </Button>
                 </div>
             </div>
         </div>

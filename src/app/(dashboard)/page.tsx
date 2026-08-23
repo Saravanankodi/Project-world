@@ -1,27 +1,17 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import Projectcard from '@/components/Cards/Projectcard'
 import HeroCard from '@/components/Cards/HeroCard';
 import Issusescard from '@/components/Cards/Issusescard';
 import { Civil, Ai, Lapmobile } from '@/components/icons/dashboard';
 import {Cpu} from 'lucide-react'
 import SectionHeader from '@/components/ui/base/SectionHeader';
+import { getProjectsByStatus, Project } from '@/services/project';
 const DashboardPage = () => {
 
-  const cards = [
-    {
-      id: 1,
-      image: "/Auth/login.png",
-      category: "Civil Engineering",
-      title: "Eco-Smart Bridge",
-      description:
-        "Next-gen structural design with integrated IoT sensors for real-time monitoring.",
-      rating: 4.9,
-      author: "Alex Rivera",
-      authorAvatar: "/Topbar/ProfileImage.jpg",
-      price: 120,
-      bookmarked: true,
-    },
-  ];
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
 
   const categories = [
@@ -112,6 +102,56 @@ const DashboardPage = () => {
       iconColor: "text-[#027A48]",
     },
   ];
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        setLoading(true);
+
+        const data = await getProjectsByStatus("published");
+
+        setProjects(data);
+      } catch (err) {
+        console.error("Failed to fetch dashboard projects:", err);
+        setError("Failed to load projects");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProjects();
+  }, []);
+
+  const cards = projects.map((project) => ({
+    id: project.id!,
+    
+    image:
+      project.technicalDetails.resources.screenshots?.[0] ||
+      "/Auth/login.png",
+
+    category:
+      project.projectInformation.domain,
+
+    title:
+      project.projectInformation.title,
+
+    description:
+      project.projectInformation.description,
+
+    rating: 4.9,
+
+    author: "Creator",
+
+    authorAvatar:
+      "/Topbar/ProfileImage.jpg",
+
+    price:
+      project.priceDetails.pricingType === "free"
+        ? 0
+        : project.priceDetails.basePrice,
+
+    bookmarked: false,
+  }));
   return (
     <div className='px-4 py-5'>     
       <div>

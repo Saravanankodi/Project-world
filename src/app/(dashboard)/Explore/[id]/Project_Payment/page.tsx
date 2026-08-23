@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
     Building2,
@@ -19,50 +19,65 @@ import PurchaseSummaryCard from "@/components/ui/projects/PurchaseSummaryCard";
 import PaymentDetails from "@/components/ui/projects/PaymentDetails";
 
 import { geist, inter } from "@/lib/fonts";
+import { useParams } from "next/navigation";
+import { getProjectById, Project } from "@/services/project";
+import { UserProfile } from "@/types/types";
+import { getUserProfile } from "@/services/user";
 
 type PaymentMethod = "card" | "upi" | "bank";
 
 export default function ProjectPaymentPage() {
+    const params = useParams();
 
-    const [paymentMethod, setPaymentMethod] =
-        useState<PaymentMethod>("card");
+    const projectId = params.id as string;
 
-    const projectPrice = 249;
-    const discount = 0;
-    const finalAmount = projectPrice - discount;
-    const paymentTabs = [
-        {
-            id: "card",
-            label: "Card Payment",
-            icon: CreditCard,
-        },
-        {
-            id: "upi",
-            label: "UPI",
-            icon: Building2,
-        },
-        {
-            id: "bank",
-            label: "Net Banking",
-            icon: Landmark,
-        },
-    ];
-    const [bank, setBank] = useState("");
-    const bankOptions = [
-        { label: "State Bank of India", value: "sbi" },
-        { label: "HDFC Bank", value: "hdfc" },
-        { label: "ICICI Bank", value: "icici" },
-        { label: "Axis Bank", value: "axis" },
-    ];
-    const [upiApp, setUpiApp] = useState("");
-    const upiOptions = [
-        { label: "Google Pay", value: "gpay" },
-        { label: "PhonePe", value: "phonepe" },
-        { label: "Paytm", value: "paytm" },
-        { label: "BHIM", value: "bhim" },
-    ];
+    const [project, setProject] = useState<Project | null>(null);
+    const [owner, setOwner] = useState<UserProfile | null>(null);
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function fetchProject() {
+            if (!projectId) return;
+
+            try {
+                setLoading(true);
+
+                const projectData = await getProjectById(projectId);
+
+                if (!projectData) {
+                    setError("Project not found");
+                    return;
+                }
+
+                setProject(projectData);
+
+                // Fetch project owner
+                const ownerData = await getUserProfile(projectData.ownerId);
+
+                setOwner(ownerData);
+            } catch (err) {
+                console.error("Error fetching project:", err);
+                setError("Failed to load project");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchProject();
+    }, [projectId]);
+
+    const projectPrice = project?.priceDetails.basePrice ?? 0;
+
+    const discount =
+        project?.priceDetails.discountEnabled
+            ? project.priceDetails.discount
+            : 0;
+
+    const finalAmount = Math.max(projectPrice - discount + 10, 0);
+
     const OrderSummary = () => (
-
         <div className="rounded-2xl bg-[#EDF6EA] p-6">
 
             <h3
@@ -74,27 +89,32 @@ export default function ProjectPaymentPage() {
             <div className="space-y-4">
 
                 <div className="flex justify-between">
-
                     <span className={`${inter.className} text-xs text-[#3D4A3D]`}>
                         Project Price
                     </span>
 
-                    <span className={`${inter.className} text-semibold text-xs text-[#161D16]`}>
+                    <span className={`${inter.className} text-xs font-semibold text-[#161D16]`}>
                         ${projectPrice.toFixed(2)}
                     </span>
+                </div>
+                <div className="flex justify-between">
+                    <span className={`${inter.className} text-xs text-[#3D4A3D]`}>
+                        Platform Fee
+                    </span>
 
+                    <span className={`${inter.className} text-xs font-semibold text-[#161D16]`}>
+                        $ 10
+                    </span>
                 </div>
 
                 <div className="flex justify-between">
-
                     <span className={`${inter.className} text-xs text-[#3D4A3D]`}>
                         Discount
                     </span>
 
-                    <span className={`${inter.className} text-semibold text-xs text-[#006E2F]`}>
+                    <span className={`${inter.className} text-xs font-semibold text-[#006E2F]`}>
                         -${discount.toFixed(2)}
                     </span>
-
                 </div>
 
                 <div className="border-t pt-4 flex justify-between">
@@ -114,9 +134,7 @@ export default function ProjectPaymentPage() {
                 </div>
 
             </div>
-
         </div>
-
     );
 
     const PayButton = () => (
@@ -256,6 +274,15 @@ export default function ProjectPaymentPage() {
     //     }
     // };
 
+    if (loading) {
+        return (
+            <div className="flex min-h-100 items-center justify-center">
+                <p className={`${inter.className} text-sm text-[#3D4A3D]`}>
+                    Loading project...
+                </p>
+            </div>
+        );
+    }
     return (
         <div className="mx-auto w-full max-w-7xl space-y-3 sm:space-y-6 px-4 py-6 lg:px-8">
 
@@ -268,20 +295,37 @@ export default function ProjectPaymentPage() {
 
                 <div className="space-y-3 sm:space-y-6">
 
-                    {/* <PurchaseSummaryCard
-                        image="/preview/preview-2.jpg"
-                        userimage="/preview/preview-2.jpg"
-                        title="Eco Smart Bridge Infrastructure"
-                        category="Civil Engineering"
-                        rating={4.9}
-                        reviews={124}
-                        creator="Alex Rivera"
-                        creatorRole="Top Rated Creator"
-                        projectPrice={249}
-                        platformFee={10}
-                    /> */}
+                    <PurchaseSummaryCard
+                        image={
+                            project?.technicalDetails.resources.screenshots?.[0] ||
+                            "/preview/preview-2.jpg"
+                        }
 
-                    <PaymentDetails />
+                        userimage={
+                            owner?.profileImg ||
+                            "/preview/preview-2.jpg"
+                        }
+
+                        title={project?.projectInformation.title || ""}
+
+                        category={project?.projectInformation.domain || ""}
+
+                        rating={4.9}
+
+                        reviews={124}
+
+                        creator={owner?.name || "Unknown Creator"}
+
+                        creatorRole={
+                            owner?.userType === "professional"
+                                ? "Professional"
+                                : "Student"
+                        }
+
+                        projectPrice={projectPrice}
+
+                        platformFee={10}
+                    />
 
                 </div>
 
@@ -363,12 +407,11 @@ export default function ProjectPaymentPage() {
 
                     {/* Summary */}
 
-                    <div className="mt-3 sm:mt-8">
+                    <div className="mt-3 sm:mt-8 space-y-3">
 
                         <OrderSummary />
-
+                        <PaymentDetails />
                     </div>
-
                     {/* Button */}
 
                     <div className="mt-3 sm:mt-8">

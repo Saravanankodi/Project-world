@@ -9,6 +9,7 @@ import {
 
 import { geist } from "@/lib/fonts";
 import ResourceUploadCard from "./ResourceUploadCard";
+import { ExistingProjectFiles } from "@/types/project";
 
 interface Resources {
     sourceCode: File | null;
@@ -23,12 +24,26 @@ interface ProjectResourcesProps {
         e: React.ChangeEvent<HTMLInputElement>,
         key: keyof Resources
     ) => void;
+    removeFile: (
+        key: "sourceCode" | "documentation" | "demoVideo"
+    ) => void;
+    removeScreenshot: (index: number) => void;
+    existingFiles: ExistingProjectFiles;
+
+    setExistingFiles: React.Dispatch<
+        React.SetStateAction<ExistingProjectFiles>
+    >;
 }
 
 export default function ProjectResources({
-    resources,
+   resources,
     onFileChange,
+    removeFile,
+    removeScreenshot,
+  existingFiles,
+    setExistingFiles,
 }: ProjectResourcesProps) {
+    
     return (
         <div className="mt-6 rounded-2xl border border-[#EAECF0]  p-3 sm:p-6">
 
@@ -47,8 +62,10 @@ export default function ProjectResources({
                     description="Upload ZIP file containing your source code."
                     icon={<FileCode2 size={36} className="text-[#039855]" />}
                     file={resources.sourceCode}
+                    existingFile={existingFiles.sourceCode}
                     accept=".zip,.rar,.7z"
                     onChange={(e) => onFileChange(e, "sourceCode")}
+                    removeFile={removeFile}
                 />
 
                 <ResourceUploadCard
@@ -56,8 +73,10 @@ export default function ProjectResources({
                     description="Upload PDF or DOC documentation."
                     icon={<FileText size={36} className="text-[#039855]" />}
                     file={resources.documentation}
+                    existingFile={existingFiles.documentation}
                     accept=".pdf,.doc,.docx"
                     onChange={(e) => onFileChange(e, "documentation")}
+                    removeFile={removeFile}
                 />
 
                 <ResourceUploadCard
@@ -65,8 +84,10 @@ export default function ProjectResources({
                     description="Upload MP4, MOV or demo video."
                     icon={<PlayCircle size={36} className="text-[#039855]" />}
                     file={resources.demoVideo}
+                    existingFile={existingFiles.demoVideo}
                     accept=".mp4,.mov,.avi"
                     onChange={(e) => onFileChange(e, "demoVideo")}
+                    removeFile={removeFile}
                 />
 
                 <div className="border rounded-xl p-4">
@@ -94,17 +115,53 @@ export default function ProjectResources({
                     />
 
 
-                    <div className="mt-3 space-y-1">
+                     <div className="mt-3 space-y-1">
+               {existingFiles.screenshots
+    .filter((url): url is string => url !== null)
+    .map((url, index) => (
+        <div
+            key={`existing-${index}`}
+            className="flex items-center justify-between"
+        >
+            <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline truncate"
+            >
+                Screenshot {index + 1}
+            </a>
 
+            <button
+                type="button"
+                onClick={() =>
+                    setExistingFiles(prev => ({
+                        ...prev,
+                        screenshots: prev.screenshots.filter(
+                            (_, i) => i !== index
+                        ),
+                    }))
+                }
+            >
+                Remove
+            </button>
+        </div>
+    ))}
                         {resources.screenshots.map((file, index) => (
-                            <p 
-                            key={index}
-                            className="text-sm text-gray-600"
+                            <div
+                                key={index}
+                                className="flex justify-between"
                             >
-                                {file.name}
-                            </p>
-                        ))}
+                                <span>{file.name}</span>
 
+                                <button
+                                    type="button"
+                                    onClick={() => removeScreenshot(index)}
+                                >
+                                    Remove
+                                </button>
+                            </div>
+                        ))}
                     </div>
 
                 </div>

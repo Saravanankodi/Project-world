@@ -3,31 +3,53 @@
 "use client";
 
 import { inter } from "@/lib/fonts";
-import { ProjectStatus } from "@/types/types";
+import { ProjectStatus } from "@/services/project";
+
 
 interface StatusBadgeProps {
     status: ProjectStatus;
 }
 
 
-const statusStyles = {
-    marketplace: {
-        text: "In Marketplace",
-        className:
-            "bg-[#22C55E33] text-[#004B1E] border border-[#22C55E4D]",
-    },
+const statusStyles: Record<
+  ProjectStatus,
+  { text: string; className: string }
+> = {
+  draft: {
+    text: "Draft",
+    className:
+      "bg-[#F2F4F7] text-[#475467] border border-[#D0D5DD]",
+  },
 
-    review: {
-        text: "Waiting Approval",
-        className:
-            "bg-[#DAE2FD] text-[#5C647A] border border-[#D9D6FE]",
-    },
+  pending: {
+    text: "Waiting Approval",
+    className:
+      "bg-[#DAE2FD] text-[#5C647A] border border-[#D9D6FE]",
+  },
 
-    draft: {
-        text: "Complete Details",
-        className:
-            "bg-[#F2F4F7] text-[#475467] border border-[#D0D5DD]",
-    },
+  approved: {
+    text: "Approved",
+    className:
+      "bg-[#22C55E33] text-[#004B1E] border border-[#22C55E4D]",
+  },
+
+  rejected: {
+    text: "Rejected",
+    className:
+      "bg-[#FEE4E2] text-[#B42318] border border-[#FECDCA]",
+  },
+
+  published: {
+    text: "Published",
+    className:
+      "bg-[#ECFDF3] text-[#027A48] border border-[#ABEFC6]",
+  },
+
+  archived: {
+    text: "Archived",
+    className:
+      "bg-[#F2F4F7] text-[#667085] border border-[#D0D5DD]",
+  },
 };
 
 export default function StatusBadge({

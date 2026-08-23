@@ -51,3 +51,10 @@ export interface ProjectTypeProps {
     value: string;
     onChange: (value: string) => void;
 }
+ export interface ExistingProjectFiles {
+  sourceCode: string | null;
+  documentation: string | null;
+  demoVideo: string | null;
+  screenshots: (string | null)[];
+}
+

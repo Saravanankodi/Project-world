@@ -7,8 +7,9 @@ import {
   getDocs,
   collection,
   serverTimestamp,
+  arrayUnion, 
+  arrayRemove
 } from "firebase/firestore";
-
 import { db } from "@/lib/firebase";
 import { UserProfile } from "@/types/types";
 
@@ -83,4 +84,36 @@ export async function getUsers() {
     id: doc.id,
     ...doc.data(),
   })) as User[];
+}
+
+export async function addSavedProject(
+    uid:string,
+    projectId:string
+){
+
+    const userRef = doc(db,"users",uid);
+
+    await updateDoc(userRef,{
+        savedProjects: arrayUnion({
+            projectId
+        })
+    });
+
+}
+
+
+
+export async function removeSavedProject(
+    uid:string,
+    projectId:string
+){
+
+    const userRef = doc(db,"users",uid);
+
+    await updateDoc(userRef,{
+        savedProjects: arrayRemove({
+            projectId
+        })
+    });
+
 }

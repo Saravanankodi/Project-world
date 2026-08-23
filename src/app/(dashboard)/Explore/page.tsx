@@ -1,11 +1,8 @@
 "use client";
-
 import Projectcard from "@/components/Cards/Projectcard";
 import { inter } from "@/lib/fonts"
 import { getProjects, Project } from "@/services/project";
 import { getUsers } from "@/services/user";
-import { projectsWithUsers } from "@/types/types";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 const ExplorePage = () => {
 
@@ -57,12 +54,12 @@ useEffect(() => {
             </div>
             <div className="overflow-x-auto md:overflow-visible scrollbar-hide">
                 <div className="flex gap-3 md:gap-x-3 md:gap-y-6 md:grid md:w-full md:grid-cols-3 xl:grid-cols-4">
-                    {cards.map((card,index) => (
-                        <Link href={`Explore/${card.id}`} key={index} >
-                            <div className="w-60 shrink-0 md:w-auto">
+                    {cards.map((card) => (
+                            <div
+                             key={card.id}
+                             className="w-60 shrink-0 md:w-auto">
                                 <Projectcard {...card} />
                             </div>
-                        </Link>
                     ))}
                 </div>
             </div>

@@ -1,15 +1,22 @@
 "use client";
 
 import { geist, inter } from "@/lib/fonts";
-import { UploadCloud } from "lucide-react";
+import { Delete, UploadCloud } from "lucide-react";
 
 interface ResourceUploadCardProps {
     title: string;
     description: string;
     icon: React.ReactNode;
+
     file: File | null;
+
+    existingFile?: string | null;
+
     accept?: string;
     multiple?: boolean;
+    removeFile: (
+        key: "sourceCode" | "documentation" | "demoVideo"
+    ) => void;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -18,10 +25,13 @@ export default function ResourceUploadCard({
     description,
     icon,
     file,
+    existingFile,
     accept,
     multiple = false,
+    removeFile,
     onChange,
 }: ResourceUploadCardProps) {
+    
     return (
         <label
             className="cursor-pointer rounded-2xl border-2 border-dashed border-[#D0D5DD] p-2 sm:p-6 transition hover:border-[#039855]"
@@ -52,12 +62,22 @@ export default function ResourceUploadCard({
                     className="hidden sm:block mt-5 text-[#98A2B3]"
                 />
 
-                {file && (
-                    <p className={`${inter.className} mt-4 max-w-full truncate text-sm font-medium text-[#039855]`}>
-                        {file.name}
-                    </p>
-                )}
-
+              {file ? (
+    <p className="mt-4 text-sm font-medium text-[#039855]">
+        {file.name}
+    </p>
+) : (
+    existingFile && (
+        <a
+            href={existingFile}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 text-sm text-blue-600 underline"
+        >
+            View Uploaded File
+        </a>
+    )
+)}
             </div>
         </label>
     );

@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { PriceDetails, ProjectInformation, TechnicalDetails } from "@/types/project";
+import { useState , useEffect } from "react";
+import { ExistingProjectFiles, PriceDetails, ProjectInformation, TechnicalDetails } from "@/types/project";
 import ProjectInformationForm from "@/components/ui/Upload_Project/ProjectInformation";
 import TechnicalDetailsForm from "@/components/ui/Technical_Details/TechnicalDetails";
 import PricingForm from "@/components/ui/Pricing/Pricing";
 import { saveDraft, submitProject, updateProject } from "@/services/project";
 import { getAuth } from "firebase/auth";
 import { uploadFile } from "@/services/storage";
-
+import { getProjectById } from "@/services/project";
+import { useSearchParams } from "next/navigation";
 
 
 export default function UploadProject() {
@@ -17,9 +18,10 @@ export default function UploadProject() {
     const user = auth.currentUser;
 
     const [step, setStep] = useState(1);
-    const [projectId, setProjectId] = useState<string | null>(null);
-     
-    
+    const searchParams = useSearchParams();
+    const editProjectId = searchParams.get("id");
+    const isEditMode = !!editProjectId;
+    const [projectId, setProjectId] = useState<string | null>(editProjectId);
     // STEP 1 DATA
     const [projectInformation, setProjectInformation] =
         useState<ProjectInformation>({
@@ -70,7 +72,45 @@ const [projectFiles, setProjectFiles] = useState({
             acceptFeedback: true,
         });
 
-        
+        const [existingFiles, setExistingFiles] =
+            useState<ExistingProjectFiles>({
+                sourceCode: null,
+                documentation: null,
+                demoVideo: null,
+                screenshots: [],
+            });
+
+        useEffect(() => {
+    if (!editProjectId) return;
+
+    const id = editProjectId;
+
+    async function loadProject() {
+        try {
+            const project = await getProjectById(id);
+
+            if (!project) return;
+
+            setProjectInformation(project.projectInformation);
+            setTechnicalDetails(project.technicalDetails);
+            setPriceDetails(project.priceDetails);
+            setProjectId(project.id ?? null);
+
+            setExistingFiles({
+                sourceCode: project.technicalDetails.resources.sourceCode,
+                documentation: project.technicalDetails.resources.documentation,
+                demoVideo: project.technicalDetails.resources.demoVideo,
+                screenshots: project.technicalDetails.resources.screenshots,
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    loadProject();
+}, [editProjectId]);
+
+// save draft
 const handleSaveDraft = async () => {
     if (!user) return;
 
@@ -130,34 +170,32 @@ const handleSaveDraft = async () => {
         alert("Failed to save draft.");
     }
 };
-
+//submit form
 const handleSubmit = async () => {
     if (!user) return;
 
     try {
-        // Upload files
-        const sourceCodeURL = await uploadFile(
-            projectFiles.sourceCode,
-            "sourceCode"
-        );
+        const sourceCodeURL = projectFiles.sourceCode
+            ? await uploadFile(projectFiles.sourceCode, "sourceCode")
+            : technicalDetails.resources.sourceCode;
 
-        const documentationURL = await uploadFile(
-            projectFiles.documentation,
-            "documentation"
-        );
+        const documentationURL = projectFiles.documentation
+            ? await uploadFile(projectFiles.documentation, "documentation")
+            : technicalDetails.resources.documentation;
 
-        const demoVideoURL = await uploadFile(
-            projectFiles.demoVideo,
-            "videos"
-        );
+        const demoVideoURL = projectFiles.demoVideo
+            ? await uploadFile(projectFiles.demoVideo, "videos")
+            : technicalDetails.resources.demoVideo;
 
-      const screenshotsURL = await Promise.all(
-    projectFiles.screenshots.map((file) =>
-        uploadFile(file, "screenshots")
-    )
-);
+        const screenshotsURL =
+            projectFiles.screenshots.length > 0
+                ? await Promise.all(
+                      projectFiles.screenshots.map((file) =>
+                          uploadFile(file, "screenshots")
+                      )
+                  )
+                : technicalDetails.resources.screenshots;
 
-        // Create technical details with URLs
         const technicalData = {
             ...technicalDetails,
             resources: {
@@ -168,25 +206,39 @@ const handleSubmit = async () => {
             },
         };
 
-        let id = projectId;
-
-        if (!id) {
-            id = await saveDraft({
-                ownerId: user.uid,
+        // ==========================
+        // EDIT PROJECT
+        // ==========================
+        if (isEditMode && projectId) {
+            await updateProject(projectId, {
                 projectInformation,
                 technicalDetails: technicalData,
                 priceDetails,
-                status: "draft",
+                status: "pending",
             });
 
-            setProjectId(id);
+            alert("Project updated successfully.");
+            return;
         }
+
+        // ==========================
+        // CREATE NEW PROJECT
+        // ==========================
+        const id = await saveDraft({
+            ownerId: user.uid,
+            projectInformation,
+            technicalDetails: technicalData,
+            priceDetails,
+            status: "draft",
+        });
 
         await submitProject(id, {
             projectInformation,
             technicalDetails: technicalData,
             priceDetails,
         });
+
+        setProjectId(id);
 
         alert("Project submitted successfully.");
     } catch (err) {
@@ -212,6 +264,8 @@ const handleSubmit = async () => {
                     setData={setTechnicalDetails}
                     projectFiles={projectFiles}
                     setProjectFiles={setProjectFiles}
+                    existingFiles={existingFiles}
+                    setExistingFiles={setExistingFiles}
                     onBack={() => setStep(1)}
                     onContinue={() => setStep(3)}
                     onSaveDraft={handleSaveDraft}

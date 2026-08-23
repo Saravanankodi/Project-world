@@ -8,7 +8,7 @@ import UsageDistribution from "./UsageDistribution";
 import RequirementsCard from "./RequirementsCard";
 import ProjectResources from "./ProjectResources";
 import UploadHeader from "../Upload_Project/UploadHeader";
-import { TechnicalDetails } from "@/types/project";
+import { ExistingProjectFiles, TechnicalDetails } from "@/types/project";
 import { uploadFile } from "@/services/storage";
 
 interface TechnicalDetailsProps {
@@ -31,6 +31,11 @@ interface TechnicalDetailsProps {
         }>
     >;
 
+    existingFiles: ExistingProjectFiles;
+
+    setExistingFiles: React.Dispatch<
+        React.SetStateAction<ExistingProjectFiles>
+    >;
     onBack: () => void;
     onContinue: () => void;
     onSaveDraft?: () => void;
@@ -41,6 +46,8 @@ export default function TechnicalDetailsForm({
     setData,
     projectFiles,
     setProjectFiles,
+    existingFiles,
+    setExistingFiles,
     onBack,
     onContinue,
     onSaveDraft,
@@ -122,23 +129,25 @@ export default function TechnicalDetailsForm({
     // File Upload
     // ===============================
 
- const handleFileChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    key: keyof typeof projectFiles
-) => {
+    const handleFileChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        key: keyof typeof projectFiles
+        ) => {
+        const files = Array.from(e.target.files || []);
 
-    const files = Array.from(e.target.files || []);
+        if (!files.length) return;
 
-    if (!files.length) return;
-
-    setProjectFiles(prev => ({
-        ...prev,
-        [key]:
+        setProjectFiles(prev => ({
+            ...prev,
+            [key]:
             key === "screenshots"
-                ? files
+                ? [...prev.screenshots, ...files]
                 : files[0],
-    }));
-};
+        }));
+
+        // allow selecting the same file again
+        e.target.value = "";
+    };
 
     // ===============================
     // Validation
@@ -172,32 +181,49 @@ export default function TechnicalDetailsForm({
             }
         }
 
-        // Operating System
-if (!projectFiles.sourceCode) {
-    alert("Please upload Source Code.");
-    return false;
-}
+                // Operating System
+        if (!projectFiles.sourceCode) {
+            alert("Please upload Source Code.");
+            return false;
+        }
 
-if (!projectFiles.documentation) {
-    alert("Please upload Documentation.");
-    return false;
-}
+        if (!projectFiles.documentation) {
+            alert("Please upload Documentation.");
+            return false;
+        }
 
-if (!projectFiles.demoVideo) {
-    alert("Please upload Demo Video.");
-    return false;
-}
+        if (!projectFiles.demoVideo) {
+            alert("Please upload Demo Video.");
+            return false;
+        }
 
-if (projectFiles.screenshots.length === 0) {
-    alert("Please upload Project Screenshots.");
-    return false;
-}      return true;
-    };
+        if (projectFiles.screenshots.length === 0) {
+            alert("Please upload Project Screenshots.");
+            return false;
+        }      return true;
+            };
 
     const handleContinue = async () => {
         if (!validateForm()) return;
                        onContinue();
     };
+
+    const removeScreenshot = (index: number) => {
+        setProjectFiles(prev => ({
+            ...prev,
+            screenshots: prev.screenshots.filter((_, i) => i !== index),
+        }));
+    };
+
+    const removeFile = (
+        key: "sourceCode" | "documentation" | "demoVideo"
+        ) => {
+        setProjectFiles(prev => ({
+            ...prev,
+            [key]: null,
+        }));
+    };
+
     return (      
           <section className="my-10">
 
@@ -250,12 +276,14 @@ if (projectFiles.screenshots.length === 0) {
             {/* Resources */}
 
             <div className="mt-6">
-
-<ProjectResources
-    resources={projectFiles}
-    onFileChange={handleFileChange}
-/>
-
+                <ProjectResources
+                    resources={projectFiles}
+                    onFileChange={handleFileChange}
+                    removeFile={removeFile}
+                    removeScreenshot={removeScreenshot}
+                    existingFiles={existingFiles}
+                    setExistingFiles={setExistingFiles}
+                />
             </div>
 
             {/* Bottom Actions */}
