@@ -9,49 +9,37 @@ import { useRouter } from "next/navigation";
 import ProjectBanner from "@/components/Cards/ProjectBanner";
 import { getProjectsByStatus, getUserProjects } from "@/services/project";
 import type { Project as FirestoreProject } from "@/types/project";
-import type { Project as TableProject } from "@/types/types";
+
 import { getAuth } from "firebase/auth";
 
 const My_ProjectsPage = () => {
-const [loading, setLoading] = useState(true);
-const [projects, setProjects] = useState<any[]>([]);
-useEffect(() => {
-  async function loadProjects() {
-    try {
-      const auth = getAuth();
-      const user = auth.currentUser;
+    const [loading, setLoading] = useState(true);
+    const [projects, setProjects] = useState<FirestoreProject[]>([]);
 
-      if (!user) return;
+    useEffect(() => {
+        async function loadProjects() {
+            try {
+                const auth = getAuth();
+                const user = auth.currentUser;
 
-      const data = await getUserProjects(user.uid);
-
-                const tableProjects = data.map((p: any) => ({
-                id: p.id,
-                title: p.projectInformation.title,
-                image: p.technicalDetails.resources.screenshots?.[0], // or your image URL
-                technologies: p.projectInformation.technology ?? [],
-                uploadDate: p.createdAt?.toDate().toLocaleDateString(),
-                status: p.status,
-                domain:p.projectInformation.domain,
-                metrics: {
-                    sales: 0,
-                    revenue: "$0",
-                    views: 0,
-                    likes: 0,
-                    progress: 0,
-                },
-                }));
-
-                setProjects(tableProjects);
-                    } catch (err) {
-                    console.error(err);
-                    } finally {
-                    setLoading(false);
-                    }
+                if (!user) {
+                    setProjects([]);
+                    return;
                 }
 
-                loadProjects();
-                }, []);
+                const data = await getUserProjects(user.uid);
+
+                setProjects(data as FirestoreProject[]);
+            } catch (err) {
+                console.error("Failed to load projects:", err);
+                setProjects([]);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadProjects();
+    }, []);
     const rowsPerPage = 3;
 
     const [page, setPage] = useState(1);

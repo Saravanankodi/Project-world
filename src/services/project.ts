@@ -26,8 +26,8 @@ export type ProjectStatus =
   | "approved"
   | "rejected"
   | "published"
-  | "archived";
-
+  | "archived"
+;
 export interface Project {
   id?: string;
 
@@ -172,18 +172,20 @@ export async function getProjectsByStatus(
 
 // Get User Projects
 
-export async function getUserProjects(uid: string) {
-  const q = query(
-    collection(db, "projects"),
-    where("ownerId", "==", uid)
-  );
+export async function getUserProjects(
+    uid: string
+): Promise<Project[]> {
+    const q = query(
+        collection(db, "projects"),
+        where("ownerId", "==", uid)
+    );
 
-  const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+    return snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...(doc.data() as Omit<Project, "id">),
+    }));
 }
 
 // Delete Project

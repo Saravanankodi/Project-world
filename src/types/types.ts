@@ -13,7 +13,7 @@ export interface ProjectCardProps {
 
 import { Timestamp } from "firebase/firestore";
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { PriceDetails, ProjectInformation, TechnicalDetails } from "./project";
+import { PriceDetails, Project, ProjectInformation, TechnicalDetails } from "./project";
 import { User } from "@/services/user";
 import { ProjectStatus } from "@/services/project";
 
@@ -58,25 +58,6 @@ export type TechnicalDetailsProps = {
     techStacklist: technicalStack[];
     requirements: string[];
     architecture: string[];
-}
-
-export interface Project {
-    id: number;
-    image: string;
-    title: string;
-    website: string;
-    technologies: string[];
-    uploadDate: string;
-    status: ProjectStatus;
-    domain:string;
-    metrics: {
-        sales?: number;
-        revenue?: string;
-        views?: string;
-        likes?: number;
-        progress?: number;
-    };
-   
 }
 
 export interface ProjectTableProps {

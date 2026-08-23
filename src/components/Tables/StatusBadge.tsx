@@ -3,8 +3,7 @@
 "use client";
 
 import { inter } from "@/lib/fonts";
-import { ProjectStatus } from "@/services/project";
-
+import type { ProjectStatus } from "@/services/project";
 
 interface StatusBadgeProps {
     status: ProjectStatus;

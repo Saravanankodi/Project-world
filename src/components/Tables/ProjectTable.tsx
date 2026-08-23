@@ -11,10 +11,11 @@ import {
 
 import { geist, inter } from "@/lib/fonts";
 import StatusBadge from "./StatusBadge";
-import { ProjectTableProps, Project } from "@/types/types";
+import { ProjectTableProps } from "@/types/types";
 import TableTabs from "./TableTabs";
 import Pagination from "./Pagination";
 import { useRouter } from "next/navigation";
+import type { Project } from "@/types/project";
 
 
 export default function ProjectTable({
@@ -31,6 +32,7 @@ export default function ProjectTable({
         switch (project.status) {
 
             case "published":
+            case "published":
                 return (
                     <div className="flex md:flex-col xl:flex-row md:gap-4 xl:gap-12 ">
                         <div>
@@ -39,7 +41,7 @@ export default function ProjectTable({
                             </p>
 
                             <h3 className={`${inter.className} text-base font-bold text-[#161D16]`}>
-                                {project.metrics.sales}
+                                {project.priceDetails.basePrice}
                             </h3>
                         </div>
 
@@ -49,7 +51,7 @@ export default function ProjectTable({
                             </p>
 
                             <h3 className={`${inter.className} text-base font-bold text-[#006E2F]`}>
-                                {project.metrics.revenue}
+                                {project.priceDetails.basePrice * 10}
                             </h3>
                         </div>
                     </div>
@@ -63,22 +65,22 @@ export default function ProjectTable({
                                 VIEWS
                             </p>
 
-                            <h3 className={`${inter.className} text-base font-bold text-[#161D16]`}>
-                                {project.metrics.views}
-                            </h3>
-                        </div>
+                             <h3 className={`${inter.className} text-base font-bold text-[#161D16]`}>
+                                 
+                             </h3>
+                         </div>
 
-                        <div>
-                            <p className={`${inter.className} text-[10px] uppercase tracking-wider text-[#3D4A3D]`}>
-                                LIKES
-                            </p>
+                         <div>
+                             <p className={`${inter.className} text-[10px] uppercase tracking-wider text-[#3D4A3D]`}>
+                                 LIKES
+                             </p>
 
-                            <h3 className={`${inter.className} text-base font-bold text-[#161D16]`}>
-                                {project.metrics.likes}
-                            </h3>
-                        </div>
-                    </div>
-                );
+                             <h3 className={`${inter.className} text-base font-bold text-[#161D16]`}>
+                                 
+                             </h3>
+                         </div>
+                     </div>
+                 );
 
             case "draft":
                 return (
@@ -88,7 +90,7 @@ export default function ProjectTable({
                         </p>
 
                         <h3 className={`${inter.className} text-base font-bold  text-[#161D16]`}>
-                            {project.metrics.progress}%
+                            {project.priceDetails.discount}%
                         </h3>
                     </div>
                 );
@@ -212,8 +214,11 @@ export default function ProjectTable({
                         <div className="flex items-center gap-4">
 
                             <Image
-                                src={project.image}
-                                alt={project.title}
+                                src={
+                                    project.technicalDetails?.resources?.screenshots?.[0] ||
+                                    "/images/placeholder.png"
+                                }
+                                alt={project.projectInformation.title}
                                 width={72}
                                 height={72}
                                 className="rounded-xl object-cover"
@@ -223,24 +228,26 @@ export default function ProjectTable({
                                 <h3
                                     className={`${inter.className} md:text-sm xl:text-base font-semibold text-[#161D16]`}
                                 >
-                                    {project.title}
+                                    {project.projectInformation?.title || "Untitled Project"}
                                 </h3>
 
                                 <p
                                     className={`${inter.className} mt-1 md:text-[10px] xl:text-xs text-[#3D4A3D]`}
                                 >
-                                    {project.website}
+                                    {project.status}
                                 </p>
 
                                 <div className="mt-3 flex flex-wrap gap-2">
-                                    {project.technologies.map((tech) => (
-                                        <span
-                                            key={tech}
-                                            className={` ${inter.className} rounded-full bg-[#F2F4F7] px-3 py-1 xl:text-[10px] md:text-[8px] font-medium text-[#3D4A3D]`}
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
+                                    {project.projectInformation?.technology?.map(
+                                        (tech: string) => (
+                                            <span
+                                                key={tech}
+                                                className={`${inter.className} rounded-full bg-[#F2F4F7] px-3 py-1 xl:text-[10px] md:text-[8px] font-medium text-[#3D4A3D]`}
+                                            >
+                                                {tech}
+                                            </span>
+                                        )
+                                    )}
                                 </div>
                             </div>
 
@@ -249,7 +256,7 @@ export default function ProjectTable({
                         {/* Upload Date */}
                         <div>
                             <p className={` ${inter.className} md:text-sm xl:text-base font-medium text-[#161D16]`}>
-                                {project.uploadDate}
+                                {project.projectInformation?.domain || "-"}
                             </p>
                         </div>
 
@@ -260,7 +267,7 @@ export default function ProjectTable({
 
                         {/* Metrics */}
                         <div>
-                            {project.domain}
+                            {project.projectInformation.domain}
                         </div>
 
                         {/* Actions */}
