@@ -23,6 +23,8 @@ import { useParams } from "next/navigation";
 import { getProjectById, Project } from "@/services/project";
 import { UserProfile } from "@/types/types";
 import { getUserProfile } from "@/services/user";
+import { auth } from "@/lib/firebase";
+import { createOrder } from "@/services/order";
 
 type PaymentMethod = "card" | "upi" | "bank";
 
@@ -36,6 +38,59 @@ export default function ProjectPaymentPage() {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [paymentLoading, setPaymentLoading] = useState(false);
+
+    const handlePayment = async () => {
+        if (!project?.id) {
+            setError("Project information is missing.");
+            return;
+        }
+
+        const buyer = auth.currentUser;
+
+        if (!buyer) {
+            setError("Please login before purchasing this project.");
+            return;
+        }
+
+        if (!project.ownerId) {
+            setError("Project seller information is missing.");
+            return;
+        }
+
+        // Prevent seller from buying their own project
+        if (buyer.uid === project.ownerId) {
+            setError("You cannot purchase your own project.");
+            return;
+        }
+
+        try {
+            setPaymentLoading(true);
+            setError(null);
+
+            const orderId = await createOrder({
+                projectId: project.id,
+                sellerId: project.ownerId,
+                buyerId: buyer.uid,
+                amount: finalAmount,
+                status: "pending",
+            });
+
+            console.log("Order created:", orderId);
+
+            // Later:
+            // 1. Start payment gateway
+            // 2. Wait for payment success
+            // 3. Update order status to "paid"
+            // 4. Unlock project for buyer
+
+        } catch (err) {
+            console.error("Error creating order:", err);
+            setError("Failed to create order. Please try again.");
+        } finally {
+            setPaymentLoading(false);
+        }
+    };
 
     useEffect(() => {
         async function fetchProject() {
@@ -138,32 +193,36 @@ export default function ProjectPaymentPage() {
     );
 
     const PayButton = () => (
-
         <div className="space-y-4">
 
             <Button
-                className="w-full  bg-[#22C55E] py-4 text-lg font-bold text-[#004B1E]"
+                onClick={handlePayment}
+                disabled={paymentLoading}
+                className="w-full bg-[#22C55E] py-4 text-lg font-bold text-[#004B1E]"
                 rightIcon={<Unlock className="ml-2 h-5 w-5" />}
             >
-                <span className={` ${geist.className} text-[#004B1E] text-sm font-medium`}>
-                    Pay & Unlock Project
+                <span
+                    className={`${geist.className} text-[#004B1E] text-sm font-medium`}
+                >
+                    {paymentLoading
+                        ? "Creating Order..."
+                        : "Pay & Unlock Project"}
                 </span>
-
             </Button>
 
             <p
-                className={`${inter.className} flex  items-center justify-center gap-2 text-xs text-[#004B1E] font-medium`}
+                className={`${inter.className} flex items-center justify-center gap-2 text-xs text-[#004B1E] font-medium`}
             >
                 <ShieldCheck
                     className="h-4 w-4 text-[#027A48]"
                     fill="#027A48"
                     stroke="white"
                 />
+
                 <span>SSL Secure Transaction</span>
             </p>
 
         </div>
-
     );
 
     // const CardPaymentForm = () => (

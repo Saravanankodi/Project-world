@@ -23,7 +23,7 @@ const PurchasedCard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                     className="object-cover"
                 />
 
-                <button
+                {/* <button
                     onClick={() => setIsBookmarked(!isBookmarked)}
                     className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur"
                 >
@@ -32,7 +32,7 @@ const PurchasedCard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                     ) : (
                         <BookMark className="h-5 w-5 text-green-500" />
                     )}
-                </button>
+                </button> */}
             </header>
 
             {/* Content */}
@@ -78,7 +78,7 @@ const PurchasedCard = ({ bookmarked = false, ...props }: ProjectCardProps) => {
                 </div>
                 <div className="w-full flex items-center justify-center gap-3 mt-3">
                     <Button className="w-1/2 bg-[#006E2F] text-sm text-white">
-                        Open Project
+                        Open
                     </Button>
                     <Button className="w-1/2 bg-[#161D16] text-white text-sm">
                         Contact
