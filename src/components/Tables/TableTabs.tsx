@@ -6,7 +6,7 @@ import { useState } from "react";
 export interface TabItem {
     id: string;
     label: string;
-    count: number;
+    count?: number;
 }
 
 interface TableTabsProps {
@@ -44,7 +44,7 @@ const TableTabs = ({
                             : "text-[#3D4A3D] hover:text-[#0A8A43]"
                             }`}
                     >
-                        {tab.label} ({tab.count})
+                        {tab.label}
 
                         {active && (
                             <span className="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-[#006E2F]" />

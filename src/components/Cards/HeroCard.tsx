@@ -34,6 +34,7 @@ function HeroCard() {
                             </Button>
 
                             <Button
+                                onClick={() => router.push("/My_Projects/Upload_Projects")}
                                 className={`rounded-xl border border-[#FFFFFF4D] bg-[#22C55E33] py-3 md:px-6 md:py-3 lg:px-4 lg:py-3 xl:px-6 xl:py-3 font-bold  text-xs md:text-base lg:text-sm xl:text-base  text-white ${geist.className}`}
                             >
                                 Upload Project

@@ -108,7 +108,7 @@ const DashboardPage = () => {
       try {
         setLoading(true);
 
-        const data = await getProjectsByStatus("published");
+        const data = await getProjectsByStatus("approved");
 
         setProjects(data);
       } catch (err) {

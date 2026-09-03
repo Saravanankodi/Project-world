@@ -23,7 +23,7 @@ import SocialLinks from '@/components/ui/profile/SocialLinks'
 
 const ProfilePage = () => {
 
- const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

@@ -16,6 +16,7 @@ import TableTabs from "./TableTabs";
 import Pagination from "./Pagination";
 import { useRouter } from "next/navigation";
 import type { Project } from "@/types/project";
+import { useState } from "react";
 
 
 export default function ProjectTable({
@@ -28,10 +29,26 @@ export default function ProjectTable({
 }: ProjectTableProps) {
 
     const router = useRouter();
+    const [activeTab, setActiveTab] = useState("all");
+
+    const filteredProjects = projects.filter((project) => {
+    if (activeTab === "all") {
+        return true;
+    }
+
+    if (activeTab === "review") {
+        return project.status === "pending";
+    }
+     if (activeTab === "published") {
+        return project.status === "approved";
+    }
+
+    return project.status === activeTab;
+});
+
     const renderMetrics = (project: Project) => {
         switch (project.status) {
 
-            case "published":
             case "published":
                 return (
                     <div className="flex md:flex-col xl:flex-row md:gap-4 xl:gap-12 ">
@@ -159,26 +176,28 @@ export default function ProjectTable({
                         tabs={[
                             {
                                 id: "all",
-                                label: "All Projects",
-                                count: 32,
+                                label: "All Projects"
                             },
                             {
                                 id: "published",
                                 label: "Published",
-                                count: 24,
+                                
                             },
                             {
                                 id: "review",
                                 label: "Under Review",
-                                count: 3,
+                               
                             },
                             {
                                 id: "draft",
                                 label: "Draft",
-                                count: 5,
+                              
                             },
                         ]}
-                        onChange={(tab) => console.log(tab)}
+                          onChange={(tab) => {
+                        setActiveTab(tab);
+                        console.log("Selected tab:", tab);
+                    }}
                     />
                 </div >
                 {/* Header */}
@@ -205,7 +224,7 @@ export default function ProjectTable({
                     </h3>
                 </div>
 
-                {projects.map((project) => (
+                {filteredProjects.map((project) => (
                     <div
                         key={project.id}
                         className="grid xl:grid-cols-[3fr_1fr_1.2fr_2fr_1.5fr] lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_2fr_1fr_1fr] items-center justify-center text-center border-b border-[#BCCBB9] md:px-4 xl:px-8 py-2 transition hover:bg-[#FAFAFA]"

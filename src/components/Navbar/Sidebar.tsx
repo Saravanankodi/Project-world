@@ -44,16 +44,6 @@ const menu = [
                 href: "/My_Projects",
                 icon: ProjectsIcon,
             },
-            {
-                name: "Chat",
-                href: "/Chat",
-                icon: ChatIcon,
-            },
-            {
-                name: "Issues",
-                href: "/Issues",
-                icon: ChatIcon,
-            },
         ],
     },
     {
