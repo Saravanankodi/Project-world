@@ -16,8 +16,8 @@ const TechnicalDetails = ({techStacklist,requirements,architecture}:TechnicalDet
                     techStacklist.map((items,index)=>(
                         <Progress 
                             type='line'
-                            label={items.label}
-                            value={items.value}
+                            label={items.language}
+                            value={Number(items.percentage)}
                             key={index}
                         />
                     ))
