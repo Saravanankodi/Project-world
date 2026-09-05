@@ -18,8 +18,11 @@ import Search from "@/components/Navbar/Search";
 
 export default function PaymentPage() {
     const router = useRouter();
-    const [filter, setFilter] = useState("ALL");
+    const [status, setStatus] = useState("Status: All");
+    const [day, setDay] = useState("Day");
     const [month, setMonth] = useState("All Months");
+    const [year, setYear] = useState("Year");
+
 
     const payments: Payment[] = [
         {
@@ -308,10 +311,14 @@ export default function PaymentPage() {
             {/* Filter */}
             <section>
                 <PaymentFilter
-                    filter={filter}
-                    setFilter={setFilter}
+                    day={day}
                     month={month}
-                    setMonth={setMonth}
+                    year={year}
+                    status={status}
+                    onDayChange={setDay}
+                    onMonthChange={setMonth}
+                    onYearChange={setYear}
+                    onStatusChange={setStatus}
                 />
             </section>
 
